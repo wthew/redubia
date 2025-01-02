@@ -1,5 +1,5 @@
 from flask import Flask
-from redubia import Redubia
+from api.redubia import Redubia
 
 app = Flask(__name__)
 

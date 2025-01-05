@@ -13,6 +13,10 @@ def search(query: str):
 
 @app.route("/api/page/<string:page_id>")
 def page_by_id(page_id: str):
-    page = Redubia(page_id).page
+    redubia = Redubia(page_id)
 
-    return page.summary
+    return {
+        'images': redubia.page.images, 
+        'summary': redubia.page.summary,
+        'table': redubia.table(),
+    }

@@ -1,4 +1,6 @@
 import fandom
+import pprint
+from bs4 import BeautifulSoup, Tag
 
 fandom.set_wiki("dublagem")
 fandom.set_lang("..")
@@ -12,7 +14,11 @@ class Redubia:
         result = fandom.search(query, results=3)
         return [{'title': title, 'id': _id} for title, _id in result]
 
+    def table(self):
+        soup = BeautifulSoup(self.page.html, 'html.parser')
+        return str(soup.select_one('.wikitable-large'))
 
-    def elenco(self):
-        # usar bs4 e fazer parse da tabela de elenco, com suporte a links e etc
-        pass
+
+
+if __name__ == '__main__':
+    test = Redubia(174274)

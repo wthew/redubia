@@ -42,4 +42,5 @@ def get_cover(page_id: str):
 
 @app.route("/api/gallery/<string:page_id>")
 def gallery(page_id: str):
-    return dublagemApiClient.gallery(page_id)
+    size = request.args.get('size', None)
+    return dublagemApiClient.gallery(page_id, size)

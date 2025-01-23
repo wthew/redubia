@@ -9,16 +9,17 @@ import {
   DialogTitle,
 } from "@/app/components/ui/dialog";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function ModalGallery() {
   const router = useRouter();
+  const { id } = useParams();
 
   return (
     <Dialog defaultOpen onOpenChange={router.back}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-4xl">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Galeria: {id}</DialogTitle>
           <DialogDescription>
             Make changes to your profile here. Click save when you're done.
           </DialogDescription>

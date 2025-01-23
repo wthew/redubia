@@ -27,8 +27,11 @@ class DublagemApiClient:
             
         return self.make_request(args)['query']['pages'][page_id]
 
-    def gallery(self, page_id):
+    def gallery(self, page_id, size):
         args = f'action=query&format=json&prop=pageimages&pageids={page_id}&generator=images&piprop=thumbnail%7Cname%7Coriginal'
+        if size:
+            args += f'&pithumbsize={size}'
+            
         res = dict(self.make_request(args)['query']['pages']).values()
         filter_fn = lambda item: item.get('pageid', None) is not None and '.png' in str(item.get('title', ''))
 

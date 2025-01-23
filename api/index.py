@@ -22,7 +22,8 @@ def page_by_id(page_id: str):
         'images': redubia.page.images, 
         'summary': redubia.page.summary,
         'table': redubia.table(),
-        'content': redubia.page.content
+        'content': redubia.page.content,
+        'cover': dublagemApiClient.cover_image(page_id)
     }
 
 @app.route("/api/cover/<string:page_id>")

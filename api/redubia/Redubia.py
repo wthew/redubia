@@ -20,14 +20,14 @@ class DublagemApiClient:
         parse = lambda item: item[1]
         return list(map(parse, res['query']['pages'].items()))
 
-    def cover_image(self, page_id, size):
+    def cover_image(self, page_id, size = None):
         args = f'action=query&format=json&prop=pageimages&pageids={page_id}&piprop=thumbnail%7Cname%7Coriginal'
         if size:
             args += f'&pithumbsize={size}'
             
         return self.make_request(args)['query']['pages'][page_id]
 
-    def gallery(self, page_id, size):
+    def gallery(self, page_id, size = None):
         args = f'action=query&format=json&prop=pageimages&pageids={page_id}&generator=images&piprop=thumbnail%7Cname%7Coriginal'
         if size:
             args += f'&pithumbsize={size}'

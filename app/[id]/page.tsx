@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
+import Image from "next/image";
 
 type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {
@@ -18,22 +19,43 @@ export default async function PageById(props: { params: Params }) {
   const response = await callApi(`/page/${id}`, (response) => {
     return response.json();
   });
-  console.log("fetched", response.title);
+  console.log("fetched", response.cover);
 
   return (
     <div className="flex justify-center items-center h-dvh md:p-8">
-      <Card className="rounded-none md:rounded-lg w-full max-w-3xl">
-        <CardHeader>
-          <CardTitle>{response.title}</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Gallery page_id={id} />
+      <div className="absolute top-0 left-0 z-0 max-h-screen overflow-hidden blur-sm">
+        <Image
+          alt=""
+          className="w-screen blur-xl brightness-50"
+          src={{
+            src: response.cover.original.source,
+            height: response.cover.original.height,
+            width: response.cover.original.width,
+          }}
+        />
+      </div>
+      <Card className="rounded-none md:rounded-lg w-full max-w-5xl z-10 h-screen md:h-5/6 overflow-scroll">
+        <div className="p-6 pb-0 flex flex-row justify-between">
+          <CardHeader className="h-full p-0">
+            <CardTitle>{response.title}</CardTitle>
+            <CardDescription>TODO: categorias</CardDescription>
+            <Gallery page_id={id} />
+          </CardHeader>
+          <div className="rounded-md w-1/5 m-3 max-h-32 overflow-hidden">
+            <Image
+              alt=""
+              src={{
+                src: response.cover.original.source,
+                height: response.cover.original.height,
+                width: response.cover.original.width,
+              }}
+            />
+          </div>
+        </div>
+        <CardContent className="">
           <p>{response.summary}</p>
+          {/* <div dangerouslySetInnerHTML={{ __html: response.table }} /> */}
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
       </Card>
     </div>
   );

@@ -7,5 +7,5 @@ export default function ModalGallery() {
   const router = useRouter();
   const { id } = useParams();
 
-  return <GalleryModal id={id as string} onClose={router.back} />;
+  return <GalleryModal id={id as string} onClose={() => router.push(`/${id}`)} />;
 }

@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import Image from "next/image";
+import { HandlerAppBarHides } from "../components/AppBar/context";
 
 type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {
@@ -34,7 +35,7 @@ export default async function PageById(props: { params: Params }) {
           }}
         />
       </div>
-      <Card className="rounded-none md:rounded-lg w-full max-w-5xl z-10 h-screen md:h-5/6 overflow-scroll">
+      <HandlerAppBarHides>
         <div className="p-6 pb-0 flex flex-row justify-between">
           <CardHeader className="h-full p-0">
             <CardTitle>{response.title}</CardTitle>
@@ -54,9 +55,14 @@ export default async function PageById(props: { params: Params }) {
         </div>
         <CardContent className="">
           <p>{response.summary}</p>
+          <p>{response.summary}</p>
+          <p>{response.summary}</p>
+          <p>{response.summary}</p>
+          <p>{response.summary}</p>
+          <p>{response.summary}</p>
           {/* <div dangerouslySetInnerHTML={{ __html: response.table }} /> */}
         </CardContent>
-      </Card>
+      </HandlerAppBarHides>
     </div>
   );
 }

@@ -11,7 +11,7 @@ import { Skeleton } from "../components/ui/skeleton";
 export default function () {
   return (
     <div className="flex justify-center items-center h-dvh md:p-8">
-      <Card className="rounded-none md:rounded-lg w-full max-w-3xl z-10">
+      <Card className="rounded-none md:rounded-lg w-full max-w-5xl z-10">
         <div className="p-6 pb-0 flex flex-row justify-between">
           <CardHeader className="h-full p-0">
             <CardTitle>

@@ -95,9 +95,8 @@ export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
       className="flex flex-col w-screen z-10 justify-center items-center"
     >
       <Card
-        className={`rounded-none pt-[${appBarHeight}px] md:pt-0 md:mt-[${appBarHeight}px] md:rounded-lg w-full max-w-5xl md:h-5/6 overflow-scroll`}
+        className={`border-0 md:border-1 rounded-none h-full pt-[${appBarHeight}px] md:pt-0 md:mt-[${appBarHeight}px] md:rounded-lg w-full max-w-5xl md:h-5/6 overflow-scroll`}
         ref={(el) => {
-          console.log("indo setar a ref");
           if (el && !containerRef.current) {
             updateContainerRef(el);
             containerRef.current = el;

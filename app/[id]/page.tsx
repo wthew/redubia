@@ -55,11 +55,6 @@ export default async function PageById(props: { params: Params }) {
         </div>
         <CardContent className="">
           <p>{response.summary}</p>
-          <p>{response.summary}</p>
-          <p>{response.summary}</p>
-          <p>{response.summary}</p>
-          <p>{response.summary}</p>
-          <p>{response.summary}</p>
           {/* <div dangerouslySetInnerHTML={{ __html: response.table }} /> */}
         </CardContent>
       </HandlerAppBarHides>

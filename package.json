@@ -8,16 +8,20 @@
     "dev": "yarn run next-dev & yarn run flask-dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pregen": "wget http://localhost:5328/apispec_1.json -O api/api.json",
+    "gen": "kubb generate"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-dialog": "^1.1.5",
     "@tailwindcss/postcss": "^4.0.0",
+    "@tanstack/react-query": "^5.65.1",
     "@types/node": "20.1.4",
     "@types/react": "^19.0.7",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",
@@ -34,5 +38,13 @@
     "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@kubb/cli": "^3.5.6",
+    "@kubb/core": "^3.5.6",
+    "@kubb/plugin-client": "^3.5.6",
+    "@kubb/plugin-oas": "^3.5.6",
+    "@kubb/plugin-react-query": "^3.5.6",
+    "@kubb/plugin-ts": "^3.5.6"
   }
 }

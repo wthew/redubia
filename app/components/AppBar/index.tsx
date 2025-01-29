@@ -19,7 +19,7 @@ import { useAppBar } from "@/app/components/AppBar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/app/lib/hooks/useDebounced";
 import Link from "next/link";
-import { SearchResponse } from "@/app/lib/types/api";
+import { useGetApiSearchTerm } from "@/app/lib/services/gen";
 
 export default function AppBar() {
   const { visible, appBarRef } = useAppBar();
@@ -46,27 +46,17 @@ export function Search() {
 
   const [search, setSearch] = useState("");
   const debounced = useDebounced(search);
-  const [options, setOptions] = useState<SearchResponse>([]);
+  const { data, isLoading } = useGetApiSearchTerm({ term: debounced });
+  const options = Array.isArray(data?.data) ? data.data : [];
 
   const onOpen = useCallback(() => {
-    setOpen(true)
-  }, [])
+    setOpen(true);
+  }, []);
 
   const clear = useCallback(() => {
     setOpen(false);
     setSearch("");
-    setOptions([]);
   }, []);
-
-  useEffect(() => {
-    if (!debounced) return;
-
-    fetch(`/api/search/${debounced}`)
-      .then((res) => res.json())
-      .then((res) => setOptions(res));
-  }, [debounced]);
-
-  console.log({ options, test: 1 });
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -81,9 +71,9 @@ export function Search() {
 
   return (
     <>
-      <div onClick={onOpen} className="flex border rounded-md px-4 py-2 w-full max-w-xs focus:outline-none focus:ring focus:ring-zinc-300">
+      <div onClick={onOpen} className="flex border rounded-md px-4 py-2">
         <SearchIcon />
-        <span className="ml-3 opacity-50">Pesquisar ...</span>
+        <span className="mx-3 opacity-50">Pesquisar ...</span>
       </div>
 
       <CommandDialog shouldFilter={false} open={open} onOpenChange={setOpen}>
@@ -94,9 +84,11 @@ export function Search() {
           onValueChange={(value) => setSearch(value)}
         />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>
+            {isLoading ? "Loading..." : "No results found."}
+          </CommandEmpty>
           <CommandGroup>
-            {options?.map(({ id, title }) => (
+            {options.map(({ id, title }) => (
               <CommandItem key={id}>
                 <Link onClick={clear} href={`/${id}`}>
                   {title}
@@ -104,38 +96,6 @@ export function Search() {
               </CommandItem>
             ))}
           </CommandGroup>
-          {/* <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem disabled>
-              <Calculator />
-              <span>Calculator</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator /> */}
-          {/* <CommandGroup heading="Settings">
-            <CommandItem>
-              <User />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CreditCard />
-              <span>Billing</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <Settings />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup> */}
         </CommandList>
       </CommandDialog>
     </>

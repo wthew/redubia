@@ -1,15 +1,22 @@
 from flask import Flask, request
+from flasgger import Swagger
+
 from api.redubia import Redubia, dublagemApiClient
+from routes import search
 
 app = Flask(__name__)
+app.config['SWAGGER'] = {
+        'title': 'Redub.ia API',
+        'termsOfService': 'http://localhost:8080/tos'
+}
+
+Swagger(app)
+
+app.register_blueprint(search, url_prefix="/api")
 
 @app.route("/api/python")
 def hello_world():
     return "<p>Hello, World!</p>"
-
-@app.route("/api/search/<string:query>")
-def search(query: str):
-    return Redubia.search(query)
 
 @app.route("/api/page/<string:page_id>")
 def page_by_id(page_id: str):

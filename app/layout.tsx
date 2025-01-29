@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "./lib/context/theme";
 import AppBar from "./components/AppBar";
 import { AppBarProvider } from "./components/AppBar/context";
+import { QueryProvider } from "./lib/context/query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <AppBarProvider>
-            <AppBar />
-            {children}
-          </AppBarProvider>
+          <QueryProvider>
+            <AppBarProvider>
+              <AppBar />
+              {children}
+            </AppBarProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

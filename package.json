@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pregen": "wget http://localhost:5328/apispec_1.json -O api/api.json",
+    "pregen": "wget http://localhost:5328/swagger.json -O api/api.json",
     "gen": "kubb generate"
   },
   "dependencies": {

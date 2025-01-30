@@ -1,21 +1,28 @@
 
 
-from flask import Blueprint
+from flask_smorest import Blueprint
+from flask.views import MethodView
 from http import HTTPStatus
-from flasgger import swag_from
 from redubia import dublagemApiClient
-from flask_marshmallow import Schema
-from marshmallow.fields import Str, Int
+from marshmallow import Schema
+from marshmallow.fields import Str, Int, Nested
+from api import schemas 
+from api.schemas.enums import Namespace
 
 api = Blueprint('api', __name__)
 
-class SearchSchema(Schema):
-    id = Int()
+class CategoriesResponseSchema(schemas.WithNamespace):
+    id = Int(attribute='pageid')
+    thumbnail = Nested(schemas.ImageFile)
     title = Str()
 
-@api.route("/categories")
-def categories():
-    res = dublagemApiClient.make_request("action=query&format=json&prop=pageimages&generator=allpages&piprop=thumbnail%7Cname%7Coriginal&gapnamespace=14")
-    print("res:", res["query"]["pages"])
+    class Meta:
+        many = True
 
-    return res["query"]["pages"]
+@api.route("/categories")
+class CategoriesController(MethodView):
+    
+    @api.response(200, CategoriesResponseSchema)
+    def get(self):
+        res = dublagemApiClient.make_request("action=query&format=json&prop=pageimages&generator=allpages&piprop=thumbnail%7Cname&gapnamespace=14")["query"]["pages"]
+        return list(dict(res).values())

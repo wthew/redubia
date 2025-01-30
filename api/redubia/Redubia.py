@@ -25,7 +25,7 @@ class DublagemApiClient:
         if size:
             args += f'&pithumbsize={size}'
             
-        return self.make_request(args)['query']['pages'][page_id]
+        return self.make_request(args)['query']['pages'][f'{page_id}']
 
     def gallery(self, page_id, size = None):
         args = f'action=query&format=json&prop=pageimages&pageids={page_id}&generator=images&piprop=thumbnail%7Cname%7Coriginal'

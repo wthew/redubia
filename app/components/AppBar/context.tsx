@@ -94,8 +94,9 @@ export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
       style={{ height: `calc(${containerHeight} * 100)` }}
       className="flex flex-col w-screen z-10 justify-center items-center"
     >
+      <div className="hidden md:flex" style={{ height: appBarHeight }} />
       <Card
-        className={`border-0 md:border-1 rounded-none h-full pt-[${appBarHeight}px] md:pt-0 md:mt-[${appBarHeight}px] md:rounded-lg w-full max-w-5xl md:h-5/6 overflow-scroll`}
+        className={`border-0 md:border-1 rounded-none h-full md:rounded-lg w-full max-w-5xl md:h-5/6 overflow-scroll`}
         ref={(el) => {
           if (el && !containerRef.current) {
             updateContainerRef(el);
@@ -103,6 +104,7 @@ export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
           }
         }}
       >
+        <div className="flex md:hidden" style={{ height: appBarHeight }} />
         {props.children}
       </Card>
     </div>

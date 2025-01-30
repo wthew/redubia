@@ -2,7 +2,7 @@ from flask import Flask, request
 from flasgger import Swagger
 
 from api.redubia import Redubia, dublagemApiClient
-from routes import search
+from routes import register_routes
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -11,8 +11,7 @@ app.config['SWAGGER'] = {
 }
 
 Swagger(app)
-
-app.register_blueprint(search, url_prefix="/api")
+register_routes(app)
 
 @app.route("/api/python")
 def hello_world():

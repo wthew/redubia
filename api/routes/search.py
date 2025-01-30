@@ -3,11 +3,14 @@ from http import HTTPStatus
 from flasgger import swag_from
 from redubia import Redubia
 from flask_marshmallow import Schema
-from marshmallow.fields import Str, Int
+from marshmallow.fields import Str, Int, Enum
+from redubia import dublagemApiClient
+from schemas.enums import Namespace
 
 api = Blueprint('api', __name__)
 
 class SearchSchema(Schema):
+    ns = Enum(Namespace)
     id = Int()
     title = Str()
 
@@ -29,6 +32,8 @@ def search(term: str):
         SearchResultItem:
             type: object
             properties:
+                ns:
+                  type: integer
                 id:
                     type: integer
                 title:
@@ -41,7 +46,8 @@ def search(term: str):
           $ref: '#/definitions/SearchResult'
     
     '''
-    result = Redubia.search(term)
-    print("teste search", result)
-    print("dumps:", SearchSchema(many=True).dump(result))
+
+    res = dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")
+    result = [{ 'id': i['pageid'], 'ns': Namespace(i['ns']), 'title': i['title'] } for i in res['query']['search']]
+    
     return SearchSchema(many=True).dump(result)

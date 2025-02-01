@@ -1,0 +1,335 @@
+{
+  "paths": {
+    "/api/categories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categories"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 13544,
+                    "ns": "file",
+                    "title": "Categoria:Anima\u00e7\u00f5es Brasileiras",
+                    "thumbnail": {
+                      "width": 33,
+                      "height": 50,
+                      "source": "https://redubia.vercel.app"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "categories"
+        ]
+      }
+    },
+    "/api/cover/{page_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cover"
+                },
+                "example": {
+                  "original": {
+                    "width": 33,
+                    "height": 50,
+                    "source": "https://redubia.vercel.app"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "details"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "page_id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
+    },
+    "/api/page/{page_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "details"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "page_id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "/api/search": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Search"
+                  }
+                },
+                "example": [
+                  {
+                    "ns": "article",
+                    "id": 174274,
+                    "title": "Dan Da Dan"
+                  },
+                  {
+                    "ns": "article",
+                    "id": 442,
+                    "title": "Guilherme Briggs"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "search"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Redub.ia API",
+    "version": "v1"
+  },
+  "tags": [
+    {
+      "name": "categories",
+      "description": ""
+    },
+    {
+      "name": "details",
+      "description": ""
+    },
+    {
+      "name": "search",
+      "description": ""
+    }
+  ],
+  "openapi": "3.0.2",
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Error name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "errors": {
+            "type": "object",
+            "description": "Errors",
+            "additionalProperties": {}
+          }
+        }
+      },
+      "PaginationMetadata": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "total_pages": {
+            "type": "integer"
+          },
+          "first_page": {
+            "type": "integer"
+          },
+          "last_page": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "previous_page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        }
+      },
+      "ImageFile": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string",
+            "format": "url"
+          }
+        }
+      },
+      "Categories": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "$ref": "#/components/schemas/ImageFile"
+          }
+        }
+      },
+      "Cover": {
+        "type": "object",
+        "properties": {
+          "original": {
+            "$ref": "#/components/schemas/ImageFile"
+          }
+        }
+      },
+      "PageDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/Cover"
+          }
+        }
+      },
+      "Search": {
+        "type": "object",
+        "properties": {
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories"
+            ]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "UNPROCESSABLE_CONTENT": {
+        "description": "Unprocessable Content",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import { pluginClient } from "@kubb/plugin-client";
 export default defineConfig({
   root: ".",
   input: {
-    path: "./api/api.json",
+    path: "./api/swagger.json",
   },
   output: {
     path: "./app/lib/services/gen",
@@ -57,6 +57,7 @@ export default defineConfig({
           pattern: "store",
         },
       ],
+      paramsType: "object",
       pathParamsType: "object",
       dataReturnType: "full",
       client: "axios",
@@ -73,13 +74,9 @@ export default defineConfig({
         dataReturnType: "full",
       },
       paramsType: "object",
+      pathParamsType: "object",
       mutation: {
         methods: ["post", "put", "delete"],
-      },
-      infinite: {
-        queryParam: "next_page",
-        initialPageParam: 0,
-        cursorParam: "nextCursor",
       },
       query: {
         methods: ["get"],

@@ -39,5 +39,4 @@ __pycache__
 .vscode
 
 #
-api/api.json
 app/lib/services/gen

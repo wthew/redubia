@@ -1,8 +1,8 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
-from redubia import dublagemApiClient
+from api.redubia import dublagemApiClient
 from api.schemas import CategoriesSchema, Namespace, image_example 
-from utils import create_api_blueprint
+from api.utils import create_api_blueprint
 
 api = create_api_blueprint(__name__)
 

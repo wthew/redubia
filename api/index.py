@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_smorest import Api
 from api.redubia import Redubia, dublagemApiClient
-from routes import register_routes
+from api.routes import register_routes
 
 app = Flask(__name__)
 app.config["API_TITLE"] = "Redub.ia API"

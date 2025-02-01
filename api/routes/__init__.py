@@ -1,5 +1,5 @@
 from flask_smorest import Api
-from utils import import_from_folder
+from api.utils import import_from_folder
 from os.path import dirname
 
 def register_routes(app: Api):

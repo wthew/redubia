@@ -1,9 +1,9 @@
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint
-from redubia import Redubia, dublagemApiClient
+from api.redubia import Redubia, dublagemApiClient
 from api.schemas import  SearchSchema, Namespace, SearchRequestSchema
-from utils import create_api_blueprint
+from api.utils import create_api_blueprint
 
 api = create_api_blueprint(__name__)
 
@@ -17,6 +17,8 @@ class SearchController(MethodView):
     @api.arguments(SearchRequestSchema, location="query")
     @api.response(200, SearchSchema, example=SearchSchema().dump(example))
     def get(self, test):
+        print("args:", request.args)
         term = request.args.get('q', '')
         res = dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")
+        print("res:", res)
         return res['query']['search']

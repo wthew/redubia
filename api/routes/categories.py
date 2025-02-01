@@ -1,28 +1,23 @@
-
-
 from flask_smorest import Blueprint
 from flask.views import MethodView
-from http import HTTPStatus
 from redubia import dublagemApiClient
-from marshmallow import Schema
-from marshmallow.fields import Str, Int, Nested
-from api import schemas 
-from api.schemas.enums import Namespace
+from api.schemas import CategoriesSchema, Namespace, image_example 
+from utils import create_api_blueprint
 
-api = Blueprint('api', __name__)
+api = create_api_blueprint(__name__)
 
-class CategoriesResponseSchema(schemas.WithNamespace):
-    id = Int(attribute='pageid')
-    thumbnail = Nested(schemas.ImageFile)
-    title = Str()
-
-    class Meta:
-        many = True
 
 @api.route("/categories")
 class CategoriesController(MethodView):
-    
-    @api.response(200, CategoriesResponseSchema)
+    example = CategoriesSchema().load([{
+        "id": 13544,
+        "ns": Namespace(6),
+        "title": "Categoria:Animações Brasileiras",
+        "thumbnail": image_example
+    }])
+
+    @api.response(200, CategoriesSchema, example=CategoriesSchema().dump(example))
     def get(self):
-        res = dublagemApiClient.make_request("action=query&format=json&prop=pageimages&generator=allpages&piprop=thumbnail%7Cname&gapnamespace=14")["query"]["pages"]
+        res = dublagemApiClient.make_request(
+            "action=query&format=json&prop=pageimages&generator=allpages&piprop=thumbnail%7Cname&gapnamespace=14")["query"]["pages"]
         return list(dict(res).values())

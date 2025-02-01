@@ -1,6 +1,11 @@
 from importlib import import_module as module
 from sys import path
 from os import listdir
+from flask_smorest import Blueprint
+
+def create_api_blueprint(name: str):
+    return Blueprint('api', name, url_prefix="/api")
+
 
 def import_from_folder(folder: str):
     path.append(folder)

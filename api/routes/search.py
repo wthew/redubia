@@ -1,31 +1,22 @@
-from flask_smorest import Blueprint
-from flask.views import MethodView
 from flask import request
-from http import HTTPStatus
-from redubia import Redubia
-from marshmallow import Schema
-from marshmallow.fields import Str, Int, Enum
-from redubia import dublagemApiClient
-from api import schemas
-from schemas.enums import Namespace
+from flask.views import MethodView
+from flask_smorest import Blueprint
+from redubia import Redubia, dublagemApiClient
+from api.schemas import  SearchSchema, Namespace, SearchRequestSchema
+from utils import create_api_blueprint
 
-api = Blueprint('api', __name__, )
-
-class SearchSchemaRequest(Schema):
-    q = Str()
-
-class SearchSchemaResponse(schemas.WithNamespace):
-    id = Int(attribute='pageid')
-    title = Str()
-
-    class Meta:
-        many = True
+api = create_api_blueprint(__name__)
 
 @api.route("/search")
 class SearchController(MethodView):
-  @api.arguments(SearchSchemaRequest, location="query")
-  @api.response(200, SearchSchemaResponse)
-  def get(self, test):
-      term = request.args.get('q', '')
-      res = dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")
-      return res['query']['search']
+    example = SearchSchema().load([
+        { "id": 174274, "ns": Namespace(0), "title": "Dan Da Dan" },
+        { "id": 442, "ns": Namespace(0), "title": "Guilherme Briggs" }
+    ])
+
+    @api.arguments(SearchRequestSchema, location="query")
+    @api.response(200, SearchSchema, example=SearchSchema().dump(example))
+    def get(self, test):
+        term = request.args.get('q', '')
+        res = dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")
+        return res['query']['search']

@@ -1,7 +1,7 @@
 // context/AppBarContext.js
 "use client";
 
-import { Card } from "@/app/components/ui/card";
+import { Card } from "@/app/lib/components/ui/card";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type AppBarContextValue = {

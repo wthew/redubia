@@ -5,7 +5,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/app/components/ui/dialog";
+} from "@/app/lib/components/ui/dialog";
 
 type Props = { onClose: () => void; id: string };
 export default function GalleryModal({ id, onClose }: Props) {

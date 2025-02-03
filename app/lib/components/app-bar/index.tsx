@@ -9,13 +9,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/app/components/ui/command";
+} from "@/app/lib/components/ui/command";
 
 // components/AppBar.js
 
 import React, { useCallback, useEffect, useState } from "react";
 import { cn } from "@/app/lib/utils"; // Função utilitária para lidar com classes no ShadCN
-import { useAppBar } from "@/app/components/AppBar/context";
+import { useAppBar } from "@/app/lib/components/app-bar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/app/lib/hooks/useDebounced";
 import Link from "next/link";

@@ -1,12 +1,12 @@
-import Gallery from "../components/Gallery";
+import Gallery from "../lib/components/gallery";
 import {
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
+} from "../lib/components/ui/card";
 import Image from "next/image";
-import { HandlerAppBarHides } from "../components/AppBar/context";
+import { HandlerAppBarHides } from "../lib/components/app-bar/context";
 import { getDetails } from "../lib/services/gen";
 
 type Params = Promise<{ id: number }>;

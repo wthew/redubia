@@ -2,8 +2,8 @@ import "./globals.css";
 
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "./lib/context/theme";
-import AppBar from "./components/AppBar";
-import { AppBarProvider } from "./components/AppBar/context";
+import AppBar from "./lib/components/app-bar";
+import { AppBarProvider } from "./lib/components/app-bar/context";
 import { QueryProvider } from "./lib/context/query";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -5,8 +5,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/app/components/ui/card";
-import { Skeleton } from "../components/ui/skeleton";
+} from "@/app/lib/components/ui/card";
+import { Skeleton } from "../lib/components/ui/skeleton";
 
 export default function () {
   return (

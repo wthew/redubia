@@ -5,8 +5,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/app/components/ui/dialog";
-import { Skeleton } from "@/app/components/ui/skeleton";
+} from "@/app/lib/components/ui/dialog";
+import { Skeleton } from "@/app/lib/components/ui/skeleton";
 
 export default function () {
   return (

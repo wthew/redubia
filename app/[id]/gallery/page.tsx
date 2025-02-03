@@ -1,6 +1,6 @@
 "use client";
 
-import GalleryModal from "@/app/components/Gallery/modal";
+import GalleryModal from "@/app/lib/components/gallery/modal";
 import { useParams, useRouter } from "next/navigation";
 
 export default function ModalGallery() {

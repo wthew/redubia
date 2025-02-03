@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_smorest import Api
 from api.redubia import Redubia, dublagemApiClient
 from api.routes import register_routes
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config["API_TITLE"] = "Redub.ia API"
@@ -13,6 +14,7 @@ app.config["OPENAPI_REDOC_PATH"] = "/redoc"
 app.config["OPENAPI_REDOC_URL"] = "https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"
 
 api = Api(app)
+CORS(app)
 register_routes(api)
 
 @app.route("/api/python")

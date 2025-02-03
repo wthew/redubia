@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getApiGalleryId } from "@/app/lib/services/gen";
+import { getGallery } from "@/app/lib/services/gen";
 
 export default async function Gallery(props: { page_id: number }) {
-  const { data: res } = await getApiGalleryId({ id: props.page_id });
+  const { data: res } = await getGallery({ id: props.page_id });
 
   return (
     <div className="flex flex-row gap-3 items-center">

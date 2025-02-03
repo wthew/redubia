@@ -36,14 +36,23 @@ class WithNamespace(Schema):
 # Files
 
 
-class ImageFile(Schema):
+class ImageFileSchema(Schema):
     width = fields.Int(required=True)
     height = fields.Int(required=True)
     source = fields.Url(required=True)
 
 
 class CoverSchema(Schema):
-    original = fields.Nested(ImageFile, required=True)
+    original = fields.Nested(ImageFileSchema, required=True)
+
+
+class GallerySchema(WithPageId):
+    original = fields.Nested(ImageFileSchema, required=True)
+    thumbnail = fields.Nested(ImageFileSchema, required=True)
+    title = fields.Str(attribute='pageimage')
+
+    class Meta:
+        many = True
 
 
 # Search
@@ -63,7 +72,7 @@ class SearchSchema(WithNamespace):
 
 class CategorySchema(WithNamespace, WithPageId):
     title = fields.Str()
-    thumbnail = fields.Nested(ImageFile)
+    thumbnail = fields.Nested(ImageFileSchema)
 
 
 class CategoriesSchema(CategorySchema):
@@ -79,5 +88,5 @@ class PageDetailsSchema(Schema):
 
 
 """ Shared examples """
-image_example = ImageFile().load(
+image_example = ImageFileSchema().load(
     {'width': 33, 'height': 50, 'source': 'https://redubia.vercel.app'})

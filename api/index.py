@@ -18,9 +18,3 @@ register_routes(api)
 @app.route("/api/python")
 def hello_world():
     return "<p>Hello, World!</p>"
-
-
-@app.route("/api/gallery/<string:page_id>")
-def gallery(page_id: str):
-    size = request.args.get('size', None)
-    return dublagemApiClient.gallery(page_id, size)

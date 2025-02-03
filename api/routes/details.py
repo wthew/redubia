@@ -2,7 +2,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from api.redubia import dublagemApiClient, Redubia
-from api.schemas import CoverSchema, image_example, PageDetailsSchema
+from api.schemas import GallerySchema, CoverSchema, image_example, PageDetailsSchema
 from api.utils import create_api_blueprint
 
 api = create_api_blueprint(__name__)
@@ -18,11 +18,11 @@ class CoverController(MethodView):
         return dublagemApiClient.cover_image(id, size)
 
 
-@api.route("/details/<string:id>")
+@api.route("/details/<int:id>")
 class PageDetailsController(MethodView):
 
     @api.response(200, PageDetailsSchema)
-    def get(self, id: str):
+    def get(self, id: int):
         redubia = Redubia(id)
 
         return {
@@ -30,3 +30,12 @@ class PageDetailsController(MethodView):
             'summary': redubia.page.summary,
             'cover': dublagemApiClient.cover_image(id)
         }
+
+
+@api.route("/gallery/<int:id>")
+class PageGalleryController(MethodView):
+
+    @api.response(200, GallerySchema)
+    def get(self, id: int):
+        size = request.args.get('size', None)
+        return dublagemApiClient.gallery(id, size)

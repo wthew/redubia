@@ -1,21 +1,17 @@
 import Image from "next/image";
-import callApi from "@/app/lib/services/api";
-import { ImageResponse } from "@/app/lib/types/api";
 import Link from "next/link";
+import { getApiGalleryId } from "@/app/lib/services/gen";
 
-export default async function Gallery(props: { page_id: string }) {
-  const res = await callApi(
-    `/gallery/${props.page_id}?size=${48 * 2}`,
-    (r) => r.json() as unknown as ImageResponse[]
-  );
+export default async function Gallery(props: { page_id: number }) {
+  const { data: res } = await getApiGalleryId({ id: props.page_id });
 
   return (
     <div className="flex flex-row gap-3 items-center">
-      {res.map(({ original, thumbnail, pageid, title, pageimage }) => (
-        <Link key={pageid} href={`/${pageid}`}>
+      {res.map(({ thumbnail, id, title }) => (
+        <Link key={id} href={`/${id}`}>
           <Image
             className="rounded-lg hover:scale-125 transition-transform"
-            title={pageimage}
+            title={title}
             alt={""}
             src={{ src: thumbnail.source, height: 56, width: 56 }}
           />

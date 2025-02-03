@@ -5,14 +5,12 @@ import { pluginTs } from "@kubb/plugin-ts";
 import { pluginReactQuery } from "@kubb/plugin-react-query";
 import { pluginClient } from "@kubb/plugin-client";
 
-let schema  ="https://";
+console.log("env: ", process.env.NODE_ENV);
 
-if ((process.env.NODE_ENV || "development") === "development") {
-  schema = "http://";
+if ((process.env.NODE_ENV || "development") === "development")
   config({ path: ".env.local" });
-}
 
-console.log("base url: ", process.env.VERCEL_URL);
+console.log("base url: ", process.env.API_URL);
 export default defineConfig({
   root: ".",
   input: {
@@ -43,7 +41,7 @@ export default defineConfig({
       oasType: false,
     }),
     pluginClient({
-      baseURL: `${schema}${process.env.VERCEL_URL}`,
+      baseURL: process.env.API_URL,
       output: {
         path: "./client",
         barrelType: "named",

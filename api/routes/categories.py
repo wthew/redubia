@@ -17,6 +17,7 @@ class CategoriesController(MethodView):
     }])
 
     @api.response(200, CategoriesSchema, example=CategoriesSchema().dump(example))
+    @api.doc(operationId="getCategories")
     def get(self):
         res = dublagemApiClient.make_request(
             "action=query&format=json&prop=pageimages&generator=allpages&piprop=thumbnail%7Cname&gapnamespace=14")["query"]["pages"]

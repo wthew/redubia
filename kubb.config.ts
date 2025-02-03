@@ -45,7 +45,7 @@ export default defineConfig({
     pluginClient({
       baseURL: `${schema}${process.env.VERCEL_URL}`,
       output: {
-        path: "./clients/axios",
+        path: "./client",
         barrelType: "named",
         banner: "/* eslint-disable no-alert, no-console */",
         footer: "",
@@ -54,14 +54,8 @@ export default defineConfig({
         type: "tag",
         name: ({ group }) => `${group}Service`,
       },
-      operations: true,
+      operations: false,
       parser: "client",
-      exclude: [
-        {
-          type: "tag",
-          pattern: "store",
-        },
-      ],
       paramsType: "object",
       pathParamsType: "object",
       dataReturnType: "full",

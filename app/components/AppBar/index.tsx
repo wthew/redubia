@@ -19,7 +19,7 @@ import { useAppBar } from "@/app/components/AppBar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/app/lib/hooks/useDebounced";
 import Link from "next/link";
-import { useGetApiSearch } from "@/app/lib/services/gen";
+import { useSearch } from "@/app/lib/services/gen";
 
 export default function AppBar() {
   const { visible, appBarRef } = useAppBar();
@@ -46,7 +46,7 @@ export function Search() {
 
   const [search, setSearch] = useState("");
   const debounced = useDebounced(search);
-  const { data, isLoading } = useGetApiSearch({ params: { q: debounced } });
+  const { data, isLoading } = useSearch({ params: { q: debounced } });
   const options = Array.isArray(data?.data) ? data.data : [];
 
   const onOpen = useCallback(() => {

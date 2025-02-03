@@ -7,13 +7,12 @@ import {
 } from "../components/ui/card";
 import Image from "next/image";
 import { HandlerAppBarHides } from "../components/AppBar/context";
-import { getApiDetailsId } from "../lib/services/gen";
+import { getDetails } from "../lib/services/gen";
 
 type Params = Promise<{ id: number }>;
 export default async function PageById(props: { params: Params }) {
   const { id } = await props.params;
-
-  const { data } = await getApiDetailsId({ id });
+  const { data } = await getDetails({ id });
 
   return (
     <div className="flex justify-center items-center h-dvh md:p-8">

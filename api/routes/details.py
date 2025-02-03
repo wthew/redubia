@@ -12,6 +12,7 @@ class CoverController(MethodView):
     example = CoverSchema().load({ "original": image_example })
 
     @api.response(200, CoverSchema, example=CoverSchema().dump(example))
+    @api.doc(operationId="getCover")
     def get(self, id: int):
         size = request.args.get('size', 300)
 
@@ -22,6 +23,7 @@ class CoverController(MethodView):
 class PageDetailsController(MethodView):
 
     @api.response(200, PageDetailsSchema)
+    @api.doc(operationId="getDetails")
     def get(self, id: int):
         redubia = Redubia(id)
 
@@ -36,6 +38,7 @@ class PageDetailsController(MethodView):
 class PageGalleryController(MethodView):
 
     @api.response(200, GallerySchema)
+    @api.doc(operationId="getGallery")
     def get(self, id: int):
         size = request.args.get('size', None)
         return dublagemApiClient.gallery(id, size)

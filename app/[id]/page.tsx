@@ -1,26 +1,19 @@
-import Link from "next/link";
 import Gallery from "../components/Gallery";
-import Sections from "../components/Sections";
-import callApi from "../lib/services/api";
 import {
-  Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
 import Image from "next/image";
 import { HandlerAppBarHides } from "../components/AppBar/context";
+import { getApiDetailsId } from "../lib/services/gen";
 
 type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {
   const { id } = await props.params;
 
-  const response = await callApi(`/page/${id}`, (response) => {
-    return response.json();
-  });
-  console.log("fetched", response.cover);
+  const { data } = await getApiDetailsId({ id });
 
   return (
     <div className="flex justify-center items-center h-dvh md:p-8">
@@ -29,16 +22,16 @@ export default async function PageById(props: { params: Params }) {
           alt=""
           className="w-screen blur-xl brightness-50"
           src={{
-            src: response.cover.original.source,
-            height: response.cover.original.height,
-            width: response.cover.original.width,
+            src: data.cover.original.source,
+            height: data.cover.original.height,
+            width: data.cover.original.width,
           }}
         />
       </div>
       <HandlerAppBarHides>
         <div className="p-6 pb-0 flex flex-row justify-between">
           <CardHeader className="h-full p-0">
-            <CardTitle>{response.title}</CardTitle>
+            <CardTitle>{data.title}</CardTitle>
             <CardDescription>TODO: categorias</CardDescription>
             <Gallery page_id={id} />
           </CardHeader>
@@ -46,16 +39,15 @@ export default async function PageById(props: { params: Params }) {
             <Image
               alt=""
               src={{
-                src: response.cover.original.source,
-                height: response.cover.original.height,
-                width: response.cover.original.width,
+                src: data.cover.original.source,
+                height: data.cover.original.height,
+                width: data.cover.original.width,
               }}
             />
           </div>
         </div>
         <CardContent className="">
-          <p>{response.summary}</p>
-          {/* <div dangerouslySetInnerHTML={{ __html: response.table }} /> */}
+          <p>{data.summary}</p>
         </CardContent>
       </HandlerAppBarHides>
     </div>

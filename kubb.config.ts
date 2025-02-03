@@ -1,9 +1,16 @@
+import { config } from "dotenv";
 import { defineConfig } from "@kubb/core";
 import { pluginOas } from "@kubb/plugin-oas";
 import { pluginTs } from "@kubb/plugin-ts";
 import { pluginReactQuery } from "@kubb/plugin-react-query";
 import { pluginClient } from "@kubb/plugin-client";
 
+console.log("env: ", process.env.NODE_ENV);
+
+if ((process.env.NODE_ENV || "development") === "development")
+  config({ path: ".env.local" });
+
+console.log("base url: ", process.env.API_URL);
 export default defineConfig({
   root: ".",
   input: {
@@ -34,6 +41,7 @@ export default defineConfig({
       oasType: false,
     }),
     pluginClient({
+      baseURL: process.env.API_URL,
       output: {
         path: "./clients/axios",
         barrelType: "named",
@@ -43,11 +51,6 @@ export default defineConfig({
       group: {
         type: "tag",
         name: ({ group }) => `${group}Service`,
-      },
-      transformers: {
-        name: (name, type) => {
-          return `${name}Client`;
-        },
       },
       operations: true,
       parser: "client",

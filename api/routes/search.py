@@ -17,8 +17,5 @@ class SearchController(MethodView):
     @api.arguments(SearchRequestSchema, location="query")
     @api.response(200, SearchSchema, example=SearchSchema().dump(example))
     def get(self, test):
-        print("args:", request.args)
         term = request.args.get('q', '')
-        res = dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")
-        print("res:", res)
-        return res['query']['search']
+        return [] if term is '' else dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")['query']['search']

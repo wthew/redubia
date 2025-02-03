@@ -3,6 +3,7 @@ from marshmallow import Schema, fields, pre_dump, pre_load
 
 """ Enums"""
 
+
 class Namespace(Enum):
     article = 0
     file = 6
@@ -10,6 +11,7 @@ class Namespace(Enum):
 
 
 """ Helper Schema Classes """
+
 
 class WithPageId(Schema):
     id = fields.Int(attribute='pageid')
@@ -32,14 +34,16 @@ class WithNamespace(Schema):
 """ Concrete Schemas """
 
 # Files
+
+
 class ImageFile(Schema):
-    width = fields.Int()
-    height = fields.Int()
-    source = fields.Url()
+    width = fields.Int(required=True)
+    height = fields.Int(required=True)
+    source = fields.Url(required=True)
 
 
 class CoverSchema(Schema):
-    original = fields.Nested(ImageFile)
+    original = fields.Nested(ImageFile, required=True)
 
 
 # Search
@@ -55,6 +59,8 @@ class SearchSchema(WithNamespace):
         many = True
 
 # Categories
+
+
 class CategorySchema(WithNamespace, WithPageId):
     title = fields.Str()
     thumbnail = fields.Nested(ImageFile)
@@ -67,9 +73,11 @@ class CategoriesSchema(CategorySchema):
 
 # Details
 class PageDetailsSchema(Schema):
-    title = fields.Str()
-    summary = fields.Str()
-    cover = fields.Nested(CoverSchema)
+    title = fields.Str(required=True)
+    summary = fields.Str(required=True)
+    cover = fields.Nested(CoverSchema, required=True)
+
 
 """ Shared examples """
-image_example = ImageFile().load({ 'width': 33, 'height': 50, 'source': 'https://redubia.vercel.app' })
+image_example = ImageFile().load(
+    {'width': 33, 'height': 50, 'source': 'https://redubia.vercel.app'})

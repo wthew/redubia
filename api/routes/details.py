@@ -7,26 +7,26 @@ from api.utils import create_api_blueprint
 
 api = create_api_blueprint(__name__)
 
-@api.route("/cover/<int:page_id>")
+@api.route("/cover/<int:id>")
 class CoverController(MethodView):
     example = CoverSchema().load({ "original": image_example })
 
     @api.response(200, CoverSchema, example=CoverSchema().dump(example))
-    def get(self, page_id: int):
+    def get(self, id: int):
         size = request.args.get('size', 300)
 
-        return dublagemApiClient.cover_image(page_id, size)
+        return dublagemApiClient.cover_image(id, size)
 
 
-@api.route("/page/<string:page_id>")
+@api.route("/details/<string:id>")
 class PageDetailsController(MethodView):
 
     @api.response(200, PageDetailsSchema)
-    def get(self, page_id: str):
-        redubia = Redubia(page_id)
+    def get(self, id: str):
+        redubia = Redubia(id)
 
         return {
             'title': redubia.page.title,
             'summary': redubia.page.summary,
-            'cover': dublagemApiClient.cover_image(page_id)
+            'cover': dublagemApiClient.cover_image(id)
         }

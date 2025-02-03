@@ -2,6 +2,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from api.redubia import dublagemApiClient, Redubia
+from api.repositories import fandom
 from api.schemas import GallerySchema, CoverSchema, image_example, PageDetailsSchema
 from api.utils import create_api_blueprint
 
@@ -15,8 +16,8 @@ class CoverController(MethodView):
     @api.doc(operationId="getCover")
     def get(self, id: int):
         size = request.args.get('size', 300)
-
-        return dublagemApiClient.cover_image(id, size)
+        repo = fandom.make_repository(fandom.CoverRepository)
+        return repo.get(id, size)
 
 
 @api.route("/details/<int:id>")
@@ -41,4 +42,5 @@ class PageGalleryController(MethodView):
     @api.doc(operationId="getGallery")
     def get(self, id: int):
         size = request.args.get('size', None)
-        return dublagemApiClient.gallery(id, size)
+        repo = fandom.make_repository(fandom.CoverRepository)
+        return repo.get(id, size)

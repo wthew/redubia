@@ -1,7 +1,7 @@
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint
-from api.redubia import Redubia, dublagemApiClient
+from api.repositories import fandom
 from api.schemas import  SearchSchema, Namespace, SearchRequestSchema
 from api.utils import create_api_blueprint
 
@@ -19,4 +19,6 @@ class SearchController(MethodView):
     @api.doc(operationId="search")
     def get(self, test):
         term = request.args.get('q', '')
-        return [] if term is '' else dublagemApiClient.make_request(f"action=query&format=json&list=search&srsearch={term}")['query']['search']
+        repo = fandom.make_repository(fandom.SearchRepository)
+        
+        return [] if term is '' else repo.all(term)

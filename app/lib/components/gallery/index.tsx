@@ -4,13 +4,14 @@ import { getGallery } from "@/app/lib/services/gen";
 
 export default async function Gallery(props: { page_id: number }) {
   const { data: res } = await getGallery({ id: props.page_id });
+  console.log(res)
 
   return (
     <div className="flex flex-row gap-3 items-center">
       {res.map(({ thumbnail, id, title }) => (
         <Link key={id} href={`/${id}`}>
           <Image
-            className="rounded-lg hover:scale-125 transition-transform"
+            className="rounded-lg hover:scale-110 transition-transform"
             title={title}
             alt={""}
             src={{ src: thumbnail.source, height: 56, width: 56 }}

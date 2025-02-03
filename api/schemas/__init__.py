@@ -14,11 +14,11 @@ class Namespace(Enum):
 
 
 class WithPageId(Schema):
-    id = fields.Int(attribute='pageid')
+    id = fields.Int(attribute='pageid', required=True)
 
 
 class WithNamespace(Schema):
-    ns = fields.Enum(Namespace, validate=None)
+    ns = fields.Enum(Namespace, validate=None, required=True)
 
     @pre_dump
     def pre_dump_details(self, data, **kwarg):
@@ -71,7 +71,7 @@ class SearchSchema(WithNamespace):
 
 
 class CategorySchema(WithNamespace, WithPageId):
-    title = fields.Str()
+    title = fields.Str(required=True)
     thumbnail = fields.Nested(ImageFileSchema)
 
 

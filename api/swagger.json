@@ -38,6 +38,55 @@
         "operationId": "getCategories"
       }
     },
+    "/api/categories/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categories"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 13544,
+                    "ns": "file",
+                    "title": "Categoria:Anima\u00e7\u00f5es Brasileiras",
+                    "thumbnail": {
+                      "width": 33,
+                      "height": 50,
+                      "source": "https://redubia.vercel.app"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "categories"
+        ],
+        "operationId": "getCategoriesForPage"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
+    },
     "/api/cover/{id}": {
       "get": {
         "responses": {
@@ -311,7 +360,12 @@
           "thumbnail": {
             "$ref": "#/components/schemas/ImageFile"
           }
-        }
+        },
+        "required": [
+          "id",
+          "ns",
+          "title"
+        ]
       },
       "Cover": {
         "type": "object",
@@ -360,6 +414,7 @@
           }
         },
         "required": [
+          "id",
           "original",
           "thumbnail"
         ]
@@ -381,7 +436,10 @@
           "title": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "ns"
+        ]
       }
     },
     "responses": {

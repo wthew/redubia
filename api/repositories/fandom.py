@@ -3,6 +3,7 @@ from typing import TypeVar
 from api.schemas import Namespace
 from . import RepositoryBase
 
+
 class BaseRequest:
     _required_fields = []
     _optional_fields = []
@@ -53,7 +54,7 @@ class GetCategoriesByPageRequest(ByPageIdRequest):
 
 class GetCoverRequest(ByPageIdRequest):
     _optional_fields = ['pithumbsize']
-    
+
     prop = "pageimages"
     piprop = "thumbnail|name|original"
 
@@ -96,18 +97,28 @@ class FandomRepositoryBase(RepositoryBase):
     def __init__(self, client: FandomClient):
         self.client = client
 
+    def _exclude_without_id(self, res):
+        return list(filter(lambda item: dict(item).get('pageid', None) is not None, res))
+
     def add(self, entity):
         print("cannot add in fandom")
 
 
 class CategoryRepository(FandomRepositoryBase):
+    def _parser(self, categories):
+        def mapper(category):
+            category['title'] = category['title'].replace('Categoria:', '')
+            return category
+
+        return self._exclude_without_id(map(mapper, list(dict(categories).values())))
+
     def get(self, page_id):
         res = self.client.request(GetCategoriesByPageRequest(pageids=page_id))
-        return res
+        return self._parser(res)
 
     def all(self, criteria):
         res = self.client.request(GetCategoriesRequest())
-        return res
+        return self._parser(res)
 
 
 class SearchRepository(FandomRepositoryBase):
@@ -122,7 +133,8 @@ class SearchRepository(FandomRepositoryBase):
 
 class CoverRepository(FandomRepositoryBase):
     def get(self, page_id, size):
-        res = self.client.request(GetCoverRequest(pageids=page_id, pithumbsize=size))
+        res = self.client.request(GetCoverRequest(
+            pageids=page_id, pithumbsize=size))
         return res
 
     def all(self, criteria):
@@ -131,14 +143,20 @@ class CoverRepository(FandomRepositoryBase):
 
 class GalleryRepository(FandomRepositoryBase):
     def get(self, page_id, size):
-        res = self.client.request(GetGalleryRequest(pageids=page_id, pithumbsize=size))
-        return res
+        res = list(dict(self.client.request(GetGalleryRequest(
+            pageids=page_id,
+            pithumbsize=size
+        ))).values())
+
+        return self._exclude_without_id(filter(lambda item: item['title'].find('.png') is not -1, res))
 
     def all(self, criteria):
         print('cannot get many gallerys')
 
 
 Repo = TypeVar("Repo", bound=FandomRepositoryBase)
+
+
 def make_repository(cls: Repo) -> Repo:
     client = FandomClient()
 

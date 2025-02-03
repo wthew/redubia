@@ -42,5 +42,5 @@ class PageGalleryController(MethodView):
     @api.doc(operationId="getGallery")
     def get(self, id: int):
         size = request.args.get('size', None)
-        repo = fandom.make_repository(fandom.CoverRepository)
+        repo = fandom.make_repository(fandom.GalleryRepository)
         return repo.get(id, size)

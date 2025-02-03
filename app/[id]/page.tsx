@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { HandlerAppBarHides } from "../lib/components/app-bar/context";
 import { getDetails } from "../lib/services/gen";
+import Categories from "../lib/components/category";
 
 type Params = Promise<{ id: number }>;
 export default async function PageById(props: { params: Params }) {
@@ -29,12 +30,17 @@ export default async function PageById(props: { params: Params }) {
       </div>
       <HandlerAppBarHides>
         <div className="p-6 pb-0 flex flex-row justify-between">
-          <CardHeader className="h-full p-0">
-            <CardTitle>{data.title}</CardTitle>
-            <CardDescription>TODO: categorias</CardDescription>
+          <CardHeader className="h-full w-4/5 p-0">
+            <CardTitle className="flex justify-between items-center">
+              <h1 className="text-2xl">{data.title}</h1>
+              <span className="font-light opacity-25">#{id}</span>
+            </CardTitle>
+            <CardDescription>
+              <Categories id={id} />
+            </CardDescription>
             <Gallery page_id={id} />
           </CardHeader>
-          <div className="rounded-md w-1/5 m-3 max-h-32 overflow-hidden">
+          <div className="rounded-md w-1/5 m-3 overflow-hidden">
             <Image
               alt=""
               src={{
@@ -46,7 +52,7 @@ export default async function PageById(props: { params: Params }) {
           </div>
         </div>
         <CardContent className="">
-          <p>{data.summary}</p>
+          <p className="mt-3">{data.summary}</p>
         </CardContent>
       </HandlerAppBarHides>
     </div>

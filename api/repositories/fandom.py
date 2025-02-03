@@ -126,7 +126,7 @@ class SearchRepository(FandomRepositoryBase):
         res = self.client.request(SearhRequest(srsearch=query_term))
         return res[0]
 
-    def all(self, criteria):
+    def all(self, query_term):
         res = self.client.request(SearhRequest(srsearch=query_term))
         return res
 

@@ -1,3 +1,4 @@
+from base64 import b64encode, b64decode
 from importlib import import_module as module
 from sys import path
 from os import listdir
@@ -16,3 +17,14 @@ def import_from_folder(folder: str):
                 yield i.replace('.py', '')
 
     return { key: module(name=key) for key in list(seek()) }
+
+
+def encode_base64(string):
+    _bytes = b64encode(string.encode("ascii"))
+    return _bytes.decode("ascii")
+
+def decode_base64(string):
+    _bytes = b64decode(string)
+    output = _bytes.decode("utf-8")
+    print('decoded:', output)
+    return output

@@ -34,7 +34,7 @@ class BaseRequest:
         return dict({key: value(key) for key in fields})
 
     def get_data(self, data):
-        return data["query"]["pages"]
+        return list(dict(data["query"]["pages"]).values()), data["continue"]
 
 
 class ByPageIdRequest(BaseRequest):
@@ -82,15 +82,27 @@ class FandomClient:
     def __init__(self):
         self.session = Session()
 
-    def request(self, request: BaseRequest, cb=None):
-        # TODO: suporte a paginação
+    def request_until_end(self, request: BaseRequest, continue_param={}):
+        params = request.get_params()
 
-        res = self.session.get(url=self.base_url, params=request.get_params())
+        while True:
+            params.update(continue_param)
+            res = self.session.get(url=self.base_url, params=params).json()
 
-        if cb is None:
-            cb = request.get_data
+            if 'continue' not in res:
+                break
 
-        return cb(res.json())
+            data, continue_param = request.get_data(res)
+
+    def request(self, request: BaseRequest, pagination=None, until_end=False):
+        params = request.get_params()
+
+        if pagination is not None:
+            params.update(pagination)
+
+        data = self.session.get(url=self.base_url, params=params).json()
+
+        return request.get_data(data)
 
 
 class FandomRepositoryBase(RepositoryBase):
@@ -109,16 +121,16 @@ class CategoryRepository(FandomRepositoryBase):
         def mapper(category):
             category['title'] = category['title'].replace('Categoria:', '')
             return category
-
-        return self._exclude_without_id(map(mapper, list(dict(categories).values())))
+        
+        return self._exclude_without_id(map(mapper, categories))
 
     def get(self, page_id):
         res = self.client.request(GetCategoriesByPageRequest(pageids=page_id))
         return self._parser(res)
 
-    def all(self, criteria):
-        res = self.client.request(GetCategoriesRequest())
-        return self._parser(res)
+    def all(self, **kwargs):
+        res, pagination = self.client.request(GetCategoriesRequest(), kwargs.get('pagination', None))
+        return self._parser(res), pagination
 
 
 class SearchRepository(FandomRepositoryBase):

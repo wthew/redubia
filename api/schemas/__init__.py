@@ -1,5 +1,7 @@
 from enum import Enum
-from marshmallow import Schema, fields, pre_dump, pre_load
+from marshmallow import Schema, fields, pre_dump, pre_load, missing
+from json import dumps, loads
+from api.utils import encode_base64, decode_base64
 
 """ Enums"""
 
@@ -15,6 +17,35 @@ class Namespace(Enum):
 
 class WithPageId(Schema):
     id = fields.Int(attribute='pageid', required=True)
+
+
+class WithPagination(Schema):
+    next_page = fields.Raw(validate=None)
+    page = fields.Raw(validate=None)
+
+    @pre_dump
+    def pre_dump_details(self, data, **kwarg):
+        output = dict(data)
+
+        if isinstance(output.get('next_page', None), dict):
+            output['next_page'] = encode_base64(dumps(output['next_page']))
+
+        if isinstance(output.get('page', None), dict):
+            output['page'] = encode_base64(dumps(output['page']))
+
+        return output
+
+    @pre_load
+    def pre_load_details(self, data, **kwarg):
+        output = dict(data)
+
+        if isinstance(output.get('next_page', None), str):
+            output['next_page'] = loads(decode_base64(output['next_page']))
+
+        if isinstance(output.get('page', None), str):
+            output['page'] = loads(decode_base64(output['page']))
+
+        return output
 
 
 class WithNamespace(Schema):
@@ -75,9 +106,13 @@ class CategorySchema(WithNamespace, WithPageId):
     thumbnail = fields.Nested(ImageFileSchema)
 
 
-class CategoriesSchema(CategorySchema):
+class CategoriesRequestSchema(WithPagination):
     class Meta:
-        many = True
+        exclude = ['next_page']
+
+
+class CategoriesSchema(WithPagination):
+    results = fields.List(fields.Nested(CategorySchema))
 
 
 # Details

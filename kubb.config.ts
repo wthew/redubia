@@ -29,10 +29,6 @@ export default defineConfig({
       output: {
         path: "models",
       },
-      group: {
-        type: "tag",
-        name: ({ group }) => `${group}Controller`,
-      },
       enumType: "asConst",
       enumSuffix: "Enum",
       dateType: "date",
@@ -56,24 +52,22 @@ export default defineConfig({
       parser: "client",
       paramsType: "object",
       pathParamsType: "object",
-      dataReturnType: "full",
+      dataReturnType: "data",
       client: "axios",
     }),
     pluginReactQuery({
       output: {
         path: "./hooks",
       },
-      group: {
-        type: "tag",
-        name: ({ group }) => `${group}Hooks`,
-      },
       client: {
-        dataReturnType: "full",
+        dataReturnType: "data",
       },
       paramsType: "object",
       pathParamsType: "object",
-      mutation: {
-        methods: ["post", "put", "delete"],
+      infinite: {
+        cursorParam: 'next_cursor',
+        queryParam: 'cursor',
+        initialPageParam: null
       },
       query: {
         methods: ["get"],

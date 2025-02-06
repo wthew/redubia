@@ -22,22 +22,27 @@ import Link from "next/link";
 import { useSearch } from "@/app/lib/services/gen";
 
 export default function AppBar() {
-  const { visible, appBarRef } = useAppBar();
+  const { visible, appBarRef, appBarHeight } = useAppBar();
 
   return (
-    <header
-      ref={appBarRef}
-      className={cn(
-        "bg-card text-card-foreground fixed top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
-        visible ? "translate-y-0" : "-translate-y-full",
-        "md:translate-y-0" // Sempre visível no desktop
-      )}
-    >
-      <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-semibold">redub.ia</h1>
-        <Search />
-      </div>
-    </header>
+    <>
+      <header
+        ref={appBarRef}
+        className={cn(
+          "bg-card text-card-foreground fixed top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
+          visible ? "translate-y-0" : "-translate-y-full",
+          "md:translate-y-0" // Sempre visível no desktop
+        )}
+      >
+        <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+          <Link href="/">
+            <h1 className="text-xl font-semibold">redub.ia</h1>
+          </Link>
+          <Search />
+        </div>
+      </header>
+      <div className="" style={{ height: appBarHeight }} />
+    </>
   );
 }
 
@@ -46,8 +51,7 @@ export function Search() {
 
   const [search, setSearch] = useState("");
   const debounced = useDebounced(search);
-  const { data, isLoading } = useSearch({ params: { q: debounced } });
-  const options = Array.isArray(data?.data) ? data.data : [];
+  const { data = [], isLoading } = useSearch({ params: { q: debounced } });
 
   const onOpen = useCallback(() => {
     setOpen(true);
@@ -88,7 +92,7 @@ export function Search() {
             {isLoading ? "Loading..." : "No results found."}
           </CommandEmpty>
           <CommandGroup>
-            {options.map(({ id, title }) => (
+            {data.map(({ id, title }) => (
               <CommandItem key={id}>
                 <Link onClick={clear} href={`/${id}`}>
                   {title}

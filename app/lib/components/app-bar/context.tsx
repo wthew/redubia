@@ -71,7 +71,7 @@ export function useAppBar() {
 export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
   props
 ) => {
-  const { updateContainerRef, appBarHeight } = useAppBar();
+  const { updateContainerRef, appBarHeight, visible } = useAppBar();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerHeight, setContainerHeight] = useState("1vh");
 
@@ -90,13 +90,9 @@ export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
   }, []);
 
   return (
-    <div
-      style={{ height: `calc(${containerHeight} * 100)` }}
-      className="flex flex-col w-screen z-10 justify-center items-center"
-    >
-      <div className="hidden md:flex" style={{ height: appBarHeight }} />
+    <div className="flex flex-col w-screen z-10 justify-center items-center min-h-dvh h-auto">
       <Card
-        className={`border-0 md:border-1 rounded-none h-full md:rounded-lg w-full max-w-5xl md:h-5/6 overflow-scroll`}
+        className={`border-0 md:border-1 rounded-none h-full md:rounded-lg w-full max-w-5xl`}
         ref={(el) => {
           if (el && !containerRef.current) {
             updateContainerRef(el);
@@ -104,7 +100,6 @@ export const HandlerAppBarHides: React.FC<React.PropsWithChildren> = (
           }
         }}
       >
-        <div className="flex md:hidden" style={{ height: appBarHeight }} />
         {props.children}
       </Card>
     </div>

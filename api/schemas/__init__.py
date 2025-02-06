@@ -10,6 +10,7 @@ class Namespace(Enum):
     article = 0
     file = 6
     categories = 14
+    with_audio = 500
 
 
 """ Helper Schema Classes """
@@ -18,20 +19,22 @@ class Namespace(Enum):
 class WithPageId(Schema):
     id = fields.Int(attribute='pageid', required=True)
 
+class ByIdRequestSchema(Schema):
+    id = fields.Int()
 
 class WithPagination(Schema):
-    next_page = fields.Raw(validate=None)
-    page = fields.Raw(validate=None)
+    next_cursor = fields.Raw(validate=None)
+    cursor = fields.Raw(validate=None)
 
     @pre_dump
     def pre_dump_details(self, data, **kwarg):
         output = dict(data)
 
-        if isinstance(output.get('next_page', None), dict):
-            output['next_page'] = encode_base64(dumps(output['next_page']))
+        if isinstance(output.get('next_cursor', None), dict):
+            output['next_cursor'] = encode_base64(dumps(output['next_cursor']))
 
-        if isinstance(output.get('page', None), dict):
-            output['page'] = encode_base64(dumps(output['page']))
+        if isinstance(output.get('cursor', None), dict):
+            output['cursor'] = encode_base64(dumps(output['cursor']))
 
         return output
 
@@ -39,11 +42,11 @@ class WithPagination(Schema):
     def pre_load_details(self, data, **kwarg):
         output = dict(data)
 
-        if isinstance(output.get('next_page', None), str):
-            output['next_page'] = loads(decode_base64(output['next_page']))
+        if isinstance(output.get('next_cursor', None), str):
+            output['next_cursor'] = loads(decode_base64(output['next_cursor']))
 
-        if isinstance(output.get('page', None), str):
-            output['page'] = loads(decode_base64(output['page']))
+        if isinstance(output.get('cursor', None), str):
+            output['cursor'] = loads(decode_base64(output['cursor']))
 
         return output
 
@@ -65,8 +68,6 @@ class WithNamespace(Schema):
 """ Concrete Schemas """
 
 # Files
-
-
 class ImageFileSchema(Schema):
     width = fields.Int(required=True)
     height = fields.Int(required=True)
@@ -98,21 +99,29 @@ class SearchSchema(WithNamespace):
     class Meta:
         many = True
 
+
 # Categories
-
-
 class CategorySchema(WithNamespace, WithPageId):
     title = fields.Str(required=True)
-    thumbnail = fields.Nested(ImageFileSchema)
+    thumbnail = fields.Nested(ImageFileSchema, required=True)
+
+
+class PageSchema(WithNamespace, WithPageId):
+    title = fields.Str(required=True)
+    thumbnail = fields.Nested(ImageFileSchema, required=True)
 
 
 class CategoriesRequestSchema(WithPagination):
     class Meta:
-        exclude = ['next_page']
+        exclude = ['next_cursor']
 
 
 class CategoriesSchema(WithPagination):
     results = fields.List(fields.Nested(CategorySchema))
+
+
+class PagesSchema(WithPagination):
+    results = fields.List(fields.Nested(PageSchema))
 
 
 # Details

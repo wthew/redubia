@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getGallery } from "@/app/lib/services/gen";
 
 export default async function Gallery(props: { page_id: number }) {
-  const { data: res } = await getGallery({ id: props.page_id });
+  const res = await getGallery({ id: props.page_id });
   console.log(res)
 
   return (

@@ -2,29 +2,40 @@
   "paths": {
     "/api/categories": {
       "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {},
+            "required": false
+          }
+        ],
         "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categories"
-                  }
+                  "$ref": "#/components/schemas/Categories"
                 },
-                "example": [
-                  {
-                    "id": 13544,
-                    "ns": "file",
-                    "title": "Categoria:Anima\u00e7\u00f5es Brasileiras",
-                    "thumbnail": {
-                      "width": 33,
-                      "height": 50,
-                      "source": "https://redubia.vercel.app"
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 13544,
+                      "ns": "file",
+                      "title": "Anima\u00e7\u00f5es Brasileiras",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           },
@@ -40,29 +51,48 @@
     },
     "/api/categories/{id}": {
       "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {},
+            "required": false
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
         "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Categories"
-                  }
+                  "$ref": "#/components/schemas/Pages"
                 },
-                "example": [
-                  {
-                    "id": 13544,
-                    "ns": "file",
-                    "title": "Categoria:Anima\u00e7\u00f5es Brasileiras",
-                    "thumbnail": {
-                      "width": 33,
-                      "height": 50,
-                      "source": "https://redubia.vercel.app"
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 118646,
+                      "ns": "article",
+                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
             }
           },
@@ -73,7 +103,7 @@
         "tags": [
           "categories"
         ],
-        "operationId": "getCategoriesForPage"
+        "operationId": "getPagesByCategory"
       },
       "parameters": [
         {
@@ -149,6 +179,55 @@
           "details"
         ],
         "operationId": "getDetails"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
+    },
+    "/api/details/{id}/categories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 13544,
+                    "ns": "file",
+                    "title": "Anima\u00e7\u00f5es Brasileiras",
+                    "thumbnail": {
+                      "width": 33,
+                      "height": 50,
+                      "source": "https://redubia.vercel.app"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "details"
+        ],
+        "operationId": "getCategoriesForPage"
       },
       "parameters": [
         {
@@ -340,7 +419,7 @@
           "width"
         ]
       },
-      "Categories": {
+      "Category": {
         "type": "object",
         "properties": {
           "id": {
@@ -351,7 +430,8 @@
             "enum": [
               "article",
               "file",
-              "categories"
+              "categories",
+              "with_audio"
             ]
           },
           "title": {
@@ -364,8 +444,64 @@
         "required": [
           "id",
           "ns",
+          "thumbnail",
           "title"
         ]
+      },
+      "Categories": {
+        "type": "object",
+        "properties": {
+          "next_cursor": {},
+          "cursor": {},
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          }
+        }
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories",
+              "with_audio"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "$ref": "#/components/schemas/ImageFile"
+          }
+        },
+        "required": [
+          "id",
+          "ns",
+          "thumbnail",
+          "title"
+        ]
+      },
+      "Pages": {
+        "type": "object",
+        "properties": {
+          "next_cursor": {},
+          "cursor": {},
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Page"
+            }
+          }
+        }
       },
       "Cover": {
         "type": "object",
@@ -427,7 +563,8 @@
             "enum": [
               "article",
               "file",
-              "categories"
+              "categories",
+              "with_audio"
             ]
           },
           "id": {
@@ -443,8 +580,8 @@
       }
     },
     "responses": {
-      "DEFAULT_ERROR": {
-        "description": "Default error response",
+      "UNPROCESSABLE_CONTENT": {
+        "description": "Unprocessable Content",
         "content": {
           "application/json": {
             "schema": {
@@ -453,8 +590,8 @@
           }
         }
       },
-      "UNPROCESSABLE_CONTENT": {
-        "description": "Unprocessable Content",
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
         "content": {
           "application/json": {
             "schema": {

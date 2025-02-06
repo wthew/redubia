@@ -26,5 +26,4 @@ def encode_base64(string):
 def decode_base64(string):
     _bytes = b64decode(string)
     output = _bytes.decode("utf-8")
-    print('decoded:', output)
     return output

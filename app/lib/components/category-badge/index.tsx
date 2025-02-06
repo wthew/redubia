@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { getCategoriesForPage, GetCategoriesForPage200 } from "../../services/gen";
+import { getCategoriesForPage, Category as TypeCategory } from "../../services/gen";
 import { hashColor } from "../../utils";
 import Color from "color";
 
-type Props = { category: GetCategoriesForPage200[number] };
+type Props = { category: TypeCategory };
 export function Category({ category }: Props) {
   const bg = Color({ hex: hashColor(category.title) }).desaturate(0.16);
   const fg = bg.lighten(0.25).isDark()
@@ -13,7 +13,7 @@ export function Category({ category }: Props) {
   const style = { background: bg.lighten(0.25).hex(), color: fg.hex() };
 
   return (
-    <Link href={`/${category.id}`}>
+    <Link href={`/categories/${category.id}`}>
       <div
         className="w-max p-2 rounded-full m-1 text-xs hover:scale-110 transition-all"
         style={style}
@@ -25,7 +25,8 @@ export function Category({ category }: Props) {
 }
 
 export default async function Categories(props: { id: number }) {
-    const { data: categories } = await getCategoriesForPage({ id: props.id });
+  const categories = await getCategoriesForPage({ id: props.id });
+  console.log({categories})
 
   return (
     <div className="flex flex-wrap">

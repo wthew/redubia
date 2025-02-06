@@ -3,7 +3,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint
 from api.redubia import dublagemApiClient, Redubia
 from api.repositories import fandom
-from api.schemas import GallerySchema, CoverSchema, image_example, PageDetailsSchema
+from api.schemas import Namespace, GallerySchema, CoverSchema, image_example, PageDetailsSchema, CategorySchema
 from api.utils import create_api_blueprint
 
 api = create_api_blueprint(__name__)
@@ -27,13 +27,28 @@ class PageDetailsController(MethodView):
     @api.doc(operationId="getDetails")
     def get(self, id: int):
         redubia = Redubia(id)
+        res = fandom.make_repository(fandom.DetailsPageRepository).get(id)
 
         return {
             'title': redubia.page.title,
-            'summary': redubia.page.summary,
+            'summary': '\n\n'.join(res),
             'cover': dublagemApiClient.cover_image(id)
         }
 
+@api.route("/details/<int:id>/categories")
+class CategoriesForPageController(MethodView):
+    example = CategorySchema(many=True).load([{
+        "id": 13544,
+        "ns": Namespace(6),
+        "title": "Animações Brasileiras",
+        "thumbnail": image_example
+    }])
+
+    @api.response(200, CategorySchema(many=True), example=CategorySchema(many=True).dump(example))
+    @api.doc(operationId="getCategoriesForPage")
+    def get(self, id: int):
+        res = fandom.make_repository(fandom.CategoriesByPageRepository).get(id)
+        return res
 
 @api.route("/gallery/<int:id>")
 class PageGalleryController(MethodView):

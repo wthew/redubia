@@ -40,3 +40,5 @@ __pycache__
 
 #
 app/lib/services/gen
+.coverage
+.*_cache

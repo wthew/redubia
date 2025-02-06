@@ -2,9 +2,9 @@ from requests import Session
 from typing import TypeVar
 from api.schemas import Namespace
 from . import RepositoryBase
-from pprint import pprint
 from markdownify import markdownify
 from bs4 import BeautifulSoup
+
 
 class BaseRequest:
     _required_fields = []
@@ -27,26 +27,27 @@ class BaseRequest:
         self.__dict__.update(kwargs)
 
     def get_params(self):
-        def value(key): return self.__getattribute__(key)
+        def value(key):
+            return self.__getattribute__(key)
 
         fields = [
-            i for i in dir(self)
-            if not i.startswith('_') and not callable(value(i))
+            i for i in dir(self) if not i.startswith("_") and not callable(value(i))
         ]
         return dict({key: value(key) for key in fields})
 
-    get_data_result = TypeVar('get_data_result')
+    get_data_result = TypeVar("get_data_result")
+
     def get_data(self, data) -> get_data_result:
-        next_cursor = data.get('continue', None)
+        next_cursor = data.get("continue", None)
         return list(dict(data["query"]["pages"]).values()), next_cursor
 
 
 class ByPageIdRequest(BaseRequest):
-    _required_fields = ['pageids']
+    _required_fields = ["pageids"]
 
 
 class GetCategoriesRequest(BaseRequest):
-    _optional_fields = ['pithumbsize']
+    _optional_fields = ["pithumbsize"]
 
     prop = "pageimages"
     generator = "allpages"
@@ -55,10 +56,10 @@ class GetCategoriesRequest(BaseRequest):
 
 
 class GetPagesByCategoryRequest(BaseRequest):
-    _required_fields = ['gcmpageid']
-    _optional_fields =['pithumbsize']
-    generator='categorymembers'
-    prop='pageimages'
+    _required_fields = ["gcmpageid"]
+    _optional_fields = ["pithumbsize"]
+    generator = "categorymembers"
+    prop = "pageimages"
 
 
 class GetCategoriesByPageRequest(ByPageIdRequest):
@@ -66,14 +67,14 @@ class GetCategoriesByPageRequest(ByPageIdRequest):
 
 
 class GetCoverRequest(ByPageIdRequest):
-    _optional_fields = ['pithumbsize']
+    _optional_fields = ["pithumbsize"]
 
     prop = "pageimages"
     piprop = "thumbnail|name|original"
 
 
 class GetGalleryRequest(ByPageIdRequest):
-    _optional_fields = ['pithumbsize']
+    _optional_fields = ["pithumbsize"]
 
     prop = "pageimages"
     generator = "images"
@@ -86,28 +87,30 @@ class SearhRequest(BaseRequest):
     list = "search"
 
     def get_data(self, data):
-        return data['query']['search']
+        return data["query"]["search"]
 
 
 class PageSectionsRequest(BaseRequest):
-    _required_fields=["pageid"]
-    action="parse"
-    prop="sections"
+    _required_fields = ["pageid"]
+    action = "parse"
+    prop = "sections"
 
     def get_data(self, data):
         return list(data["parse"]["sections"])
 
+
 class PageContentRequest(BaseRequest):
-    _required_fields=[ "pageid",  "section" ]
-    action='parse'
-    prop="text"
+    _required_fields = ["pageid", "section"]
+    action = "parse"
+    prop = "text"
 
     def get_data(self, data):
         return str(data["parse"]["text"]["*"])
 
+
 class FandomClient:
     base_url = "https://dublagem.fandom.com/api.php"
-    request_type = TypeVar('request_type', bound=BaseRequest)
+    request_type = TypeVar("request_type", bound=BaseRequest)
 
     def __init__(self):
         self.session = Session()
@@ -128,8 +131,8 @@ class FandomRepositoryBase(RepositoryBase):
         self.client = client
 
     def _filter(self, item):
-        return dict(item).get('pageid', None) is not None
-    
+        return dict(item).get("pageid", None) is not None
+
     def _map(self, item):
         return item
 
@@ -142,47 +145,56 @@ class FandomRepositoryBase(RepositoryBase):
 
 class CategoriesByPageRepository(FandomRepositoryBase):
     def _map(self, category):
-        category['title'] = category['title'].replace('Categoria:', '')
+        category["title"] = category["title"].replace("Categoria:", "")
         return category
-    
+
     def _filter(self, category):
         item = dict(category)
 
-        missing_id = item.get('pageid', None) is None
-        is_category = item.get('ns', None) == Namespace.categories.value
+        missing_id = item.get("pageid", None) is None
+        is_category = item.get("ns", None) == Namespace.categories.value
         return not missing_id and is_category
 
     def get(self, page_id):
-        res, next_cursor = self.client.request(GetCategoriesByPageRequest(pageids=page_id))
+        res, next_cursor = self.client.request(
+            GetCategoriesByPageRequest(pageids=page_id)
+        )
         return self._parser(res)
 
     def all(self, **kwargs):
-        res, pagination = self.client.request(GetCategoriesRequest(), kwargs.get('pagination', None))
+        res, pagination = self.client.request(
+            GetCategoriesRequest(), kwargs.get("pagination", None)
+        )
         return self._parser(res), pagination
 
 
 class CategoryRepository(FandomRepositoryBase):
     def _map(self, category):
-        category['title'] = category['title'].replace('Categoria:', '')
+        category["title"] = category["title"].replace("Categoria:", "")
         return category
-    
+
     def _filter(self, category):
         item = dict(category)
 
-        missing_id = item.get('pageid', None) is None
-        missing_thumb = item.get('thumbnail', None) is None
+        missing_id = item.get("pageid", None) is None
+        missing_thumb = item.get("thumbnail", None) is None
 
         return not missing_id and not missing_thumb
 
     def get(self, **kwargs):
-        category_id=kwargs.get('id', None)
-        cursor=kwargs.get('cursor', None)
+        category_id = kwargs.get("id", None)
+        cursor = kwargs.get("cursor", None)
 
-        res, next_cursor = self.client.request(GetPagesByCategoryRequest(gcmpageid=category_id, pithumbsize=300), cursor)
+        res, next_cursor = self.client.request(
+            GetPagesByCategoryRequest(gcmpageid=category_id, pithumbsize=300),
+            cursor,
+        )
         return self._parser(res), next_cursor
 
     def all(self, **kwargs):
-        res, next_cursor = self.client.request(GetCategoriesRequest(pithumbsize=300), kwargs.get('cursor', None))
+        res, next_cursor = self.client.request(
+            GetCategoriesRequest(pithumbsize=300), kwargs.get("cursor", None)
+        )
         return self._parser(res), next_cursor
 
 
@@ -198,42 +210,38 @@ class SearchRepository(FandomRepositoryBase):
 
 class CoverRepository(FandomRepositoryBase):
     def get(self, page_id, size):
-        res = self.client.request(GetCoverRequest(
-            pageids=page_id, pithumbsize=size))
+        res = self.client.request(GetCoverRequest(pageids=page_id, pithumbsize=size))
         return res
 
     def all(self, criteria):
-        print('cannot get many covers')
+        print("cannot get many covers")
 
 
 class GalleryRepository(FandomRepositoryBase):
     def _filter(self, image):
         item = dict(image)
 
-        missing_id = item.get('pageid', None) is None
-        missing_title = item.get('title', None) is None
-        is_image = item['title'].find('.png') != -1
+        missing_id = item.get("pageid", None) is None
+        missing_title = item.get("title", None) is None
+        is_image = item["title"].find(".png") != -1
 
         return not missing_id and not missing_title and is_image
 
-
     def get(self, page_id, size):
-        res, next_cursor = self.client.request(GetGalleryRequest(
-            pageids=page_id,
-            pithumbsize=size
-        ))
-
-        
+        res, next_cursor = self.client.request(
+            GetGalleryRequest(pageids=page_id, pithumbsize=size)
+        )
 
         return self._parser(res)
 
     def all(self, criteria):
-        print('cannot get many gallerys')
+        print("cannot get many gallerys")
 
-class DetailsPageSummary():
+
+class DetailsPageSummary:
     def get(self, pageid):
         content = self.client.request(PageContentRequest(pageid=pageid, section=0))
-        print('content:', markdownify(content))
+        print("content:", markdownify(content))
 
         return content
 
@@ -245,41 +253,44 @@ class DetailsPageRepository(FandomRepositoryBase):
     def get(self, pageid):
         content = self.client.request(PageContentRequest(pageid=pageid, section=0))
         soup = BeautifulSoup(content, "html.parser")
-        
-        for toc in soup.find_all('aside'):
+
+        for toc in soup.find_all("aside"):
             toc.decompose()
 
         for tag in soup.find_all():
-            if tag.has_attr('class'):
-                del tag.attrs['class']
+            if tag.has_attr("class"):
+                del tag.attrs["class"]
 
-            if tag.has_attr('style'):
-                del tag.attrs['style']
+            if tag.has_attr("style"):
+                del tag.attrs["style"]
 
         yield soup.get_text()
 
-    def all(self):
+    def all(self, pageid):
         sections = self.client.request(PageSectionsRequest(pageid=pageid))
-        
+
         for section in sections:
-            content = self.client.request(PageContentRequest(pageid=pageid, section=section['index']))
+            content = self.client.request(
+                PageContentRequest(pageid=pageid, section=section["index"])
+            )
             soup = BeautifulSoup(content, "html.parser")
-            
-            for toc in soup.find_all(id='toc'):
+
+            for toc in soup.find_all(id="toc"):
                 toc.decompose()
 
             for tag in soup.find_all():
-                if tag.has_attr('class'):
-                    del tag.attrs['class']
+                if tag.has_attr("class"):
+                    del tag.attrs["class"]
 
-                if tag.has_attr('style'):
-                    del tag.attrs['style']
+                if tag.has_attr("style"):
+                    del tag.attrs["style"]
 
             yield markdownify(soup.prettify())
-        
 
 
 Repo = TypeVar("Repo", bound=FandomRepositoryBase)
+
+
 def make_repository(cls: Repo) -> Repo:
     client = FandomClient()
 

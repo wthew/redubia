@@ -1,5 +1,5 @@
 from enum import Enum
-from marshmallow import Schema, fields, pre_dump, pre_load, missing
+from marshmallow import Schema, fields, pre_dump, pre_load
 from json import dumps, loads
 from api.utils import encode_base64, decode_base64
 
@@ -17,10 +17,12 @@ class Namespace(Enum):
 
 
 class WithPageId(Schema):
-    id = fields.Int(attribute='pageid', required=True)
+    id = fields.Int(attribute="pageid", required=True)
+
 
 class ByIdRequestSchema(Schema):
     id = fields.Int()
+
 
 class WithPagination(Schema):
     next_cursor = fields.Raw(validate=None)
@@ -30,11 +32,11 @@ class WithPagination(Schema):
     def pre_dump_details(self, data, **kwarg):
         output = dict(data)
 
-        if isinstance(output.get('next_cursor', None), dict):
-            output['next_cursor'] = encode_base64(dumps(output['next_cursor']))
+        if isinstance(output.get("next_cursor", None), dict):
+            output["next_cursor"] = encode_base64(dumps(output["next_cursor"]))
 
-        if isinstance(output.get('cursor', None), dict):
-            output['cursor'] = encode_base64(dumps(output['cursor']))
+        if isinstance(output.get("cursor", None), dict):
+            output["cursor"] = encode_base64(dumps(output["cursor"]))
 
         return output
 
@@ -42,11 +44,11 @@ class WithPagination(Schema):
     def pre_load_details(self, data, **kwarg):
         output = dict(data)
 
-        if isinstance(output.get('next_cursor', None), str):
-            output['next_cursor'] = loads(decode_base64(output['next_cursor']))
+        if isinstance(output.get("next_cursor", None), str):
+            output["next_cursor"] = loads(decode_base64(output["next_cursor"]))
 
-        if isinstance(output.get('cursor', None), str):
-            output['cursor'] = loads(decode_base64(output['cursor']))
+        if isinstance(output.get("cursor", None), str):
+            output["cursor"] = loads(decode_base64(output["cursor"]))
 
         return output
 
@@ -56,16 +58,17 @@ class WithNamespace(Schema):
 
     @pre_dump
     def pre_dump_details(self, data, **kwarg):
-        data['ns'] = Namespace(data['ns'])
+        data["ns"] = Namespace(data["ns"])
         return data
 
     @pre_load
     def pre_load_details(self, data, **kwarg):
-        data['ns'] = data['ns'].name
+        data["ns"] = data["ns"].name
         return data
 
 
 """ Concrete Schemas """
+
 
 # Files
 class ImageFileSchema(Schema):
@@ -81,7 +84,7 @@ class CoverSchema(Schema):
 class GallerySchema(WithPageId):
     original = fields.Nested(ImageFileSchema, required=True)
     thumbnail = fields.Nested(ImageFileSchema, required=True)
-    title = fields.Str(attribute='pageimage')
+    title = fields.Str(attribute="pageimage")
 
     class Meta:
         many = True
@@ -93,7 +96,7 @@ class SearchRequestSchema(Schema):
 
 
 class SearchSchema(WithNamespace):
-    id = fields.Int(attribute='pageid')
+    id = fields.Int(attribute="pageid")
     title = fields.Str()
 
     class Meta:
@@ -113,7 +116,7 @@ class PageSchema(WithNamespace, WithPageId):
 
 class CategoriesRequestSchema(WithPagination):
     class Meta:
-        exclude = ['next_cursor']
+        exclude = ["next_cursor"]
 
 
 class CategoriesSchema(WithPagination):
@@ -133,4 +136,5 @@ class PageDetailsSchema(Schema):
 
 """ Shared examples """
 image_example = ImageFileSchema().load(
-    {'width': 33, 'height': 50, 'source': 'https://redubia.vercel.app'})
+    {"width": 33, "height": 50, "source": "https://redubia.vercel.app"}
+)

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class RepositoryBase(ABC):
     @abstractmethod
     def get(self, identifier):
@@ -12,4 +13,3 @@ class RepositoryBase(ABC):
     @abstractmethod
     def all(self, criteria):
         pass
-

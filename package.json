@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": "python -m flask --app api/index --debug run -p 5328",
-    "next-dev": "next dev",
-    "dev": "yarn run next-dev & yarn run flask-dev",
+    "api:dev": "python -m api",
+    "app:dev": "next dev",
+    "gen:dev": "run-when-changed --watch 'api/swagger.json' --exec 'yarn gen'",
+    "dev": "yarn api:dev & yarn app:dev & yarn gen:dev",
     "prebuild": "kubb generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pregen": "wget http://localhost:5328/swagger.json -O api/swagger.json",
-    "gen": "kubb generate"
+    "gen": "kubb generate",
+    "prepare": "husky",
+    "test": "echo 'can commit!'"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.2",
@@ -50,6 +52,8 @@
     "@kubb/plugin-react-query": "^3.5.7",
     "@kubb/plugin-ts": "^3.5.6",
     "@types/color": "^4.2.0",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "husky": "^9.1.7",
+    "run-when-changed": "^2.1.0"
   }
 }

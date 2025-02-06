@@ -1,98 +1,43 @@
 {
   "paths": {
-    "/api/categories": {
+    "/api/search": {
       "get": {
         "parameters": [
           {
             "in": "query",
-            "name": "cursor",
-            "schema": {},
-            "required": false
-          }
-        ],
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Categories"
-                },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 13544,
-                      "ns": "file",
-                      "title": "Anima\u00e7\u00f5es Brasileiras",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "categories"
-        ],
-        "operationId": "getCategories"
-      }
-    },
-    "/api/categories/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {},
-            "required": false
-          },
-          {
-            "in": "path",
-            "name": "id",
+            "name": "q",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "required": true
+            "required": false
           }
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pages"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Search"
+                  }
                 },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 118646,
-                      "ns": "article",
-                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
+                "example": [
+                  {
+                    "ns": "article",
+                    "id": 174274,
+                    "title": "Dan Da Dan"
+                  },
+                  {
+                    "ns": "article",
+                    "id": 442,
+                    "title": "Guilherme Briggs"
+                  }
+                ]
               }
             }
           },
@@ -101,21 +46,10 @@
           }
         },
         "tags": [
-          "categories"
+          "search"
         ],
-        "operationId": "getPagesByCategory"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
+        "operationId": "search"
+      }
     },
     "/api/cover/{id}": {
       "get": {
@@ -278,44 +212,42 @@
         }
       ]
     },
-    "/api/search": {
+    "/api/categories": {
       "get": {
         "parameters": [
           {
             "in": "query",
-            "name": "q",
-            "schema": {
-              "type": "string"
-            },
+            "name": "cursor",
+            "schema": {},
             "required": false
           }
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Search"
-                  }
+                  "$ref": "#/components/schemas/Categories"
                 },
-                "example": [
-                  {
-                    "ns": "article",
-                    "id": 174274,
-                    "title": "Dan Da Dan"
-                  },
-                  {
-                    "ns": "article",
-                    "id": 442,
-                    "title": "Guilherme Briggs"
-                  }
-                ]
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 13544,
+                      "ns": "file",
+                      "title": "Anima\u00e7\u00f5es Brasileiras",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
+                    }
+                  ]
+                }
               }
             }
           },
@@ -324,10 +256,78 @@
           }
         },
         "tags": [
-          "search"
+          "categories"
         ],
-        "operationId": "search"
+        "operationId": "getCategories"
       }
+    },
+    "/api/categories/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {},
+            "required": false
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pages"
+                },
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 118646,
+                      "ns": "article",
+                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "categories"
+        ],
+        "operationId": "getPagesByCategory"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
     }
   },
   "info": {
@@ -336,7 +336,7 @@
   },
   "tags": [
     {
-      "name": "categories",
+      "name": "search",
       "description": ""
     },
     {
@@ -344,7 +344,7 @@
       "description": ""
     },
     {
-      "name": "search",
+      "name": "categories",
       "description": ""
     }
   ],
@@ -399,6 +399,29 @@
           }
         }
       },
+      "Search": {
+        "type": "object",
+        "properties": {
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories",
+              "with_audio"
+            ]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ns"
+        ]
+      },
       "ImageFile": {
         "type": "object",
         "properties": {
@@ -417,6 +440,36 @@
           "height",
           "source",
           "width"
+        ]
+      },
+      "Cover": {
+        "type": "object",
+        "properties": {
+          "original": {
+            "$ref": "#/components/schemas/ImageFile"
+          }
+        },
+        "required": [
+          "original"
+        ]
+      },
+      "PageDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/Cover"
+          }
+        },
+        "required": [
+          "cover",
+          "summary",
+          "title"
         ]
       },
       "Category": {
@@ -446,6 +499,28 @@
           "ns",
           "thumbnail",
           "title"
+        ]
+      },
+      "Gallery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "original": {
+            "$ref": "#/components/schemas/ImageFile"
+          },
+          "thumbnail": {
+            "$ref": "#/components/schemas/ImageFile"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "original",
+          "thumbnail"
         ]
       },
       "Categories": {
@@ -502,86 +577,11 @@
             }
           }
         }
-      },
-      "Cover": {
-        "type": "object",
-        "properties": {
-          "original": {
-            "$ref": "#/components/schemas/ImageFile"
-          }
-        },
-        "required": [
-          "original"
-        ]
-      },
-      "PageDetails": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "cover": {
-            "$ref": "#/components/schemas/Cover"
-          }
-        },
-        "required": [
-          "cover",
-          "summary",
-          "title"
-        ]
-      },
-      "Gallery": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "original": {
-            "$ref": "#/components/schemas/ImageFile"
-          },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageFile"
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "original",
-          "thumbnail"
-        ]
-      },
-      "Search": {
-        "type": "object",
-        "properties": {
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "id": {
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "ns"
-        ]
       }
     },
     "responses": {
-      "UNPROCESSABLE_CONTENT": {
-        "description": "Unprocessable Content",
+      "UNPROCESSABLE_ENTITY": {
+        "description": "Unprocessable Entity",
         "content": {
           "application/json": {
             "schema": {

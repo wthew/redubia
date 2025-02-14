@@ -1,0 +1,1 @@
+{"type":"object","properties":{"original":{"type":"object","properties":{"width":{"type":"integer"},"height":{"type":"integer"},"source":{"type":"string","format":"url"}},"required":["height","source","width"],"x-readme-ref-name":"ImageFile"}},"required":["original"],"x-readme-ref-name":"Cover"}

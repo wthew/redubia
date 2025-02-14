@@ -5,7 +5,7 @@
   "scripts": {
     "flask-dev": "python -m flask --app api/index --debug run -p 5328",
     "next-dev": "next dev",
-    "dev": "yarn run next-dev & yarn run flask-dev",
+    "dev": "yarn flask-dev & yarn next-dev",
     "prebuild": "kubb generate",
     "build": "next build",
     "start": "next start",

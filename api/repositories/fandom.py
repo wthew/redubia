@@ -5,6 +5,7 @@ from . import RepositoryBase
 from pprint import pprint
 from markdownify import markdownify
 from bs4 import BeautifulSoup
+from api.redubia.parser import Parser
 
 class BaseRequest:
     _required_fields = []
@@ -98,7 +99,7 @@ class PageSectionsRequest(BaseRequest):
         return list(data["parse"]["sections"])
 
 class PageContentRequest(BaseRequest):
-    _required_fields=[ "pageid",  "section" ]
+    _required_fields=[ "pageid" ]
     action='parse'
     prop="text"
 
@@ -243,26 +244,24 @@ class DetailsPageSummary():
 
 class DetailsPageRepository(FandomRepositoryBase):
     def get(self, pageid):
-        content = self.client.request(PageContentRequest(pageid=pageid, section=0))
+        content = self.client.request(PageContentRequest(pageid=pageid))
         soup = BeautifulSoup(content, "html.parser")
-        
-        for toc in soup.find_all('aside'):
-            toc.decompose()
 
-        for tag in soup.find_all():
-            if tag.has_attr('class'):
-                del tag.attrs['class']
+        parser = Parser(content)
 
-            if tag.has_attr('style'):
-                del tag.attrs['style']
+        return parser.parse() or ""
 
-        yield soup.get_text()
-
-    def all(self):
+    def all(self, pageid):
         sections = self.client.request(PageSectionsRequest(pageid=pageid))
+        print('sections:', sections)
         
         for section in sections:
+            if section['toclevel'] != 1:
+                continue
+
             content = self.client.request(PageContentRequest(pageid=pageid, section=section['index']))
+            parser = Parser(content)
+
             soup = BeautifulSoup(content, "html.parser")
             
             for toc in soup.find_all(id='toc'):
@@ -275,7 +274,7 @@ class DetailsPageRepository(FandomRepositoryBase):
                 if tag.has_attr('style'):
                     del tag.attrs['style']
 
-            yield markdownify(soup.prettify())
+            yield parser.parse() or markdownify(soup.prettify())
         
 
 

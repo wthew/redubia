@@ -1,41 +1,43 @@
 {
   "paths": {
-    "/api/categories": {
+    "/api/search": {
       "get": {
         "parameters": [
           {
             "in": "query",
-            "name": "cursor",
-            "schema": {},
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
             "required": false
           }
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Categories"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Search"
+                  }
                 },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 13544,
-                      "ns": "file",
-                      "title": "Anima\u00e7\u00f5es Brasileiras",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
+                "example": [
+                  {
+                    "ns": "article",
+                    "id": 174274,
+                    "title": "Dan Da Dan"
+                  },
+                  {
+                    "ns": "article",
+                    "id": 442,
+                    "title": "Guilherme Briggs"
+                  }
+                ]
               }
             }
           },
@@ -44,55 +46,37 @@
           }
         },
         "tags": [
-          "categories"
+          "search"
         ],
-        "operationId": "getCategories"
+        "operationId": "search"
       }
     },
-    "/api/categories/{id}": {
+    "/api/articles/popular-pages": {
       "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {},
-            "required": false
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "schema": {
-              "type": "integer"
-            },
-            "required": true
-          }
-        ],
         "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pages"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
                 },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 118646,
-                      "ns": "article",
-                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
+                "example": [
+                  {
+                    "id": 442,
+                    "ns": "article",
+                    "title": "Guilherme Briggs",
+                    "thumbnail": {
+                      "width": 33,
+                      "height": 50,
+                      "source": "https://redubia.vercel.app"
+                    },
+                    "description": "Guilherme Neves Briggs (Rio de Janeiro, 25 de julho de 1970) \u00e9 um ator, dublador, ex-diretor de dublagem, locutor, tradutor, desenhista e criador de conte\u00fado brasileiro. Em 2022, se mudou para Teres\u00f3polis. Como passou a morar longe dos est\u00fadios, decidiu n\u00e3o dublar mais presencialmente. Agora, dubla apenas via dublagem remota, atrav\u00e9s de um est\u00fadio montado em sua casa. O Escorpi\u00e3o Rei (2002) ..."
+                  }
+                ]
               }
             }
           },
@@ -101,21 +85,10 @@
           }
         },
         "tags": [
-          "categories"
+          "articles"
         ],
-        "operationId": "getPagesByCategory"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
+        "operationId": "getPopularPages"
+      }
     },
     "/api/cover/{id}": {
       "get": {
@@ -278,44 +251,42 @@
         }
       ]
     },
-    "/api/search": {
+    "/api/categories": {
       "get": {
         "parameters": [
           {
             "in": "query",
-            "name": "q",
-            "schema": {
-              "type": "string"
-            },
+            "name": "cursor",
+            "schema": {},
             "required": false
           }
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Search"
-                  }
+                  "$ref": "#/components/schemas/Categories"
                 },
-                "example": [
-                  {
-                    "ns": "article",
-                    "id": 174274,
-                    "title": "Dan Da Dan"
-                  },
-                  {
-                    "ns": "article",
-                    "id": 442,
-                    "title": "Guilherme Briggs"
-                  }
-                ]
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 13544,
+                      "ns": "file",
+                      "title": "Anima\u00e7\u00f5es Brasileiras",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
+                    }
+                  ]
+                }
               }
             }
           },
@@ -324,10 +295,78 @@
           }
         },
         "tags": [
-          "search"
+          "categories"
         ],
-        "operationId": "search"
+        "operationId": "getCategories"
       }
+    },
+    "/api/categories/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {},
+            "required": false
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pages"
+                },
+                "example": {
+                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
+                  "results": [
+                    {
+                      "id": 118646,
+                      "ns": "article",
+                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
+                      "thumbnail": {
+                        "width": 33,
+                        "height": 50,
+                        "source": "https://redubia.vercel.app"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "categories"
+        ],
+        "operationId": "getPagesByCategory"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
     }
   },
   "info": {
@@ -336,7 +375,11 @@
   },
   "tags": [
     {
-      "name": "categories",
+      "name": "search",
+      "description": ""
+    },
+    {
+      "name": "articles",
       "description": ""
     },
     {
@@ -344,7 +387,7 @@
       "description": ""
     },
     {
-      "name": "search",
+      "name": "categories",
       "description": ""
     }
   ],
@@ -399,6 +442,29 @@
           }
         }
       },
+      "Search": {
+        "type": "object",
+        "properties": {
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories",
+              "with_audio"
+            ]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ns"
+        ]
+      },
       "ImageFile": {
         "type": "object",
         "properties": {
@@ -418,48 +484,6 @@
           "source",
           "width"
         ]
-      },
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "title": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageFile"
-          }
-        },
-        "required": [
-          "id",
-          "ns",
-          "thumbnail",
-          "title"
-        ]
-      },
-      "Categories": {
-        "type": "object",
-        "properties": {
-          "next_cursor": {},
-          "cursor": {},
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Category"
-            }
-          }
-        }
       },
       "Page": {
         "type": "object",
@@ -481,6 +505,9 @@
           },
           "thumbnail": {
             "$ref": "#/components/schemas/ImageFile"
+          },
+          "description": {
+            "type": "string"
           }
         },
         "required": [
@@ -489,19 +516,6 @@
           "thumbnail",
           "title"
         ]
-      },
-      "Pages": {
-        "type": "object",
-        "properties": {
-          "next_cursor": {},
-          "cursor": {},
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Page"
-            }
-          }
-        }
       },
       "Cover": {
         "type": "object",
@@ -533,6 +547,35 @@
           "title"
         ]
       },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories",
+              "with_audio"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "$ref": "#/components/schemas/ImageFile"
+          }
+        },
+        "required": [
+          "id",
+          "ns",
+          "thumbnail",
+          "title"
+        ]
+      },
       "Gallery": {
         "type": "object",
         "properties": {
@@ -555,33 +598,36 @@
           "thumbnail"
         ]
       },
-      "Search": {
+      "Categories": {
         "type": "object",
         "properties": {
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "id": {
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
+          "next_cursor": {},
+          "cursor": {},
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
           }
-        },
-        "required": [
-          "ns"
-        ]
+        }
+      },
+      "Pages": {
+        "type": "object",
+        "properties": {
+          "next_cursor": {},
+          "cursor": {},
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Page"
+            }
+          }
+        }
       }
     },
     "responses": {
-      "UNPROCESSABLE_CONTENT": {
-        "description": "Unprocessable Content",
+      "UNPROCESSABLE_ENTITY": {
+        "description": "Unprocessable Entity",
         "content": {
           "application/json": {
             "schema": {

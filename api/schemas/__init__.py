@@ -109,6 +109,7 @@ class CategorySchema(WithNamespace, WithPageId):
 class PageSchema(WithNamespace, WithPageId):
     title = fields.Str(required=True)
     thumbnail = fields.Nested(ImageFileSchema, required=True)
+    description = fields.Str(required=False)
 
 
 class CategoriesRequestSchema(WithPagination):

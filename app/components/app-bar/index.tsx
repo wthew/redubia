@@ -36,7 +36,7 @@ export default function AppBar() {
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/">
-            <h1 className="text-xl font-semibold">redub.ia</h1>
+            <h1 className="text-xl font-semibold">redubia</h1>
           </Link>
           <Search />
         </div>

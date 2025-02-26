@@ -21,4 +21,4 @@ class SearchController(MethodView):
         term = request.args.get('q', '')
         repo = fandom.make_repository(fandom.SearchRepository)
         
-        return [] if term is '' else repo.all(term)
+        return [] if term == '' else repo.all(term)

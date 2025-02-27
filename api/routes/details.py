@@ -27,11 +27,11 @@ class PageDetailsController(MethodView):
     @api.doc(operationId="getDetails")
     def get(self, id: int):
         redubia = Redubia(id)
-        res = fandom.make_repository(fandom.DetailsPageRepository).get(id)
+        res = fandom.make_repository(fandom.DetailsPageRepository).all(id)
 
         return {
             'title': redubia.page.title,
-            'summary': '\n\n'.join(res),
+            'summary': res,
             'cover': dublagemApiClient.cover_image(id)
         }
 

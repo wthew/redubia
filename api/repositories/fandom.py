@@ -5,7 +5,8 @@ from . import RepositoryBase
 from pprint import pprint
 from markdownify import markdownify
 from bs4 import BeautifulSoup
-from api.redubia.parser import Parser
+from api.redubia.parser import VoiceActorsWorksSectionParser
+from urllib import parse
 
 class BaseRequest:
     _required_fields = []
@@ -113,12 +114,13 @@ class FandomClient:
     def __init__(self):
         self.session = Session()
 
-    def request(self, request: request_type, pagination=None, until_end=False):
+    def request(self, request: request_type, pagination=None):
         params = request.get_params()
 
         if pagination is not None:
             params.update(pagination)
 
+        print(f'req:\t{self.base_url}?{parse.urlencode(params)}')
         data = self.session.get(url=self.base_url, params=params).json()
 
         return request.get_data(data)
@@ -247,7 +249,7 @@ class DetailsPageRepository(FandomRepositoryBase):
         content = self.client.request(PageContentRequest(pageid=pageid))
         soup = BeautifulSoup(content, "html.parser")
 
-        parser = Parser(content)
+        parser = VoiceActorsWorksSectionParser(content)
 
         return parser.parse() or ""
 
@@ -255,27 +257,22 @@ class DetailsPageRepository(FandomRepositoryBase):
         sections = self.client.request(PageSectionsRequest(pageid=pageid))
         print('sections:', sections)
         
+        output = []
         for section in sections:
             if section['toclevel'] != 1:
                 continue
 
             content = self.client.request(PageContentRequest(pageid=pageid, section=section['index']))
-            parser = Parser(content)
 
             soup = BeautifulSoup(content, "html.parser")
             
             for toc in soup.find_all(id='toc'):
                 toc.decompose()
 
-            for tag in soup.find_all():
-                if tag.has_attr('class'):
-                    del tag.attrs['class']
-
-                if tag.has_attr('style'):
-                    del tag.attrs['style']
-
-            yield parser.parse() or markdownify(soup.prettify())
+            parser = VoiceActorsWorksSectionParser(str(soup))
+            output.append(parser.parse())
         
+        return output
 
 
 Repo = TypeVar("Repo", bound=FandomRepositoryBase)

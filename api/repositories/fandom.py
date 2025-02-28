@@ -1,16 +1,13 @@
 from requests import Session
-from typing import TypeVar
-from api.schemas import Namespace
+from typing import TypeVar, Type
+from api.schemas.bases import Namespace
 from . import RepositoryBase
-from pprint import pprint
-from markdownify import markdownify
 from bs4 import BeautifulSoup
 from api.redubia.parser import VoiceActorsWorksSectionParser
-from urllib import parse
 
 class BaseRequest:
-    _required_fields = []
-    _optional_fields = []
+    _required_fields: list[str] = []
+    _optional_fields: list[str] = []
 
     action = "query"
     format = "json"
@@ -37,13 +34,12 @@ class BaseRequest:
         ]
         return dict({key: value(key) for key in fields})
 
-    get_data_result = TypeVar('get_data_result')
-    def get_data(self, data) -> get_data_result:
+    def get_data(self, data):
         next_cursor = data.get('continue', None)
         return list(dict(data["query"]["pages"]).values()), next_cursor
 
 
-class ByPageIdRequest(BaseRequest):
+class ByArticleIdRequest(BaseRequest):
     _required_fields = ['pageids']
 
 
@@ -56,25 +52,25 @@ class GetCategoriesRequest(BaseRequest):
     gapnamespace = Namespace.categories.value
 
 
-class GetPagesByCategoryRequest(BaseRequest):
+class GetArticlesByCategoryRequest(BaseRequest):
     _required_fields = ['gcmpageid']
     _optional_fields =['pithumbsize']
     generator='categorymembers'
     prop='pageimages'
 
 
-class GetCategoriesByPageRequest(ByPageIdRequest):
+class GetCategoriesByArticleRequest(ByArticleIdRequest):
     generator = "categories"
 
 
-class GetCoverRequest(ByPageIdRequest):
+class GetCoverRequest(ByArticleIdRequest):
     _optional_fields = ['pithumbsize']
 
     prop = "pageimages"
     piprop = "thumbnail|name|original"
 
 
-class GetGalleryRequest(ByPageIdRequest):
+class GetGalleryRequest(ByArticleIdRequest):
     _optional_fields = ['pithumbsize']
 
     prop = "pageimages"
@@ -91,7 +87,7 @@ class SearhRequest(BaseRequest):
         return data['query']['search']
 
 
-class PageSectionsRequest(BaseRequest):
+class ArticleSectionsRequest(BaseRequest):
     _required_fields=["pageid"]
     action="parse"
     prop="sections"
@@ -99,13 +95,15 @@ class PageSectionsRequest(BaseRequest):
     def get_data(self, data):
         return list(data["parse"]["sections"])
 
-class PageContentRequest(BaseRequest):
+
+class ArticleContentRequest(BaseRequest):
     _required_fields=[ "pageid" ]
     action='parse'
     prop="text"
 
     def get_data(self, data):
         return str(data["parse"]["text"]["*"])
+
 
 class FandomClient:
     base_url = "https://dublagem.fandom.com/api.php"
@@ -120,7 +118,6 @@ class FandomClient:
         if pagination is not None:
             params.update(pagination)
 
-        print(f'req:\t{self.base_url}?{parse.urlencode(params)}')
         data = self.session.get(url=self.base_url, params=params).json()
 
         return request.get_data(data)
@@ -143,27 +140,6 @@ class FandomRepositoryBase(RepositoryBase):
         print("cannot add in fandom")
 
 
-class CategoriesByPageRepository(FandomRepositoryBase):
-    def _map(self, category):
-        category['title'] = category['title'].replace('Categoria:', '')
-        return category
-    
-    def _filter(self, category):
-        item = dict(category)
-
-        missing_id = item.get('pageid', None) is None
-        is_category = item.get('ns', None) == Namespace.categories.value
-        return not missing_id and is_category
-
-    def get(self, page_id):
-        res, next_cursor = self.client.request(GetCategoriesByPageRequest(pageids=page_id))
-        return self._parser(res)
-
-    def all(self, **kwargs):
-        res, pagination = self.client.request(GetCategoriesRequest(), kwargs.get('pagination', None))
-        return self._parser(res), pagination
-
-
 class CategoryRepository(FandomRepositoryBase):
     def _map(self, category):
         category['title'] = category['title'].replace('Categoria:', '')
@@ -181,7 +157,7 @@ class CategoryRepository(FandomRepositoryBase):
         category_id=kwargs.get('id', None)
         cursor=kwargs.get('cursor', None)
 
-        res, next_cursor = self.client.request(GetPagesByCategoryRequest(gcmpageid=category_id, pithumbsize=300), cursor)
+        res, next_cursor = self.client.request(GetArticlesByCategoryRequest(gcmpageid=category_id, pithumbsize=300), cursor)
         return self._parser(res), next_cursor
 
     def all(self, **kwargs):
@@ -233,50 +209,63 @@ class GalleryRepository(FandomRepositoryBase):
     def all(self, criteria):
         print('cannot get many gallerys')
 
-class DetailsPageSummary():
+
+class ArticlesRepository(FandomRepositoryBase):
+    def all(self, _):
+        pass
+
     def get(self, pageid):
-        content = self.client.request(PageContentRequest(pageid=pageid, section=0))
-        print('content:', markdownify(content))
+        sections = self.__get_sections_data(pageid)
+        categories = self.__get_categories(pageid)
+        
+        return dict({ 'sections': sections, 'categories': categories })
 
-        return content
+    def __get_sections_data(self, pageid):
+        sections = self.client.request(ArticleSectionsRequest(pageid=pageid))
+        
+        def is_voice_actor():
+            res, _ = self.client.request(GetCategoriesByArticleRequest(pageids=pageid))
+            __is = 108031
+            
+            return list(filter(lambda a: a.get('pageid') == __is, res)).__len__
 
-    def all(self):
-        return None
-
-
-class DetailsPageRepository(FandomRepositoryBase):
-    def get(self, pageid):
-        content = self.client.request(PageContentRequest(pageid=pageid))
-        soup = BeautifulSoup(content, "html.parser")
-
-        parser = VoiceActorsWorksSectionParser(content)
-
-        return parser.parse() or ""
-
-    def all(self, pageid):
-        sections = self.client.request(PageSectionsRequest(pageid=pageid))
-        print('sections:', sections)
+        parser = VoiceActorsWorksSectionParser if is_voice_actor() else None
         
         output = []
         for section in sections:
             if section['toclevel'] != 1:
                 continue
 
-            content = self.client.request(PageContentRequest(pageid=pageid, section=section['index']))
+            if not parser:
+                continue
+
+            content = self.client.request(ArticleContentRequest(pageid=pageid, section=section['index']))
 
             soup = BeautifulSoup(content, "html.parser")
             
             for toc in soup.find_all(id='toc'):
                 toc.decompose()
 
-            parser = VoiceActorsWorksSectionParser(str(soup))
-            output.append(parser.parse())
+            output.append(parser(str(soup)).parse())
         
         return output
 
+    def __get_categories(self, pageid):
+        def _map(category):
+            category['title'] = category['title'].replace('Categoria:', '')
+            return category
+        
+        def _filter(category):
+            item = dict(category)
+
+            missing_id = item.get('pageid', None) is None
+            is_category = item.get('ns', None) == Namespace.categories.value
+            return not missing_id and is_category
+        
+        res, _ = self.client.request(GetCategoriesByArticleRequest(pageids=pageid))
+        return list(map(_map, filter(_filter, res)))
+
 
 Repo = TypeVar("Repo", bound=FandomRepositoryBase)
-def make_repository(cls: Repo) -> Repo:
-    client = FandomClient()
-
-    return cls(client)
+def make_repository(repo: Type[Repo]) -> Repo:
+    return repo(FandomClient())

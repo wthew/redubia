@@ -1,7 +1,6 @@
 import fandom
-import pprint
 import requests
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 
 fandom.set_wiki("dublagem")
 fandom.set_lang("..")

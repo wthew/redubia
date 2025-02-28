@@ -1,25 +1,59 @@
+from requests import get
+from flask import request
 from flask.views import MethodView
-from json import loads, dumps
-import requests
-from api.schemas import PageSchema, CategoriesSchema, CategoriesRequestSchema, ByIdRequestSchema,  Namespace, image_example
-from api.utils import create_api_blueprint, encode_base64
+from api.redubia import Redubia, dublagemApiClient
+from api.schemas.models import WikiEntitySchema, ArticleSchema, ImageSchema, image_source_example 
+from api.schemas.bases import Namespace 
+from api.utils import create_api_blueprint
+from api.repositories.fandom import make_repository, ArticlesRepository, GalleryRepository
 
 api = create_api_blueprint(__name__)
 
+
+@api.route("/articles/<int:id>")
+class PageArticlesController(MethodView):
+
+    @api.response(200, ArticleSchema)
+    @api.doc(operationId="getArticle")
+    def get(self, id: int):
+        redubia = Redubia(id)
+        details = make_repository(ArticlesRepository).get(id)
+        print(f'{details=}')
+
+        return {
+            'ns': 0,
+            'title': redubia.page.title,
+            'description': redubia.page.summary,
+            'cover': dublagemApiClient.cover_image(id),
+            **details
+        }
+
+
+@api.route("/articles/<int:id>/gallery")
+class PageGalleryController(MethodView):
+
+    @api.response(200, ImageSchema(many=True))
+    @api.doc(operationId="getGallery")
+    def get(self, id: int):
+        size = request.args.get('size', None)
+        repo = make_repository(GalleryRepository)
+        return repo.get(id, size)
+
+
 @api.route("/articles/popular-pages")
 class ArticlesPopularPagesController(MethodView):
-    example = PageSchema(many=True).load([{
-    "description": "Guilherme Neves Briggs (Rio de Janeiro, 25 de julho de 1970) \u00e9 um ator, dublador, ex-diretor de dublagem, locutor, tradutor, desenhista e criador de conte\u00fado brasileiro. Em 2022, se mudou para Teres\u00f3polis. Como passou a morar longe dos est\u00fadios, decidiu n\u00e3o dublar mais presencialmente. Agora, dubla apenas via dublagem remota, atrav\u00e9s de um est\u00fadio montado em sua casa. O Escorpi\u00e3o Rei (2002) ...",
-    "id": 442,
-    "ns": Namespace(0),
-    "thumbnail": image_example,
-    "title": "Guilherme Briggs",
-  }])
+    example = WikiEntitySchema(many=True).load([{
+        "description": "...",
+        "id": 442,
+        "ns": Namespace(0),
+        "thumbnail": image_source_example,
+        "title": "Guilherme Briggs",
+    }])
 
-    @api.response(200, PageSchema(many=True), example=PageSchema(many=True).dump(example))
+    @api.response(200, WikiEntitySchema(many=True), example=WikiEntitySchema(many=True).dump(example))
     @api.doc(operationId="getPopularPages")
     def get(self):
-        res = requests.get("https://dublagem.fandom.com/wikia.php?controller=GlobalExploreNavApiController&method=getPopularPages").json()
+        res = get("https://dublagem.fandom.com/wikia.php?controller=GlobalExploreNavApiController&method=getPopularPages").json()
         output = [
             {
                 "description": item["description"],

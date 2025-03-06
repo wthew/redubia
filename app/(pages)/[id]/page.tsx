@@ -7,14 +7,20 @@ import {
 } from "../../components/ui/card";
 import Image from "../../components/image";
 import { HandlerAppBarHides } from "../../components/app-bar/context";
-import { getDetails } from "../../services/gen";
 import Categories from "../../components/category-badge";
 import Markdown from "react-markdown";
+import { getArticleById } from "@/lib/services/gen";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type Params = Promise<{ id: number }>;
 export default async function PageById(props: { params: Params }) {
   const { id } = await props.params;
-  const data = await getDetails({ id });
+  const data = await getArticleById({ id });
 
   return (
     <div className="flex justify-center items-center md:p-8">
@@ -22,13 +28,13 @@ export default async function PageById(props: { params: Params }) {
         <Image
           alt=""
           className="w-screen blur-xl brightness-50"
-          image={data.cover.original}
+          image={data.cover?.original!}
         />
       </div>
       <HandlerAppBarHides>
         <div className="p-6 pb-0 flex flex-row justify-between">
           <div className="rounded-md w-1/5 m-3 overflow-hidden">
-            <Image alt="" image={data.cover.original} />
+            <Image alt="" image={data.cover?.original!} />
           </div>
           <CardHeader className="h-full w-4/5 p-2">
             <CardTitle className="flex justify-start gap-2 items-center">
@@ -36,13 +42,37 @@ export default async function PageById(props: { params: Params }) {
               <small className="font-light opacity-25 self-start">#{id}</small>
             </CardTitle>
             <CardDescription>
-              <Categories id={id} />
+              <Categories categories={data.categories || []} />
             </CardDescription>
             <Gallery page_id={id} />
           </CardHeader>
         </div>
         <CardContent className="">
-          <Markdown className="mt-3">{data.summary}</Markdown>
+          <Markdown className="mt-3">{data.description}</Markdown>
+          {data.sections?.map((section: any, idx) => {
+            const { lists, title } = section as {
+              title: string;
+              lists: {
+                title: string;
+                items: { link: string; text: string }[];
+              }[];
+            };
+
+            return (
+              <Accordion type="multiple">
+                <AccordionItem value={`${idx}-${title}`}>
+                  <AccordionTrigger>{title}</AccordionTrigger>
+                  <AccordionContent>
+                    <ul>
+                      {lists
+                        .map(({ items }) => items.map((i) => <li>{i.text}</li>))
+                        .flat()}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            );
+          })}
         </CardContent>
       </HandlerAppBarHides>
     </div>

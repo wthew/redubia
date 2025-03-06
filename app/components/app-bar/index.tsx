@@ -19,7 +19,7 @@ import { useAppBar } from "@/components/app-bar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/hooks/useDebounced";
 import Link from "next/link";
-import { useSearch } from "@/services/gen";
+import { useSearch } from "@/lib/services/gen";
 
 export default function AppBar() {
   const { visible, appBarRef, appBarHeight } = useAppBar();

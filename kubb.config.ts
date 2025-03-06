@@ -26,9 +26,7 @@ export default defineConfig({
   plugins: [
     pluginOas({ validate: false }),
     pluginTs({
-      output: {
-        path: "models",
-      },
+      output: { path: "models" },
       enumType: "asConst",
       enumSuffix: "Enum",
       dateType: "date",
@@ -44,10 +42,7 @@ export default defineConfig({
         banner: "/* eslint-disable no-alert, no-console */",
         footer: "",
       },
-      group: {
-        type: "tag",
-        name: ({ group }) => `${group}Service`,
-      },
+      group: { type: "tag", name: ({ group }) => `${group}Service` },
       operations: false,
       parser: "client",
       paramsType: "object",
@@ -56,12 +51,8 @@ export default defineConfig({
       client: "axios",
     }),
     pluginReactQuery({
-      output: {
-        path: "./hooks",
-      },
-      client: {
-        dataReturnType: "data",
-      },
+      output: { path: "./hooks", banner: '// @ts-nocheck' },
+      client: { dataReturnType: "data" },
       paramsType: "object",
       pathParamsType: "object",
       infinite: {

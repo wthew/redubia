@@ -6,19 +6,19 @@ from api.schemas.models import WikiEntitySchema, ArticleSchema, ImageSchema, ima
 from api.schemas.bases import Namespace 
 from api.utils import create_api_blueprint
 from api.repositories.fandom import make_repository, ArticlesRepository, GalleryRepository
+from api.utils.cache import cache
 
 api = create_api_blueprint(__name__)
-
 
 @api.route("/articles/<int:id>")
 class PageArticlesController(MethodView):
 
     @api.response(200, ArticleSchema)
-    @api.doc(operationId="getArticle")
+    @api.doc(operationId="getArticleById")
+    @cache.cached(timeout=60)
     def get(self, id: int):
         redubia = Redubia(id)
         details = make_repository(ArticlesRepository).get(id)
-        print(f'{details=}')
 
         return {
             'ns': 0,
@@ -36,8 +36,10 @@ class PageGalleryController(MethodView):
     @api.doc(operationId="getGallery")
     def get(self, id: int):
         size = request.args.get('size', None)
-        repo = make_repository(GalleryRepository)
-        return repo.get(id, size)
+        res = make_repository(GalleryRepository).get(id, size)
+        print(f'{res=}')
+
+        return res
 
 
 @api.route("/articles/popular-pages")

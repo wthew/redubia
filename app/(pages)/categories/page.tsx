@@ -3,13 +3,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getCategoriesInfiniteQueryOptions } from "../../services/gen";
 import Categories from "./categories";
+import { getCategoriesQueryOptions } from "@/lib/services/gen";
 
 export default async function Page() {
   const client = new QueryClient();
 
-  await client.prefetchInfiniteQuery(getCategoriesInfiniteQueryOptions({}));
+  await client.prefetchQuery(getCategoriesQueryOptions({}));
 
   return (
     <div className="flex flex-col items-center">

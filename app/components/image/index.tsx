@@ -1,9 +1,9 @@
+import { ImageSourceFile } from "@/lib/services/gen";
 import NextImage from "next/image";
-import { ImageFile } from "../../services/gen";
 import { ComponentProps } from "react";
 
 type Props = Omit<ComponentProps<typeof NextImage>, "src"> & {
-  image: ImageFile;
+  image: ImageSourceFile;
 };
 export default function Image({ image, ...props }: Props) {
   const { height, source, width } = image;

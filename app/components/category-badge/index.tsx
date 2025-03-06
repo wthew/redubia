@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { getCategoriesForPage, Category as TypeCategory } from "../../services/gen";
 import { hashColor } from "../../utils";
 import Color from "color";
+import { WikiEntity } from "@/lib/services/gen";
 
-type Props = { category: TypeCategory };
+type Props = { category: WikiEntity };
 export function Category({ category }: Props) {
   const bg = Color({ hex: hashColor(category.title) }).desaturate(0.16);
   const fg = bg.lighten(0.25).isDark()
@@ -24,13 +24,10 @@ export function Category({ category }: Props) {
   );
 }
 
-export default async function Categories(props: { id: number }) {
-  const categories = await getCategoriesForPage({ id: props.id });
-  console.log({categories})
-
+export default async function Categories(props: { categories: WikiEntity[] }) {
   return (
     <div className="flex flex-wrap">
-      {categories.map((category) => (
+      {props.categories.map((category) => (
         <Category key={category.title} category={category} />
       ))}
     </div>

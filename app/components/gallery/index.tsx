@@ -1,10 +1,9 @@
+import { getGallery } from "@/lib/services/gen";
 import Image from "next/image";
 import Link from "next/link";
-import { getGallery } from "@/services/gen";
 
 export default async function Gallery(props: { page_id: number }) {
   const res = await getGallery({ id: props.page_id });
-  console.log(res)
 
   return (
     <div className="flex flex-row gap-3 items-center">
@@ -15,6 +14,7 @@ export default async function Gallery(props: { page_id: number }) {
             title={title}
             alt={""}
             src={{ src: thumbnail.source, height: 56, width: 56 }}
+            style={{ width: 56, height: 56 }}
           />
         </Link>
       ))}

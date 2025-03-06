@@ -1,57 +1,6 @@
 {
   "paths": {
-    "/api/search": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "q",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Search"
-                  }
-                },
-                "example": [
-                  {
-                    "ns": "article",
-                    "id": 174274,
-                    "title": "Dan Da Dan"
-                  },
-                  {
-                    "ns": "article",
-                    "id": 442,
-                    "title": "Guilherme Briggs"
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "search"
-        ],
-        "operationId": "search"
-      }
-    },
-    "/api/articles/popular-pages": {
+    "/api/articles/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -59,24 +8,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Page"
-                  }
-                },
-                "example": [
-                  {
-                    "id": 442,
-                    "ns": "article",
-                    "title": "Guilherme Briggs",
-                    "thumbnail": {
-                      "width": 33,
-                      "height": 50,
-                      "source": "https://redubia.vercel.app"
-                    },
-                    "description": "Guilherme Neves Briggs (Rio de Janeiro, 25 de julho de 1970) \u00e9 um ator, dublador, ex-diretor de dublagem, locutor, tradutor, desenhista e criador de conte\u00fado brasileiro. Em 2022, se mudou para Teres\u00f3polis. Como passou a morar longe dos est\u00fadios, decidiu n\u00e3o dublar mais presencialmente. Agora, dubla apenas via dublagem remota, atrav\u00e9s de um est\u00fadio montado em sua casa. O Escorpi\u00e3o Rei (2002) ..."
-                  }
-                ]
+                  "$ref": "#/components/schemas/Article"
+                }
               }
             }
           },
@@ -87,37 +20,7 @@
         "tags": [
           "articles"
         ],
-        "operationId": "getPopularPages"
-      }
-    },
-    "/api/cover/{id}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cover"
-                },
-                "example": {
-                  "original": {
-                    "width": 33,
-                    "height": 50,
-                    "source": "https://redubia.vercel.app"
-                  }
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "details"
-        ],
-        "operationId": "getCover"
+        "operationId": "getArticleById"
       },
       "parameters": [
         {
@@ -131,41 +34,7 @@
         }
       ]
     },
-    "/api/details/{id}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "details"
-        ],
-        "operationId": "getDetails"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/api/details/{id}/categories": {
+    "/api/articles/{id}/gallery": {
       "get": {
         "responses": {
           "200": {
@@ -175,56 +44,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Category"
-                  }
-                },
-                "example": [
-                  {
-                    "id": 13544,
-                    "ns": "file",
-                    "title": "Anima\u00e7\u00f5es Brasileiras",
-                    "thumbnail": {
-                      "width": 33,
-                      "height": 50,
-                      "source": "https://redubia.vercel.app"
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "details"
-        ],
-        "operationId": "getCategoriesForPage"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/api/gallery/{id}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Gallery"
+                    "$ref": "#/components/schemas/Image"
                   }
                 }
               }
@@ -235,7 +55,7 @@
           }
         },
         "tags": [
-          "details"
+          "articles"
         ],
         "operationId": "getGallery"
       },
@@ -251,6 +71,45 @@
         }
       ]
     },
+    "/api/articles/popular-pages": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WikiEntity"
+                  }
+                },
+                "example": [
+                  {
+                    "id": 442,
+                    "ns": "article",
+                    "title": "Guilherme Briggs",
+                    "thumbnail": {
+                      "width": 33,
+                      "height": 50,
+                      "source": "https://redubia.vercel.app"
+                    },
+                    "description": "..."
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "articles"
+        ],
+        "operationId": "getPopularPages"
+      }
+    },
     "/api/categories": {
       "get": {
         "parameters": [
@@ -263,14 +122,14 @@
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Categories"
+                  "$ref": "#/components/schemas/WikiEntitiesResponse"
                 },
                 "example": {
                   "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
@@ -320,14 +179,14 @@
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
           },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pages"
+                  "$ref": "#/components/schemas/WikiEntitiesResponse"
                 },
                 "example": {
                   "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
@@ -367,6 +226,57 @@
           }
         }
       ]
+    },
+    "/api/search": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchResponse"
+                  }
+                },
+                "example": [
+                  {
+                    "ns": "article",
+                    "id": 174274,
+                    "title": "Dan Da Dan"
+                  },
+                  {
+                    "ns": "article",
+                    "id": 442,
+                    "title": "Guilherme Briggs"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "search"
+        ],
+        "operationId": "search"
+      }
     }
   },
   "info": {
@@ -375,19 +285,15 @@
   },
   "tags": [
     {
-      "name": "search",
-      "description": ""
-    },
-    {
       "name": "articles",
       "description": ""
     },
     {
-      "name": "details",
+      "name": "categories",
       "description": ""
     },
     {
-      "name": "categories",
+      "name": "search",
       "description": ""
     }
   ],
@@ -442,30 +348,7 @@
           }
         }
       },
-      "Search": {
-        "type": "object",
-        "properties": {
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "id": {
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "ns"
-        ]
-      },
-      "ImageFile": {
+      "ImageSourceFile": {
         "type": "object",
         "properties": {
           "width": {
@@ -485,7 +368,29 @@
           "width"
         ]
       },
-      "Page": {
+      "Image": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "original": {
+            "$ref": "#/components/schemas/ImageSourceFile"
+          },
+          "thumbnail": {
+            "$ref": "#/components/schemas/ImageSourceFile"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "original",
+          "thumbnail"
+        ]
+      },
+      "WikiEntity": {
         "type": "object",
         "properties": {
           "id": {
@@ -504,7 +409,7 @@
             "type": "string"
           },
           "thumbnail": {
-            "$ref": "#/components/schemas/ImageFile"
+            "$ref": "#/components/schemas/ImageSourceFile"
           },
           "description": {
             "type": "string"
@@ -517,37 +422,7 @@
           "title"
         ]
       },
-      "Cover": {
-        "type": "object",
-        "properties": {
-          "original": {
-            "$ref": "#/components/schemas/ImageFile"
-          }
-        },
-        "required": [
-          "original"
-        ]
-      },
-      "PageDetails": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "cover": {
-            "$ref": "#/components/schemas/Cover"
-          }
-        },
-        "required": [
-          "cover",
-          "summary",
-          "title"
-        ]
-      },
-      "Category": {
+      "Article": {
         "type": "object",
         "properties": {
           "id": {
@@ -565,28 +440,56 @@
           "title": {
             "type": "string"
           },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageFile"
+          "description": {
+            "type": "string"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/Image"
+          },
+          "sections": {
+            "type": "array",
+            "items": {}
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WikiEntity"
+            }
           }
         },
         "required": [
           "id",
           "ns",
-          "thumbnail",
           "title"
         ]
       },
-      "Gallery": {
+      "WikiEntitiesResponse": {
         "type": "object",
         "properties": {
+          "next_cursor": {},
+          "cursor": {},
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WikiEntity"
+            }
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "ns": {
+            "type": "string",
+            "enum": [
+              "article",
+              "file",
+              "categories",
+              "with_audio"
+            ]
+          },
           "id": {
             "type": "integer"
-          },
-          "original": {
-            "$ref": "#/components/schemas/ImageFile"
-          },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageFile"
           },
           "title": {
             "type": "string"
@@ -594,40 +497,13 @@
         },
         "required": [
           "id",
-          "original",
-          "thumbnail"
+          "ns"
         ]
-      },
-      "Categories": {
-        "type": "object",
-        "properties": {
-          "next_cursor": {},
-          "cursor": {},
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Category"
-            }
-          }
-        }
-      },
-      "Pages": {
-        "type": "object",
-        "properties": {
-          "next_cursor": {},
-          "cursor": {},
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Page"
-            }
-          }
-        }
       }
     },
     "responses": {
-      "UNPROCESSABLE_ENTITY": {
-        "description": "Unprocessable Entity",
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
         "content": {
           "application/json": {
             "schema": {
@@ -636,8 +512,8 @@
           }
         }
       },
-      "DEFAULT_ERROR": {
-        "description": "Default error response",
+      "UNPROCESSABLE_CONTENT": {
+        "description": "Unprocessable Content",
         "content": {
           "application/json": {
             "schema": {

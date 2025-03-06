@@ -236,12 +236,12 @@
   resolved "https://registry.yarnpkg.com/@jsep-plugin/regex/-/regex-1.0.4.tgz#cb2fc423220fa71c609323b9ba7f7d344a755fcc"
   integrity sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==
 
-"@kubb/cli@^3.5.7":
-  version "3.5.7"
-  resolved "https://registry.yarnpkg.com/@kubb/cli/-/cli-3.5.7.tgz#c22c812825db403b2477d15547e23d704527fef0"
-  integrity sha512-k+3wWuRQdKM1iCC+tdzTZ8iJn1rlE1og0WDoWYrnVmTVRowEnqhQQa221SOzHtYZ5ARq6l0J5wrYDTvKnI0zCA==
+"@kubb/cli@^3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@kubb/cli/-/cli-3.6.1.tgz#c6603e1f872a4bbe05f4cf58dde30e50d5ad34ec"
+  integrity sha512-8H4AQAzg8ItCJCRiHCQt6nNdfAXtc+SAE40YW4fpkZseEucX9eAoFGSi/5vYtFeYdEGYjZxybrBhzKVkHUpnTQ==
   dependencies:
-    "@kubb/core" "3.5.7"
+    "@kubb/core" "3.6.1"
     chokidar "^4.0.3"
     citty "^0.1.6"
     cli-progress "^3.12.0"
@@ -289,6 +289,23 @@
     seedrandom "^3.0.5"
     semver "^7.7.1"
 
+"@kubb/core@3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@kubb/core/-/core-3.6.1.tgz#730f9642bca3d216ceff18f123735cfe5a2126b5"
+  integrity sha512-QcyR84pD/hGNd9poUEldiaGjbXhT8iGz9uL643oAEVckNPE6+DyidY7IngrbOYEaWnG2nhocZ39FNgqw3MyVXg==
+  dependencies:
+    "@kubb/fs" "3.6.1"
+    "@kubb/parser-ts" "3.6.1"
+    "@kubb/types" "3.6.1"
+    camelcase "^8.0.0"
+    find-up "^7.0.0"
+    natural-orderby "^5.0.0"
+    object-hash "^3.0.0"
+    p-queue "^8.1.0"
+    remeda "^2.21.0"
+    seedrandom "^3.0.5"
+    semver "^7.7.1"
+
 "@kubb/fs@3.5.6":
   version "3.5.6"
   resolved "https://registry.yarnpkg.com/@kubb/fs/-/fs-3.5.6.tgz#9d3bcc53d9c661dd74f653e6ec5881fef3b7d4f1"
@@ -301,6 +318,14 @@
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@kubb/fs/-/fs-3.5.7.tgz#233e59c8b39a3b3af7d0c1cb42847af0a4710c1a"
   integrity sha512-879pVX1tHAH8Y/n8nkBzylcgNMLF5yBPjggYKGwpmroUvLNzsmr22n6mvaC4hvTbqIGzahcatqoClyDZCQUL/g==
+  dependencies:
+    fs-extra "^11.3.0"
+    js-runtime "^0.0.8"
+
+"@kubb/fs@3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@kubb/fs/-/fs-3.6.1.tgz#496ad6492b2fe4e2270daad09b24cdc6956e5e7f"
+  integrity sha512-Tp82d0u+o1yGuhO5zJvaNA5Ji/oR8OibpCvznHLeQvEN5w9eeo7iCTMQXwAqGbIV6QpR0mGeMRY+D1KABfOnpw==
   dependencies:
     fs-extra "^11.3.0"
     js-runtime "^0.0.8"
@@ -353,6 +378,15 @@
   dependencies:
     prettier "^3.4.2"
     remeda "^2.20.1"
+    typescript "^5.7.3"
+
+"@kubb/parser-ts@3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@kubb/parser-ts/-/parser-ts-3.6.1.tgz#52b58b532bd4713e87da84cd9970fb4e0238bb09"
+  integrity sha512-RKGdYJff7jEhq2a157PbnnIcPYk8Yk4LF6xJek4f+H7IcVXd9vE8bGJ7/725nj1ikxUdWHgjrGXOzEBuJ2cDdA==
+  dependencies:
+    prettier "^3.5.2"
+    remeda "^2.21.0"
     typescript "^5.7.3"
 
 "@kubb/plugin-client@^3.5.6":
@@ -497,6 +531,11 @@
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@kubb/types/-/types-3.5.7.tgz#90719f6f13367196bbec39621122cf809b526014"
   integrity sha512-JDeFmYycssEBRMLwKGemQltd49qXD9batFb3eUDMz9kIvgOZvmu1FiuhSilACNJxpwqZn8xw0FiXPcWDZeYt9Q==
+
+"@kubb/types@3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@kubb/types/-/types-3.6.1.tgz#0294ff10594f7e314a635fac8dd1f40bc4d2fc85"
+  integrity sha512-7DB0120+tnfWcq+334KXigb0AxPaBxdWnbjZFdwPU46sp72CicigQ70qKK27wfAUuV8skj8SOAX4ViPFgd1fEw==
 
 "@next/env@15.1.6":
   version "15.1.6"
@@ -4344,6 +4383,11 @@ prettier@^3.4.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.4.2.tgz#a5ce1fb522a588bf2b78ca44c6e6fe5aa5a2b13f"
   integrity sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==
 
+prettier@^3.5.2:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.5.3.tgz#4fc2ce0d657e7a02e602549f053b239cb7dfe1b5"
+  integrity sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==
+
 pretty-ms@^9.0.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-9.2.0.tgz#e14c0aad6493b69ed63114442a84133d7e560ef0"
@@ -4576,6 +4620,13 @@ remeda@^2.20.1:
   integrity sha512-gsEsSmjE0CHkNp6xEsWsU/6JVNWq7rqw+ZfzNMbVV4YFIPtTj/i0FfxurTRI6Z9sAnQufU9de2Cb3xHsUTFTMA==
   dependencies:
     type-fest "^4.33.0"
+
+remeda@^2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-2.21.0.tgz#6b64b9c6e50c6d42cb85833fb8108552729a0893"
+  integrity sha512-ANFqOts3BsvW1MrKOv9SVHG3ly0MzzLa0HIu5qLkiRuEPGPuH9ny3sgd7VdHvC2VOUSN/7RkmabPlAda6JtGgg==
+  dependencies:
+    type-fest "^4.35.0"
 
 remove-undefined-objects@^5.0.0:
   version "5.0.0"
@@ -5173,6 +5224,11 @@ type-fest@^4.30.0, type-fest@^4.33.0:
   version "4.33.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.33.0.tgz#2da0c135b9afa76cf8b18ecfd4f260ecd414a432"
   integrity sha512-s6zVrxuyKbbAsSAD5ZPTB77q4YIdRctkTbJ2/Dqlinwz+8ooH2gd+YA7VA6Pa93KML9GockVvoxjZ2vHP+mu8g==
+
+type-fest@^4.35.0:
+  version "4.36.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.36.0.tgz#e656de02aa880aa01b4d3a71188bb6adb18668a2"
+  integrity sha512-3T/PUdKTCnkUmhQU6FFJEHsLwadsRegktX3TNHk+2JJB9HlA8gp1/VXblXVDI93kSnXF2rdPx0GMbHtJIV2LPg==
 
 type@^2.7.2:
   version "2.7.3"

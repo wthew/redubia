@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Category, Page } from "../../services/gen";
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import Image from "../image";
+import { WikiEntity } from "@/lib/services/gen";
 
-type Props = { item: Category | Page; prefix?: string };
+type Props = { item: WikiEntity; prefix?: string };
 export default function MediaWikiCard(props: Props) {
   const { thumbnail: thumb, title } = props.item;
 

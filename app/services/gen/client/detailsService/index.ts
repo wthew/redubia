@@ -1,5 +1,0 @@
-export { detailsService } from './detailsService.ts'
-export { getGetCategoriesForPageUrl, getCategoriesForPage } from './getCategoriesForPage.ts'
-export { getGetCoverUrl, getCover } from './getCover.ts'
-export { getGetDetailsUrl, getDetails } from './getDetails.ts'
-export { getGetGalleryUrl, getGallery } from './getGallery.ts'

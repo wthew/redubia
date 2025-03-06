@@ -1,1 +1,0 @@
-{"type":"object","properties":{"ns":{"type":"string","enum":["article","file","categories","with_audio"]},"id":{"type":"integer"},"title":{"type":"string"}},"required":["ns"],"x-readme-ref-name":"Search"}

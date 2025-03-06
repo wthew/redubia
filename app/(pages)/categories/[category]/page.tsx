@@ -1,19 +1,17 @@
-import { getPagesByCategoryInfiniteQueryOptions } from "@/services/gen";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import Articles from "./articles";
+import { getPagesByCategoryQueryOptions } from "@/lib/services/gen";
 
 type Params = Promise<{ category: number }>;
 export default async function Page(props: { params: Params }) {
   const { category: id } = await props.params;
   const client = new QueryClient();
 
-  await client.prefetchInfiniteQuery(
-    getPagesByCategoryInfiniteQueryOptions({ id, params: {} })
-  );
+  await client.prefetchQuery(getPagesByCategoryQueryOptions({ id }));
 
   return (
     <div className="flex flex-col items-center">

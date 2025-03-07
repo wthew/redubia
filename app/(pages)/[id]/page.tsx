@@ -88,7 +88,7 @@ export default async function PageById(props: { params: Params }) {
                             const { audio, image, link, text } = value;
 
                             return (
-                              <td className="p-4">
+                              <td className="p-2" style={{ minHeight: 64 }}>
                                 {image ? (
                                   <Image
                                     className="rounded-4xl"

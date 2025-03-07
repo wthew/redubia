@@ -54,31 +54,25 @@ class DubbingCastSectionParser:
             
             data = []
 
-            skip = 0
+            acc_rows_data = {}
             for row in table.find_all('tr'):
-                if skip > 0:
-                    skip -= 1
-                    continue
-                
-                td = row.find_all('td')
-                rows = [
-                    int(i['rowspan']) if 'rowspan' in i.attrs else 1 for i in td
-                ]
-
-                if (len(rows)):
-                    skip = max(rows) - 1
-                
                 row_data = {}
-                for i, cell in enumerate(row.find_all(['td'])):
+
+                if len(acc_rows_data.values()) > 0:
+                    for key, value in acc_rows_data.items():
+                        if len(value):
+                            row_data[key] = value.pop()
+                
+                for i, td in enumerate(row.find_all(['td'])):
+                    title = f'{i}__{headers[i]['title']}'
                     _data = {}
 
-                    anchor = cell.find('a')
+                    anchor = td.find('a')
+                    audio = td.find('audio')
+                    image = td.find('img')
 
-                    audio = cell.find('audio')
-                    image = cell.find('img')
-
-                    link = anchor['href'] if anchor is not None else ''
-                    text = '' if audio is not None else cell.get_text().replace('\n', '')
+                    link = anchor['href'] if anchor and 'href' in anchor.attrs is not None else ''
+                    text = '' if audio is not None else td.get_text().replace('\n', '')
                     
                     if text != '':
                         _data['text'] = text
@@ -97,14 +91,21 @@ class DubbingCastSectionParser:
                         }
 
                     if headers[i]['colspan'] > 1:
-                        old = row_data.get(headers[i]['title'], [])
+                        old = row_data.get(title, [])
 
                         old.append(_data)
-                        row_data[headers[i]['title']] = old
+                        row_data[title] = old
                     else:
-                        row_data[headers[i]['title']] = _data
+                        row_data[title] = _data
+                    
+                    rowspan = int(td['rowspan']) if 'rowspan' in td.attrs else 1
+                    if rowspan > 1:
+                        if acc_rows_data.get(title, None) is None:
+                            acc_rows_data[title] = []
+
+                        acc_rows_data[title].extend([row_data[title]] * rowspan)
                 
-                items = row_data.items()
+                items = sorted(row_data.items())
                 
                 _data = []
                 if len(items):
@@ -114,7 +115,7 @@ class DubbingCastSectionParser:
                         if isinstance(value, list):
                             value = { 'text': ', '.join(filter(lambda a: a != '', map(lambda a: a.get('text', ''), value))) }
 
-                        _data.append({ 'field': field, 'value': value })
+                        _data.append({ 'field': str(field)[3:], 'value': value })
                 
                 if len(_data):
                     data.append(_data)

@@ -3,7 +3,7 @@ from typing import TypeVar, Type
 from api.schemas.bases import Namespace
 from . import RepositoryBase
 from bs4 import BeautifulSoup
-from api.redubia.parser import VoiceActorsWorksSectionParser
+from api.redubia.parser import VoiceActorsWorksSectionParser, DubbingCastSectionParser
 
 class BaseRequest:
     _required_fields: list[str] = []
@@ -226,10 +226,15 @@ class ArticlesRepository(FandomRepositoryBase):
         def is_voice_actor():
             res, _ = self.client.request(GetCategoriesByArticleRequest(pageids=pageid))
             __is = 108031
-            
-            return list(filter(lambda a: a.get('pageid') == __is, res)).__len__
+            out = len(list(filter(lambda a: a.get('pageid') == __is, res)))
 
-        parser = VoiceActorsWorksSectionParser if is_voice_actor() else None
+            print(f'{out=}')
+
+            return out
+            
+
+        actor = is_voice_actor()
+        parser = VoiceActorsWorksSectionParser if actor else DubbingCastSectionParser
         
         output = []
         for section in sections:
@@ -247,6 +252,7 @@ class ArticlesRepository(FandomRepositoryBase):
                 toc.decompose()
 
             output.append(parser(str(soup)).parse())
+            if not actor: break
         
         return output
 

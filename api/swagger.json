@@ -390,6 +390,97 @@
           "thumbnail"
         ]
       },
+      "Image1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "original": {
+            "$ref": "#/components/schemas/ImageSourceFile"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "original"
+        ]
+      },
+      "ArticleSectionInfo": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "audio": {
+            "type": "string",
+            "format": "url"
+          },
+          "image": {
+            "$ref": "#/components/schemas/Image1"
+          },
+          "link": {
+            "type": "string",
+            "format": "url"
+          }
+        }
+      },
+      "ArticleDubbingCast": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ArticleSectionInfo"
+          }
+        }
+      },
+      "ArticleWorks": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticleSectionInfo"
+            }
+          }
+        }
+      },
+      "ArticleSection": {
+        "type": "object",
+        "properties": {
+          "dubbing_cast": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ArticleDubbingCast"
+                }
+              }
+            }
+          },
+          "works": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticleWorks"
+            }
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
       "WikiEntity": {
         "type": "object",
         "properties": {
@@ -448,7 +539,9 @@
           },
           "sections": {
             "type": "array",
-            "items": {}
+            "items": {
+              "$ref": "#/components/schemas/ArticleSection"
+            }
           },
           "categories": {
             "type": "array",

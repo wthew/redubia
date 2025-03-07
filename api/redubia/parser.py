@@ -109,6 +109,11 @@ class DubbingCastSectionParser:
                 _data = []
                 if len(items):
                     for field, value in items:
+                        print(f'{value=}')
+
+                        if isinstance(value, list):
+                            value = { 'text': ', '.join(filter(lambda a: a != '', map(lambda a: a.get('text', ''), value))) }
+
                         _data.append({ 'field': field, 'value': value })
                 
                 if len(_data):
@@ -119,7 +124,7 @@ class DubbingCastSectionParser:
         title = self.soup.select_one('.mw-headline').get_text()  
         tables = self.soup.select('table.wikitable-large')   
 
-        return { 'title': title, 'dubbing_cast': [x for xs in [parse_table(table) for table in tables] for x in xs] }
+        return { 'title': title, 'dubbing_cast': [parse_table(table) for table in tables] }
 class  VoiceActorsWorksSectionParser:
     """
     Parse a dubbing cast table or a voice actor works list

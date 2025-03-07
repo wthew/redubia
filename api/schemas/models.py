@@ -42,8 +42,8 @@ class ArticleWorks(Schema):
 
 
 class ArticleSection(Schema):
-    dubbing_cast = fields.List(fields.List(fields.Nested(ArticleDubbingCast)))
-    works = fields.List(fields.Raw())
+    dubbing_cast = fields.List(fields.List(fields.List(fields.Nested(ArticleDubbingCast))))
+    works = fields.List(fields.Nested(ArticleWorks))
     title = fields.Str(required=True)
 
 

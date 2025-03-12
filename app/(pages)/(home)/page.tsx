@@ -77,7 +77,7 @@ export default async function Home() {
 
         <footer className="footer py-6 text-gray-500 text-sm">
           <p>
-            Feito com 🖤 e muito ☕ por{" "}
+            Feito com muito ☕ por{" "}
             <a
               className="underline"
               target="_blank"

@@ -6,6 +6,7 @@ import AppBar from "../components/app-bar";
 import { AppBarProvider } from "../components/app-bar/context";
 import { QueryProvider } from "../context/query";
 import React from "react";
+import PageWrapper from "@/components/page-wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           <QueryProvider>
             <AppBarProvider>
               <AppBar />
-              {children}
+              <PageWrapper>{children}</PageWrapper>
             </AppBarProvider>
           </QueryProvider>
         </ThemeProvider>

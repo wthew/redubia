@@ -1,0 +1,47 @@
+$color: #fff;
+
+.wrap {
+  z-index: 0;
+  perspective-origin: 50% 50%;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.svg {
+  z-index: 0;
+  stroke: $color;
+  fill: $color;
+  position: absolute;
+  bottom: 0;
+  transform-style: preserve-3d;
+  height: 32px;
+  width: 32px;
+  filter: blur(1px);
+  opacity: 0.25;
+}
+
+$total: 9;
+@for $i from 1 through $total {
+  $scale: random(2) - 0.4;
+
+  .svg:nth-child(#{$i}) {
+    left: random(100vw) * 1% - 20;
+    animation: raise#{$i} 6 + random(15) + s linear infinite;
+    animation-delay: random(5) - 5 + s;
+    transform: scale(0.3 * $i - 0.6) rotate(random(360) + deg);
+
+    @keyframes raise#{$i} {
+      to {
+        bottom: 0;
+        transform: scale(0.3 * $i - 0.6) rotate(random(360) + deg);
+      }
+      to {
+        bottom: 100vh;
+      }
+    }
+  }
+}

@@ -22,14 +22,14 @@ import Link from "next/link";
 import { useSearch } from "@/lib/services/gen";
 
 export default function AppBar() {
-  const { visible, appBarRef, appBarHeight } = useAppBar();
+  const { visible, appBarRef } = useAppBar();
 
   return (
     <>
       <header
         ref={appBarRef}
         className={cn(
-          "bg-card text-card-foreground fixed top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
+          "bg-card text-card-foreground sticky top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
           visible ? "translate-y-0" : "-translate-y-full",
           "md:translate-y-0" // Sempre visível no desktop
         )}
@@ -38,10 +38,9 @@ export default function AppBar() {
           <Link href="/">
             <h1 className="text-xl font-semibold">redubia</h1>
           </Link>
-          <Search />
+          {/* <Search /> */}
         </div>
       </header>
-      <div className="" style={{ height: appBarHeight }} />
     </>
   );
 }

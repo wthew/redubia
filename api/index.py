@@ -3,7 +3,10 @@ from flask_smorest import Api
 from api.routes import register_routes
 from flask_cors import CORS
 from api.utils.cache import cache
-from os import environ
+from os import environ, path
+from dotenv import load_dotenv
+
+load_dotenv(path.join(path.dirname(__file__), '..', '.env.local'))
 
 app = Flask(__name__)
 cache.init_app(app)
@@ -22,4 +25,4 @@ register_routes(api)
 
 @app.route("/api/python")
 def hello_world():
-    return f"<p>Hello, World! test: {environ.get('API_URL')}</p>"
+    return f"<p>Hello, World! test: {environ}</p>"

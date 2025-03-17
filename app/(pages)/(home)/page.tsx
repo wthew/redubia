@@ -29,7 +29,6 @@ const icons = [
 ];
 
 export default async function Home() {
-  console.log({ icons });
   return (
     <div className="text-gray-400 bg-black font-sans flex flex-col">
       <div className="w-full h-full text-center p-4">

@@ -1,57 +1,33 @@
-from marshmallow import Schema, fields
-from api.schemas.bases import SchemaWithPageId, SchemaWithNamespace
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema as Schema
+from api.database import models
 
 
-class ImageSourceFileSchema(Schema):
-    width = fields.Int(required=True)
-    height = fields.Int(required=True)
-    source = fields.Url(required=True)
-
-image_source_example = ImageSourceFileSchema().load({
-    'width': 33, 'height': 50, 'source': 'https://redubia.vercel.app'
-})
+class BaseMeta:
+    include_relationships = True
+    load_instance = True
 
 
-class ImageSchema(SchemaWithPageId):
-    original = fields.Nested(ImageSourceFileSchema, required=True)
-    thumbnail = fields.Nested(ImageSourceFileSchema, required=True)
-    title = fields.Str(attribute='pageimage')
+class VoiceActorSchema(Schema):
+    class Meta(BaseMeta):
+        model = models.VoiceActor
 
 
-class WikiEntitySchema(SchemaWithNamespace, SchemaWithPageId):
-    title = fields.Str(required=True)
-    thumbnail = fields.Nested(ImageSourceFileSchema, required=True)
-    description = fields.Str(required=False)
+class CharacterSchema(Schema):
+    class Meta(BaseMeta):
+        model = models.Character
 
 
-class ArticleSectionInfo(Schema):
-    text = fields.Str(required=False)
-    audio = fields.Url(required=False)
-    image = fields.Nested(ImageSchema, exclude=['thumbnail'], required=False)
-    link = fields.Url(required=False)
+class MediaSchema(Schema):
+    class Meta(BaseMeta):
+        model = models.Media
 
 
-class ArticleDubbingCast(Schema):
-    field = fields.Str()
-    value = fields.Nested(ArticleSectionInfo)
+class MediaCategoriesSchema(Schema):
+    class Meta(BaseMeta):
+        model = models.MediaCategories
 
 
-class ArticleWorks(Schema):
-    title = fields.Str()
-    items = fields.List(fields.Nested(ArticleSectionInfo))
+class DubbingCastSchema(Schema):
+    class Meta(BaseMeta):
+        model = models.DubbingCast
 
-
-class ArticleSection(Schema):
-    dubbing_cast = fields.List(fields.List(fields.List(fields.Nested(ArticleDubbingCast))))
-    works = fields.List(fields.Nested(ArticleWorks))
-    title = fields.Str(required=True)
-
-
-class ArticleSchema(WikiEntitySchema):
-    title = fields.Str(required=True)
-    cover = fields.Nested(ImageSchema)
-    sections = fields.List(fields.Nested(ArticleSection))
-    categories = fields.List(fields.Nested(WikiEntitySchema))
-
-    class Meta:
-        exclude = ['thumbnail']

@@ -25,4 +25,4 @@ register_routes(api)
 
 @app.route("/api/python")
 def hello_world():
-    return f"<p>Hello, World! test: {environ}</p>"
+    return f"<p>Hello, World!</p>"

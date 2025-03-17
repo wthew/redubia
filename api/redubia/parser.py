@@ -64,7 +64,7 @@ class DubbingCastSectionParser:
                             row_data[key] = value.pop()
                 
                 for i, td in enumerate(row.find_all(['td'])):
-                    title = f'{i}__{headers[i]['title']}'
+                    title = f'{i}__{headers[i]["title"]}'
                     _data = {}
 
                     anchor = td.find('a')

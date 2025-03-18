@@ -23,6 +23,10 @@ class WikiEntitiesRequestSchema(SchemaWithPagination):
         exclude = ['next_cursor']
 
 
+class WikiEntitySchema(SchemaWithPageId, SchemaWithNamespace):
+    name = fields.String()
+    cover_url = fields.String()
+
 class WikiEntitiesResponseSchema(SchemaWithPagination):
     results = fields.List(fields.Nested(WikiEntitySchema))
 

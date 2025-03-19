@@ -7,7 +7,7 @@ NAMESPACE = "Dubladores"
 api = create_api_blueprint(NAMESPACE)
 
 @api.route("/voice-actors")
-class SearchController(MethodView):
+class VoiceActorsController(MethodView):
     example = VoiceActorSchema(many=True).load([
         { "id": uuid(), "created_at": date(), "name": "Guilherme Briggs" }
     ])

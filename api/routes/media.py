@@ -7,7 +7,7 @@ NAMESPACE = "Midias"
 api = create_api_blueprint(NAMESPACE)
 
 @api.route("/media")
-class SearchController(MethodView):
+class MediaController(MethodView):
     example = MediaSchema(many=True).load([
         { "id": uuid(), "created_at": date(), "name": "Dan da dan" }
     ])

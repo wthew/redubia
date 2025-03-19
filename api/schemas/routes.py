@@ -1,7 +1,5 @@
 from marshmallow import Schema, fields
-from api.schemas.models import WikiEntitySchema
 from api.schemas.bases import SchemaWithNamespace, SchemaWithPagination, SchemaWithPageId
-
 
 class ByIdRequestSchema(Schema):
     id = fields.Int()
@@ -27,6 +25,11 @@ class WikiEntitySchema(SchemaWithPageId, SchemaWithNamespace):
     name = fields.String()
     cover_url = fields.String()
 
+
 class WikiEntitiesResponseSchema(SchemaWithPagination):
     results = fields.List(fields.Nested(WikiEntitySchema))
 
+
+class LoginRequestSchema(Schema):
+    email = fields.Str(required=True)
+    password = fields.Str(required=True)

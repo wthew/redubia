@@ -7,7 +7,7 @@ NAMESPACE = "Personagens"
 api = create_api_blueprint(NAMESPACE)
 
 @api.route("/characters")
-class SearchController(MethodView):
+class CharactersController(MethodView):
     example = CharacterSchema(many=True).load([
         { "id": uuid(), "created_at": date(), "name": "Eren yeager" }
     ])

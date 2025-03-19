@@ -1,40 +1,6 @@
 {
   "paths": {
-    "/api/articles/{id}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Article"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "articles"
-        ],
-        "operationId": "getArticleById"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/api/articles/{id}/gallery": {
+    "/api/characters": {
       "get": {
         "responses": {
           "200": {
@@ -44,57 +10,14 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Image"
-                  }
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "articles"
-        ],
-        "operationId": "getGallery"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/api/articles/popular-pages": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WikiEntity"
+                    "$ref": "#/components/schemas/Character"
                   }
                 },
                 "example": [
                   {
-                    "id": 442,
-                    "ns": "article",
-                    "title": "Guilherme Briggs",
-                    "thumbnail": {
-                      "width": 33,
-                      "height": 50,
-                      "source": "https://redubia.vercel.app"
-                    },
-                    "description": "..."
+                    "id": "a8fca772-ac34-4550-b17f-cbe7992f5cd7",
+                    "created_at": "2025-03-18T23:47:18.090962",
+                    "name": "Eren yeager"
                   }
                 ]
               }
@@ -105,144 +28,14 @@
           }
         },
         "tags": [
-          "articles"
+          "Personagens"
         ],
-        "operationId": "getPopularPages"
+        "operationId": "getCharacters"
       }
     },
-    "/api/categories": {
+    "/api/media": {
       "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {},
-            "required": false
-          }
-        ],
         "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WikiEntitiesResponse"
-                },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 13544,
-                      "ns": "file",
-                      "title": "Anima\u00e7\u00f5es Brasileiras",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "categories"
-        ],
-        "operationId": "getCategories"
-      }
-    },
-    "/api/categories/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {},
-            "required": false
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "schema": {
-              "type": "integer"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WikiEntitiesResponse"
-                },
-                "example": {
-                  "next_cursor": "eyJoZWxsbyI6ICJ3b3JsZCJ9",
-                  "results": [
-                    {
-                      "id": 118646,
-                      "ns": "article",
-                      "title": "100 Coisas para Fazer Antes de Virar Zumbi",
-                      "thumbnail": {
-                        "width": 33,
-                        "height": 50,
-                        "source": "https://redubia.vercel.app"
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "categories"
-        ],
-        "operationId": "getPagesByCategory"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/api/search": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "q",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -250,19 +43,15 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SearchResponse"
+                    "$ref": "#/components/schemas/Media"
                   }
                 },
                 "example": [
                   {
-                    "ns": "article",
-                    "id": 174274,
-                    "title": "Dan Da Dan"
-                  },
-                  {
-                    "ns": "article",
-                    "id": 442,
-                    "title": "Guilherme Briggs"
+                    "id": "c7f4c37a-b6e4-4e09-a705-d08a7e1766b6",
+                    "created_at": "2025-03-18T23:47:18.637386",
+                    "name": "Dan da dan",
+                    "cover_url": null
                   }
                 ]
               }
@@ -273,9 +62,94 @@
           }
         },
         "tags": [
-          "search"
+          "Midias"
         ],
-        "operationId": "search"
+        "operationId": "getMedia"
+      }
+    },
+    "/api/me": {
+      "get": {
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "getCurrentUserData"
+      }
+    },
+    "/api/sign-up": {
+      "post": {
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "createAccount"
+      }
+    },
+    "/api/login": {
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "login"
+      }
+    },
+    "/api/voice-actors": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VoiceActor"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "45c22e8c-169b-4940-af45-fd38936a977d",
+                    "created_at": "2025-03-18T23:47:19.668837",
+                    "name": "Guilherme Briggs"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Dubladores"
+        ],
+        "operationId": "getVoiceActors"
       }
     }
   },
@@ -285,15 +159,19 @@
   },
   "tags": [
     {
-      "name": "articles",
+      "name": "Personagens",
       "description": ""
     },
     {
-      "name": "categories",
+      "name": "Midias",
       "description": ""
     },
     {
-      "name": "search",
+      "name": "Usuarios",
+      "description": ""
+    },
+    {
+      "name": "Dubladores",
       "description": ""
     }
   ],
@@ -348,249 +226,80 @@
           }
         }
       },
-      "ImageSourceFile": {
-        "type": "object",
-        "properties": {
-          "width": {
-            "type": "integer"
-          },
-          "height": {
-            "type": "integer"
-          },
-          "source": {
-            "type": "string",
-            "format": "url"
-          }
-        },
-        "required": [
-          "height",
-          "source",
-          "width"
-        ]
-      },
-      "Image": {
+      "Character": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "string",
+            "format": "uuid"
           },
-          "original": {
-            "$ref": "#/components/schemas/ImageSourceFile"
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
           },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageSourceFile"
-          },
-          "title": {
+          "name": {
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "original",
-          "thumbnail"
+          "name"
         ]
       },
-      "Image1": {
+      "Media": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "string",
+            "format": "uuid"
           },
-          "original": {
-            "$ref": "#/components/schemas/ImageSourceFile"
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
           },
-          "title": {
+          "name": {
+            "type": "string"
+          },
+          "cover_url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "original"
+          "email",
+          "password"
         ]
       },
-      "ArticleSectionInfo": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string"
-          },
-          "audio": {
-            "type": "string",
-            "format": "url"
-          },
-          "image": {
-            "$ref": "#/components/schemas/Image1"
-          },
-          "link": {
-            "type": "string",
-            "format": "url"
-          }
-        }
-      },
-      "ArticleDubbingCast": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "value": {
-            "$ref": "#/components/schemas/ArticleSectionInfo"
-          }
-        }
-      },
-      "ArticleWorks": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ArticleSectionInfo"
-            }
-          }
-        }
-      },
-      "ArticleSection": {
-        "type": "object",
-        "properties": {
-          "dubbing_cast": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ArticleDubbingCast"
-                }
-              }
-            }
-          },
-          "works": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ArticleWorks"
-            }
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "title"
-        ]
-      },
-      "WikiEntity": {
+      "VoiceActor": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
-          },
-          "ns": {
             "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
+            "format": "uuid"
           },
-          "title": {
-            "type": "string"
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
           },
-          "thumbnail": {
-            "$ref": "#/components/schemas/ImageSourceFile"
-          },
-          "description": {
+          "name": {
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "ns",
-          "thumbnail",
-          "title"
-        ]
-      },
-      "Article": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "cover": {
-            "$ref": "#/components/schemas/Image"
-          },
-          "sections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ArticleSection"
-            }
-          },
-          "categories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WikiEntity"
-            }
-          }
-        },
-        "required": [
-          "id",
-          "ns",
-          "title"
-        ]
-      },
-      "WikiEntitiesResponse": {
-        "type": "object",
-        "properties": {
-          "next_cursor": {},
-          "cursor": {},
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WikiEntity"
-            }
-          }
-        }
-      },
-      "SearchResponse": {
-        "type": "object",
-        "properties": {
-          "ns": {
-            "type": "string",
-            "enum": [
-              "article",
-              "file",
-              "categories",
-              "with_audio"
-            ]
-          },
-          "id": {
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "ns"
+          "name"
         ]
       }
     },

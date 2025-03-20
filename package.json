@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": "python -m flask --app api/index --debug run -p 5328",
-    "next-dev": "next dev",
-    "dev": "yarn flask-dev & yarn next-dev",
+    "dev:api": "python -m api",
+    "dev:app": "next dev",
+    "dev": "concurrently --kill-others --names back,front -c blue,green \"yarn:dev:api\" \"yarn:dev:app\"",
     "prebuild": "kubb generate",
     "build": "next build",
     "start": "next start",

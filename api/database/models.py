@@ -2,6 +2,7 @@ from enum import Enum
 import sqlalchemy as sql
 import sqlalchemy.dialects.postgresql as pg
 from api.database import Base, engine, Session
+from api.utils import run_on_init_app
 
 class Entity():
     id = sql.Column(pg.UUID(as_uuid=True), primary_key=True, server_default=sql.text('gen_random_uuid()'))
@@ -44,29 +45,14 @@ class DubbingCast(Base, Entity):
 
 
 # ensure rls for all tables
-Base.metadata.create_all(engine)
+@run_on_init_app
+def ensure_all_tables_exists():
+    Base.metadata.create_all(engine)
 
-rls = False
+@run_on_init_app
 def ensure_row_level_security():
-    global rls
-    
-    if rls:
-        return
+    for name in Base.metadata.tables.keys():
+        command = sql.text(f'ALTER TABLE {name} ENABLE ROW LEVEL SECURITY')
+        Session.execute(command)
 
-
-    for name, table in Base.metadata.tables.items():
-        print('\n\n\n\n')
-        print('create connection')
-        command = 'ALTER TABLE {} ENABLE ROW LEVEL SECURITY'.format(name)
-        command = sql.text(command)
-        print('command generated:', command)
-        result = Session.execute(command)
-        print('\nrls ensured for {}!'.format(name))
-
-    print('before commit')
     Session.commit()
-    print('\n\n\n\n')
-    
-    rls = True
-
-

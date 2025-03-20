@@ -1,8 +1,9 @@
 from base64 import b64encode, b64decode
 from importlib import import_module as module
 from sys import path
-from os import listdir
+from os import listdir, environ
 from functools import wraps
+from typing import Callable, List
 from flask_smorest import Blueprint
 from api.schemas.bases import SchemaWithExample
 
@@ -41,3 +42,17 @@ def example_response(api: Blueprint, schema: SchemaWithExample):
         return wrapper
 
     return decorator
+
+_callbacks: List[Callable] = []
+def init_app():
+    for callback in _callbacks:
+        callback()
+
+    environ["INITIALIZED"] = "1"
+
+
+def run_on_init_app(fn: Callable):
+    if not environ.get("INITIALIZED", None):
+        _callbacks.append(fn)
+
+    return fn

@@ -1,9 +1,9 @@
 from flask import Flask, g, request
 from flask_smorest import Api
 from os.path import dirname
-from api.auth import get_user_by_token
-from api.utils import import_from_folder
-from api.utils.cache import cache
+from api.lib import import_from_folder
+from api.lib.auth import get_user_by_token
+from api.lib.cache import cache
 
 def configure_routes(app: Flask):
     cache.init_app(app)

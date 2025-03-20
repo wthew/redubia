@@ -1,8 +1,8 @@
 from flask import g
 from flask.views import MethodView
-from api.repositories.models import CharacterRepository
+from api.database.repositories import CharacterRepository
 from api.schemas.models import MediaEntitySchema
-from api.utils import create_api_blueprint, example_response
+from api.lib import create_api_blueprint, example_response
 
 NAMESPACE = "Personagens"
 api = create_api_blueprint(NAMESPACE)

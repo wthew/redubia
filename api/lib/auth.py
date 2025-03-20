@@ -1,6 +1,6 @@
 from flask import g, request, jsonify
 from functools import wraps
-from api.services.supabase import supabase_client
+from api.lib.services.supabase import supabase_client
 
 
 def get_user_by_token(token: str):

@@ -1,14 +1,13 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS as configure_cors
 
 from api.routes import configure_routes
 from api.database.setup import configure_database
-from api.utils import init_app
+from api.lib import init_app
 
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
 
     app.config["API_TITLE"] = "Redub.ia API"
     app.config["API_VERSION"] = "v1"
@@ -18,6 +17,7 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
+    configure_cors(app)
     configure_database(app)
     configure_routes(app)
 

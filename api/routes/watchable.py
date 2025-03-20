@@ -1,8 +1,8 @@
 from flask import g
 from flask.views import MethodView
-from api.repositories.models import WatchableRepository
+from api.database.repositories import WatchableRepository
 from api.schemas.models import MediaEntitySchema
-from api.utils import create_api_blueprint, example_response
+from api.lib import create_api_blueprint, example_response
 
 NAMESPACE = "Midias"
 api = create_api_blueprint(NAMESPACE)

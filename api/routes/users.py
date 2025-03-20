@@ -1,10 +1,9 @@
-from flask import g, jsonify, request
+from flask import g, jsonify
 from flask.views import MethodView
-from api.utils import create_api_blueprint
+from api.lib import create_api_blueprint
 from api.schemas.routes import LoginRequestSchema
-from api.services.supabase import supabase_client
-from api.auth import private_route
-from pprint import pprint
+from api.lib.services.supabase import supabase_client
+from api.lib.auth import private_route
 
 NAMESPACE = "Usuarios"
 api = create_api_blueprint(NAMESPACE)

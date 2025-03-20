@@ -2,7 +2,7 @@ from enum import Enum
 import sqlalchemy as sql
 import sqlalchemy.dialects.postgresql as pg
 from api.database import Base, engine, Session
-from api.utils import run_on_init_app
+from api.lib import run_on_init_app
 
 class Entity():
     id = sql.Column(pg.UUID(as_uuid=True), primary_key=True, server_default=sql.text('gen_random_uuid()'))

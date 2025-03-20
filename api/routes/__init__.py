@@ -11,8 +11,9 @@ def configure_routes(app: Flask):
 
     @app.before_request
     def populate_current_user():
-        print(f'{request.remote_addr=}')
-        g.current_user = get_user_by_token(request.headers.get('Authorization'))
+        token = request.headers.get('Authorization')
+        if token:
+            g.current_user = get_user_by_token(token)
 
     for route in dict(import_from_folder(dirname(__file__))).values():
         api.register_blueprint(route.api, name=route.NAMESPACE)

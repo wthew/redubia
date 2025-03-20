@@ -1,16 +1,15 @@
 from flask import g
 from flask.views import MethodView
-from api.repositories.models import VoiceActorRepository
+from api.repositories.models import WatchableRepository
 from api.schemas.models import MediaEntitySchema
 from api.utils import create_api_blueprint, example_response
 
-NAMESPACE = "Dubladores"
+NAMESPACE = "Midias"
 api = create_api_blueprint(NAMESPACE)
 
-@api.route("/voice-actors")
-class VoiceActorsController(MethodView):
+@api.route("/watchable")
+class WatchableController(MethodView):
     @example_response(api, MediaEntitySchema(many=True))
-    @api.doc(operationId="getVoiceActors")
+    @api.doc(operationId="getWatchable")
     def get(self):
-        return g.with_transaction(lambda s: VoiceActorRepository(s).get_all())
-
+        return g.with_transaction(lambda s: WatchableRepository(s).get_all())

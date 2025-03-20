@@ -14,7 +14,7 @@ engine = create_engine(DATABASE_URL)
 class Base(DeclarativeBase):
     """Base model for all models"""
 
-Base.metadata.bind = engine
+Base.metadata.bind = engine # type: ignore
 
 Session = scoped_session(sessionmaker())
 Session.configure(bind=engine)

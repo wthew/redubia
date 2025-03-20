@@ -16,18 +16,18 @@ class SearchResponseSchema(SchemaWithPageId, SchemaWithNamespace):
         many = True
 
 
-class WikiEntitiesRequestSchema(SchemaWithPagination):
+class MediaEntitiesRequestSchema(SchemaWithPagination):
     class Meta:
         exclude = ['next_cursor']
 
 
-class WikiEntitySchema(SchemaWithPageId, SchemaWithNamespace):
+class MediaEntitySchema(SchemaWithPageId, SchemaWithNamespace):
     name = fields.String()
     cover_url = fields.String()
 
 
-class WikiEntitiesResponseSchema(SchemaWithPagination):
-    results = fields.List(fields.Nested(WikiEntitySchema))
+class MediaEntitiesResponseSchema(SchemaWithPagination):
+    results = fields.List(fields.Nested(MediaEntitySchema))
 
 
 class LoginRequestSchema(Schema):

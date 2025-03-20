@@ -22,10 +22,8 @@ class UserController(MethodView):
 class SignUpController(MethodView):
     @api.arguments(LoginRequestSchema)
     @api.doc(operationId="createAccount")
-    def post(self, body: LoginRequestSchema):
-        print('\n\n\n\n\n\n\n\nbody:\n', body)
+    def post(self, body):
         response = supabase_client.auth.sign_up(body)
-        print(f'{response=}')
         return {}
 
 
@@ -33,9 +31,10 @@ class SignUpController(MethodView):
 class LoginController(MethodView):
     @api.arguments(LoginRequestSchema)
     @api.doc(operationId="login")
-    def post(self, body: LoginRequestSchema):
-        print(f"{body=}")
+    def post(self, body):
         response = supabase_client.auth.sign_in_with_password(body)
-        pprint(response.session)
+
+        if not response.session:
+            return {}
 
         return { 'access_token': response.session.access_token, 'refresh_token': response.session.refresh_token }

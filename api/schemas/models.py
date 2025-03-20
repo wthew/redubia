@@ -1,26 +1,17 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from api.database import Session, models
+from api.schemas.bases import SchemaWithExample
 
-class BaseSchema(SQLAlchemyAutoSchema):
+class BaseSchema(SQLAlchemyAutoSchema, SchemaWithExample):    
     class Meta:
         include_relationships = True
         load_instance = True
         sqla_session = Session
 
 
-class VoiceActorSchema(BaseSchema):
+class MediaEntitySchema(BaseSchema):
     class Meta(BaseSchema.Meta):
-        model = models.VoiceActor
-
-
-class CharacterSchema(BaseSchema):
-    class Meta(BaseSchema.Meta):
-        model = models.Character
-
-
-class MediaSchema(BaseSchema):
-    class Meta(BaseSchema.Meta):
-        model = models.Media
+        model = models.MediaEntity
 
 
 class MediaCategoriesSchema(BaseSchema):

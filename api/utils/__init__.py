@@ -2,7 +2,9 @@ from base64 import b64encode, b64decode
 from importlib import import_module as module
 from sys import path
 from os import listdir
+from functools import wraps
 from flask_smorest import Blueprint
+from api.schemas.bases import SchemaWithExample
 
 def create_api_blueprint(name: str):
     return Blueprint('api', name, url_prefix="/api")
@@ -27,3 +29,15 @@ def decode_base64(string):
     _bytes = b64decode(string)
     output = _bytes.decode("utf-8")
     return output
+
+def example_response(api: Blueprint, schema: SchemaWithExample):
+    
+    def decorator(fn):
+        @api.response(200, schema=schema, example=schema.dump(schema.example()))
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            return fn(*args, **kwargs)
+
+        return wrapper
+
+    return decorator

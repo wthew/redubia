@@ -51,8 +51,26 @@ def ensure_all_tables_exists():
 
 @run_on_init_app
 def ensure_row_level_security():
-    for name in Base.metadata.tables.keys():
-        command = sql.text(f'ALTER TABLE {name} ENABLE ROW LEVEL SECURITY')
-        Session.execute(command)
+    def is_rls_enabled(session, table_name):
+        query = sql.text("""
+            SELECT relrowsecurity
+            FROM pg_class
+            WHERE oid = to_regclass(:table_name);
+        """)
+        result = session.execute(query, {"table_name": table_name}).fetchone()
+        if result:
+            return result[0]  # Retorna True ou False
 
-    Session.commit()
+        return False  # Se a tabela não for encontrada
+
+    def enable_rls_if_needed(session, table_name):
+        if not is_rls_enabled(session, table_name):
+            session.execute(sql.text(f"ALTER TABLE {table_name} ENABLE ROW LEVEL SECURITY"))
+            session.commit()
+            
+        print(f"RLS habilitado para a tabela {table_name}")
+
+    for name in Base.metadata.tables.keys():
+        enable_rls_if_needed(Session, name)
+    
+    print('')

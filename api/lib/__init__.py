@@ -34,7 +34,7 @@ def decode_base64(string):
 def example_response(api: Blueprint, schema: SchemaWithExample):
     
     def decorator(fn):
-        @api.response(200, schema=schema, example=schema.dump(schema.example()))
+        @api.response(200, schema=schema, example=schema.dump(schema.example))
         @wraps(fn)
         def wrapper(*args, **kwargs):
             return fn(*args, **kwargs)

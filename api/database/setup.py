@@ -17,25 +17,29 @@ def configure_database(app: Flask):
 
     @app.before_request
     def populate_with_transaction():
+        g.session = sessionmaker(engine, expire_on_commit=False)()
 
-        T = TypeVar('T')
-        def with_transaction(callback: Callable[[Session], T]):
-            session = sessionmaker(engine, expire_on_commit=False)
-            
-            with session() as session:
-                try:
-                    user: UserResponse = g.get('current_user', None)
-                    print('indo setar na seção usuario:', user)
-                    # session.execute(text(f"SET app.current_user_id = {int(user)}"))
-                    return callback(session)
-                    
-                except Exception as exception:
-                    session.rollback()
-                    raise exception
+        def with_transaction(callback):            
+            try:
+                user: UserResponse = g.get('current_user', None)
+                print('indo setar na seção usuario:', user)
+                # session.execute(text(f"SET app.current_user_id = {int(user)}"))
+                return callback(g.session)
                 
-                finally:
-                    session.execute(text('RESET ROLE;'))
-                    session.commit()
-                    session.close()
+            except Exception as exception:
+                g.session.rollback()
+                raise exception
+            
+            finally:
+                # g.session.execute(text('RESET ROLE;'))
+                g.session.commit()
+                
         
         g.with_transaction = with_transaction
+    
+    @app.after_request
+    def remove_session(response):
+        g.session.close()
+        
+        return response
+    

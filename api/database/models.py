@@ -1,26 +1,21 @@
-from enum import Enum
 import sqlalchemy as sql
+from sqlalchemy.orm import relationship
 import sqlalchemy.dialects.postgresql as pg
-from api.database import Base, engine, Session
+from api.database import Base, engine, Session, EntityNamespace
 from api.lib import run_on_init_app
 
 class Entity():
-    id = sql.Column(pg.UUID(as_uuid=True), primary_key=True, server_default=sql.text('gen_random_uuid()'))
-
-
-class EntityNamespace(Enum):
-    watchable = 'watchable'
-    voice_actor = 'voice_actor'
-    character = 'character'
+    id = sql.Column(pg.UUID, nullable=False, primary_key=True, server_default=sql.text('gen_random_uuid()'))
 
 class MediaEntity(Base, Entity):
     """Media model."""
     __tablename__ = 'media_entity'
 
     created_at = sql.Column(pg.TIMESTAMP(timezone=True), nullable=False, server_default=sql.text('now()'))
-    namespace = sql.Column(pg.TEXT, nullable=False)
+    namespace = sql.Column(sql.Enum(EntityNamespace), nullable=False)
     name = sql.Column(pg.TEXT, nullable=False)
     cover_url = sql.Column(pg.TEXT)
+    categories = relationship('MediaCategories', lazy='subquery')
     
 
 class MediaCategories(Base, Entity):
@@ -29,7 +24,8 @@ class MediaCategories(Base, Entity):
 
     created_at = sql.Column(pg.TIMESTAMP(timezone=True), nullable=False, server_default=sql.text('now()'))
     category = sql.Column(sql.TEXT, nullable=False)
-    media = sql.Column(pg.UUID(as_uuid=True), sql.ForeignKey('media_entity.id'), nullable=False)
+    media_entity_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'), nullable=False)
+    media_entity = relationship('MediaEntity')
 
 
 class DubbingCast(Base, Entity):
@@ -37,9 +33,12 @@ class DubbingCast(Base, Entity):
     __tablename__ = 'dubbing_cast'
 
     created_at = sql.Column(pg.TIMESTAMP(timezone=True), nullable=False, server_default=sql.text('now()'))
-    media = sql.Column(pg.UUID(as_uuid=True), sql.ForeignKey('media_entity.id'), nullable=False)
-    voice_actor = sql.Column(pg.UUID(as_uuid=True), sql.ForeignKey('media_entity.id'))
-    character = sql.Column(pg.UUID(as_uuid=True), sql.ForeignKey('media_entity.id'))
+    watchable_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'), nullable=False)
+    watchable = relationship('MediaEntity', foreign_keys=[watchable_id])
+    voice_actor_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'))
+    voice_actor = relationship('MediaEntity', foreign_keys=[voice_actor_id])
+    character_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'))
+    character = relationship('MediaEntity', foreign_keys=[character_id])
     label = sql.Column(pg.TEXT)
 
 

@@ -1,6 +1,7 @@
+from os import environ
+from enum import Enum
 from sqlalchemy.orm import DeclarativeBase, scoped_session, sessionmaker
 from sqlalchemy import create_engine
-from os import environ
 
 USER = environ.get("DB_USER")
 PWD = environ.get("DB_PASSWORD")
@@ -13,6 +14,14 @@ engine = create_engine(DATABASE_URL)
 
 class Base(DeclarativeBase):
     """Base model for all models"""
+
+
+# Enums
+class EntityNamespace(Enum):
+    watchable = 'watchable'
+    voice_actor = 'voice_actor'
+    character = 'character'
+
 
 Base.metadata.bind = engine # type: ignore
 

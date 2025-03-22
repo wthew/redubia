@@ -1,47 +1,63 @@
-from enum import Enum
-from marshmallow import Schema, fields, pre_dump, pre_load
+from marshmallow import Schema, fields
 from uuid import uuid4
 from datetime import datetime
 
-class Namespace(Enum):
-    media = 0
-    voice_actor = 1
-    character = 2
+def _parse_uuid(_):
+    """Parse UUID value."""
+    return str(uuid4())
 
+def _parse_datetime(_):
+    """Parse datetime value."""
+    return datetime.now().isoformat()
 
+def _parse_string(_):
+    """Parse string value."""
+    return 'string'
+
+def _parse_nested(x):
+    """Parse nested schema."""
+    if isinstance(x.schema, SchemaWithExample):
+        return x.schema.dump(x.schema.example)
+    
+    return None
+
+def _parse_list(x):
+    """Parse list schema."""
+    return [mapper[type(x.inner).__name__](x.inner)]
+
+def _parse_enum(x):
+    """Parse enum schema."""
+    return list(x.enum.__members__.values())[0].name
+
+mapper = {
+    'UUID': _parse_uuid,
+    'DateTime': _parse_datetime,
+    'String': _parse_string,
+    'Nested': _parse_nested,
+    'List': _parse_list,
+    'Enum': _parse_enum
+}
 class SchemaWithExample(Schema):
-    def example(self):
-        mapper = {
-            'UUID': str(uuid4()),
-            'DateTime': datetime.now().isoformat(),
-            'String': 'string'
-        }
+    """Base schema with example generation."""    
+    
+    def _parse(self, field_data):
+        """Parse field data based on its type."""
+        field_type = type(field_data).__name__
+        if field_type in mapper:
+            return mapper[field_type](field_data)
+        
+        return None
 
+    @property
+    def example(self):
+
+        fields = self._declared_fields.items()
         example = {
-            field: mapper[type(field_data).__name__]
-            for field, field_data in self._declared_fields.items()
+            field: self._parse(field_data)
+            for field, field_data in fields if field not in self.exclude
         }
 
         return self.load([example] if self.many else example)
-
-
-
-class SchemaWithNamespace(Schema):
-    namespace = fields.Enum(Namespace, validate=None, required=True)
-
-    @pre_dump
-    def pre_dump_details(self, data, **kwarg):
-        data['namespace'] = Namespace(data['namespace'])
-        return data
-
-    @pre_load
-    def pre_load_details(self, data, **kwarg):
-        data['namespace'] = data['namespace'].name
-        return data
-
-
-class SchemaWithPagination(Schema):
-    pass
 
 
 class SchemaWithPageId(Schema):

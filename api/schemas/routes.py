@@ -1,33 +1,19 @@
 from marshmallow import Schema, fields
-from api.schemas.bases import SchemaWithNamespace, SchemaWithPagination, SchemaWithPageId
+from api.schemas.bases import SchemaWithPageId
 
 class ByIdRequestSchema(Schema):
-    id = fields.Int()
+    id = fields.UUID()
 
 
 class SearchRequestSchema(Schema):
     q = fields.Str()
 
 
-class SearchResponseSchema(SchemaWithPageId, SchemaWithNamespace):
+class SearchResponseSchema(SchemaWithPageId):
     title = fields.Str()
 
     class Meta:
         many = True
-
-
-class MediaEntitiesRequestSchema(SchemaWithPagination):
-    class Meta:
-        exclude = ['next_cursor']
-
-
-class MediaEntitySchema(SchemaWithPageId, SchemaWithNamespace):
-    name = fields.String()
-    cover_url = fields.String()
-
-
-class MediaEntitiesResponseSchema(SchemaWithPagination):
-    results = fields.List(fields.Nested(MediaEntitySchema))
 
 
 class LoginRequestSchema(Schema):

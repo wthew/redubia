@@ -1,8 +1,9 @@
+from collections.abc import Sequence
 from typing import TypeVar, Generic, Type
-from sqlalchemy import select
+from sqlalchemy import ScalarResult, select
 from sqlalchemy.orm import Session
-from api.database.models import MediaEntity, EntityNamespace
-from api.database.models import Entity
+from api.database import EntityNamespace
+from api.database.models import DubbingCast, MediaEntity, Entity
 
 T = TypeVar('T', bound=Entity)
 class RepositoryBase(Generic[T]):
@@ -16,7 +17,8 @@ class RepositoryBase(Generic[T]):
         return q.where(self.model.id == uuid) if uuid else q
 
     def get(self, uuid: str):
-        return self.session.scalar(self.get_query(uuid))
+        return self.session.scalars(self.get_query(uuid)).first()
+
 
     def get_all(self):
         result = self.session.scalars(self.get_query())
@@ -47,3 +49,24 @@ class CharacterRepository(MediaEntityByNameSpace):
 
 class VoiceActorRepository(MediaEntityByNameSpace):
     namespace = EntityNamespace.voice_actor
+
+
+class DubbingCastRepository(RepositoryBase):
+    model = DubbingCast
+
+    def get_by_watchable_id(self, watchable_id: str) -> Sequence[DubbingCast]:
+        """Get all dubbing casts for a watchable."""
+
+        q = select(self.model).where(DubbingCast.watchable_id == watchable_id)
+        return self.session.scalars(q).all()
+    
+    def get_by_voice_actor_id(self, voice_actor_id: str) -> Sequence[DubbingCast]:
+        """Get all dubbing casts for a voice actor."""
+        q = select(self.model).where(DubbingCast.voice_actor_id == voice_actor_id)
+        return self.session.scalars(q).all()
+    
+    def get_by_character_id(self, character_id: str) -> Sequence[DubbingCast]:
+        """Get all dubbing casts for a character."""
+        q = select(self.model).where(DubbingCast.character_id == character_id)
+        return self.session.scalars(q).all()
+    

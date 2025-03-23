@@ -3,8 +3,10 @@ from importlib import import_module as module
 from sys import path
 from os import listdir, environ
 from functools import wraps
-from typing import Callable, List
+from typing import Callable, List, Type
 from flask_smorest import Blueprint
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from marshmallow import fields
 from api.schemas.bases import SchemaWithExample
 
 def create_api_blueprint(name: str):
@@ -56,3 +58,15 @@ def run_on_init_app(fn: Callable):
         _callbacks.append(fn)
 
     return fn
+
+
+
+def inline_schema(schema: Type[SQLAlchemyAutoSchema], **kwargs):
+    """Inline schema for SQLAlchemyAutoSchema."""
+    class InlineSchema(schema):
+        __name__ = f"Inline{schema.__name__}Schema"
+
+        def schema_name_resolver(self):
+            return None
+
+    return fields.Nested(InlineSchema, **kwargs)

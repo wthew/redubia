@@ -10,14 +10,23 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Character"
+                    "$ref": "#/components/schemas/MediaEntitySchema"
                   }
                 },
                 "example": [
                   {
-                    "id": "a8fca772-ac34-4550-b17f-cbe7992f5cd7",
-                    "created_at": "2025-03-18T23:47:18.090962",
-                    "name": "Eren yeager"
+                    "namespace": "watchable",
+                    "categories": [
+                      {
+                        "created_at": "2025-03-22T17:20:22.769518",
+                        "category": "string",
+                        "id": "b04468ec-23f5-4a21-aa02-8d5a48d25525"
+                      }
+                    ],
+                    "created_at": "2025-03-22T17:20:22.781450",
+                    "name": "string",
+                    "cover_url": "string",
+                    "id": "d0c16cdb-4050-4f88-82a3-62df0805fbfd"
                   }
                 ]
               }
@@ -31,40 +40,6 @@
           "Personagens"
         ],
         "operationId": "getCharacters"
-      }
-    },
-    "/api/media": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Media"
-                  }
-                },
-                "example": [
-                  {
-                    "id": "c7f4c37a-b6e4-4e09-a705-d08a7e1766b6",
-                    "created_at": "2025-03-18T23:47:18.637386",
-                    "name": "Dan da dan",
-                    "cover_url": null
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "Midias"
-        ],
-        "operationId": "getMedia"
       }
     },
     "/api/me": {
@@ -83,8 +58,21 @@
     "/api/sign-up": {
       "post": {
         "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
           "default": {
             "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestSchema"
+              }
+            }
           }
         },
         "tags": [
@@ -108,7 +96,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/LoginRequestSchema"
               }
             }
           }
@@ -129,14 +117,23 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/VoiceActor"
+                    "$ref": "#/components/schemas/MediaEntitySchema"
                   }
                 },
                 "example": [
                   {
-                    "id": "45c22e8c-169b-4940-af45-fd38936a977d",
-                    "created_at": "2025-03-18T23:47:19.668837",
-                    "name": "Guilherme Briggs"
+                    "namespace": "watchable",
+                    "categories": [
+                      {
+                        "created_at": "2025-03-22T17:20:22.949146",
+                        "category": "string",
+                        "id": "8209a4fb-d5ae-4c0c-bbc2-11f675669980"
+                      }
+                    ],
+                    "created_at": "2025-03-22T17:20:22.968420",
+                    "name": "string",
+                    "cover_url": "string",
+                    "id": "be050afd-569f-471a-8ce3-367dbc2fe4ef"
                   }
                 ]
               }
@@ -151,6 +148,236 @@
         ],
         "operationId": "getVoiceActors"
       }
+    },
+    "/api/voice-actors/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceActorSchema"
+                },
+                "example": {
+                  "categories": [
+                    {
+                      "created_at": "2025-03-22T17:20:22.984853",
+                      "category": "string",
+                      "id": "328c8bf9-63ed-48c3-80e6-b47e7f9f9312"
+                    }
+                  ],
+                  "created_at": "2025-03-22T17:20:22.987209",
+                  "name": "string",
+                  "cover_url": "string",
+                  "id": "9c424f07-1c7a-423d-b2b7-f050da35a389",
+                  "dubbing_cast": [
+                    {
+                      "watchable": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-22T17:20:22.988216",
+                            "category": "string",
+                            "id": "82bae964-9740-405a-8d4c-0d977ce31f77"
+                          }
+                        ],
+                        "created_at": "2025-03-22T17:20:23.007786",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "156e8016-f6aa-4534-8fc1-8216dc562961"
+                      },
+                      "character": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-22T17:20:23.026883",
+                            "category": "string",
+                            "id": "a28aefea-4ce2-4a41-84d8-f447f987e1ff"
+                          }
+                        ],
+                        "created_at": "2025-03-22T17:20:23.041213",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "df1a7aab-57d2-4b9f-9074-9731615ec345"
+                      },
+                      "created_at": "2025-03-22T17:20:23.070638",
+                      "label": "string",
+                      "id": "d6bff8ed-aa1c-4f5e-91fe-01dd92d53789"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Dubladores"
+        ],
+        "operationId": "getVoiceActorById"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "/api/watchables": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MediaEntitySchema"
+                  }
+                },
+                "example": [
+                  {
+                    "namespace": "watchable",
+                    "categories": [
+                      {
+                        "created_at": "2025-03-22T17:20:23.212869",
+                        "category": "string",
+                        "id": "840ef1ab-3dfb-494a-b59d-7183ff74c59e"
+                      }
+                    ],
+                    "created_at": "2025-03-22T17:20:23.214900",
+                    "name": "string",
+                    "cover_url": "string",
+                    "id": "6c7deb78-54f7-4fc1-85c5-d02af80e60ed"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Midias"
+        ],
+        "operationId": "getWatchable"
+      }
+    },
+    "/api/watchables/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchableSchema"
+                },
+                "example": {
+                  "categories": [
+                    {
+                      "created_at": "2025-03-22T17:20:23.219131",
+                      "category": "string",
+                      "id": "ed3bf12c-feed-4bc3-8826-fc93ebe1aee0"
+                    }
+                  ],
+                  "created_at": "2025-03-22T17:20:23.235121",
+                  "name": "string",
+                  "cover_url": "string",
+                  "id": "019d6f25-ae2f-456f-96da-5354fe420333",
+                  "dubbing_cast": [
+                    {
+                      "voice_actor": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-22T17:20:23.235918",
+                            "category": "string",
+                            "id": "17e7d016-7c57-4f75-9c40-92e6b3409c0f"
+                          }
+                        ],
+                        "created_at": "2025-03-22T17:20:23.249366",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "660fcbbd-920a-40cb-86fb-3d063809d98c"
+                      },
+                      "character": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-22T17:20:23.272034",
+                            "category": "string",
+                            "id": "f762d61e-ba3a-48d4-99e6-d27c9ef41b19"
+                          }
+                        ],
+                        "created_at": "2025-03-22T17:20:23.274057",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "dd6f2c0a-91d3-4d3d-9ea3-076e553180f6"
+                      },
+                      "created_at": "2025-03-22T17:20:23.306600",
+                      "label": "string",
+                      "id": "a5b515ee-b84e-4d90-9059-9372cf0bf48f"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Midias"
+        ],
+        "operationId": "getWatchableById"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
     }
   },
   "info": {
@@ -163,22 +390,22 @@
       "description": ""
     },
     {
-      "name": "Midias",
-      "description": ""
-    },
-    {
       "name": "Usuarios",
       "description": ""
     },
     {
       "name": "Dubladores",
       "description": ""
+    },
+    {
+      "name": "Midias",
+      "description": ""
     }
   ],
   "openapi": "3.0.2",
   "components": {
     "schemas": {
-      "Error": {
+      "ErrorSchema": {
         "type": "object",
         "properties": {
           "code": {
@@ -200,7 +427,7 @@
           }
         }
       },
-      "PaginationMetadata": {
+      "PaginationMetadataSchema": {
         "type": "object",
         "properties": {
           "total": {
@@ -226,31 +453,41 @@
           }
         }
       },
-      "Character": {
+      "MediaCategoriesSchema": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
-          "name": {
+          "category": {
             "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "Media": {
-        "type": "object",
-        "properties": {
+          },
           "id": {
             "type": "string",
             "format": "uuid"
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "MediaEntitySchema": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "enum": [
+              "watchable",
+              "voice_actor",
+              "character"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaCategoriesSchema"
+            }
           },
           "created_at": {
             "type": "string",
@@ -262,13 +499,18 @@
           "cover_url": {
             "type": "string",
             "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "required": [
-          "name"
+          "name",
+          "namespace"
         ]
       },
-      "LoginRequest": {
+      "LoginRequestSchema": {
         "type": "object",
         "properties": {
           "email": {
@@ -283,12 +525,14 @@
           "password"
         ]
       },
-      "VoiceActor": {
+      "MediaEntitySchema1": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaCategoriesSchema"
+            }
           },
           "created_at": {
             "type": "string",
@@ -296,6 +540,124 @@
           },
           "name": {
             "type": "string"
+          },
+          "cover_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "VoiceActorSchema": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaCategoriesSchema"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "cover_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dubbing_cast": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "watchable": {
+                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                },
+                "character": {
+                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "label": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "WatchableSchema": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaCategoriesSchema"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "cover_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dubbing_cast": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "voice_actor": {
+                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                },
+                "character": {
+                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "label": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
           }
         },
         "required": [
@@ -309,7 +671,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorSchema"
             }
           }
         }
@@ -319,7 +681,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorSchema"
             }
           }
         }

@@ -15,7 +15,7 @@ class MediaEntity(Base, Entity):
     namespace = sql.Column(sql.Enum(EntityNamespace), nullable=False)
     name = sql.Column(pg.TEXT, nullable=False)
     cover_url = sql.Column(pg.TEXT)
-    categories = relationship('MediaCategories', lazy='subquery')
+    categories = relationship('MediaCategories', lazy='subquery', back_populates='media_entity')
     
 
 class MediaCategories(Base, Entity):
@@ -25,7 +25,7 @@ class MediaCategories(Base, Entity):
     created_at = sql.Column(pg.TIMESTAMP(timezone=True), nullable=False, server_default=sql.text('now()'))
     category = sql.Column(sql.TEXT, nullable=False)
     media_entity_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'), nullable=False)
-    media_entity = relationship('MediaEntity')
+    media_entity = relationship('MediaEntity', foreign_keys=[media_entity_id], back_populates='categories')
 
 
 class DubbingCast(Base, Entity):
@@ -40,7 +40,6 @@ class DubbingCast(Base, Entity):
     character_id = sql.Column(pg.UUID, sql.ForeignKey('media_entity.id'))
     character = relationship('MediaEntity', foreign_keys=[character_id])
     label = sql.Column(pg.TEXT)
-
 
 
 # ensure rls for all tables
@@ -67,9 +66,5 @@ def ensure_row_level_security():
             session.execute(sql.text(f"ALTER TABLE {table_name} ENABLE ROW LEVEL SECURITY"))
             session.commit()
             
-        print(f"RLS habilitado para a tabela {table_name}")
-
     for name in Base.metadata.tables.keys():
         enable_rls_if_needed(Session, name)
-    
-    print('')

@@ -7,6 +7,14 @@ const nextConfig = {
   env: {
     base_api_url: base_api_host + "/api",
   },
+  rewrites: async () => {
+    return [
+      {
+        source: "/api/:path*",
+        destination: base_api_host + "/api/" + api_mapper,
+      },
+    ];
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

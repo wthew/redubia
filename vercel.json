@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "api/index.py",
-      "use": "@vercel/python@4.7.1"
+      "use": "@vercel/python@4.7.1",
+      "config": {
+        
+      }
     },
     {
       "src": "package.json",

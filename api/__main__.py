@@ -7,7 +7,7 @@ from api.lib import init_app
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder=None)
 
     app.config["API_TITLE"] = "Redub.ia API"
     app.config["API_VERSION"] = "v1"

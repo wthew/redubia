@@ -52,6 +52,7 @@
     "@kubb/plugin-ts": "^3.5.6",
     "@svgr/webpack": "^8.1.0",
     "@types/color": "^4.2.0",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "vercel": "^41.4.1"
   }
 }

@@ -18,15 +18,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-22T17:20:22.769518",
+                        "created_at": "2025-03-23T00:20:25.132461",
                         "category": "string",
-                        "id": "b04468ec-23f5-4a21-aa02-8d5a48d25525"
+                        "id": "bf774d5c-15b1-4d5a-996f-caae68f86483"
                       }
                     ],
-                    "created_at": "2025-03-22T17:20:22.781450",
+                    "created_at": "2025-03-23T00:20:25.135364",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "d0c16cdb-4050-4f88-82a3-62df0805fbfd"
+                    "id": "7eafe4a8-2868-4bef-8ca5-c43be8d82479"
                   }
                 ]
               }
@@ -41,6 +41,100 @@
         ],
         "operationId": "getCharacters"
       }
+    },
+    "/api/characters/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CharacterSchema"
+                },
+                "example": {
+                  "categories": [
+                    {
+                      "created_at": "2025-03-23T00:20:25.145762",
+                      "category": "string",
+                      "id": "2c71c3cd-b1c0-4c8c-b04f-e3697e5f2621"
+                    }
+                  ],
+                  "created_at": "2025-03-23T00:20:25.149045",
+                  "name": "string",
+                  "cover_url": "string",
+                  "id": "ba2d399d-6e6f-4a1a-ade4-31861954d200",
+                  "dubbing_cast": [
+                    {
+                      "watchable": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-23T00:20:25.150316",
+                            "category": "string",
+                            "id": "322f1407-16fa-47b9-8fc5-fbde5eeeb3a0"
+                          }
+                        ],
+                        "created_at": "2025-03-23T00:20:25.153986",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "37df5815-8c55-4828-9f93-b2282142a911"
+                      },
+                      "voice_actor": {
+                        "categories": [
+                          {
+                            "created_at": "2025-03-23T00:20:25.163633",
+                            "category": "string",
+                            "id": "5c4902d4-e76d-4013-a897-cf6c13e0872d"
+                          }
+                        ],
+                        "created_at": "2025-03-23T00:20:25.165467",
+                        "name": "string",
+                        "cover_url": "string",
+                        "id": "a8c80e2d-0dbf-4588-a898-966934042b9a"
+                      },
+                      "created_at": "2025-03-23T00:20:25.169339",
+                      "label": "string",
+                      "id": "cbb0fa2f-fc25-46a2-a108-873e6746e2e5"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Personagens"
+        ],
+        "operationId": "getCharacterById"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
     },
     "/api/me": {
       "get": {
@@ -125,15 +219,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-22T17:20:22.949146",
+                        "created_at": "2025-03-23T00:20:25.206136",
                         "category": "string",
-                        "id": "8209a4fb-d5ae-4c0c-bbc2-11f675669980"
+                        "id": "4f7c71e3-1038-497d-bafa-55c160cf3732"
                       }
                     ],
-                    "created_at": "2025-03-22T17:20:22.968420",
+                    "created_at": "2025-03-23T00:20:25.207562",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "be050afd-569f-471a-8ce3-367dbc2fe4ef"
+                    "id": "5d1313c2-5fdd-4ba4-b301-0f2dff83e902"
                   }
                 ]
               }
@@ -176,46 +270,46 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-22T17:20:22.984853",
+                      "created_at": "2025-03-23T00:20:25.210920",
                       "category": "string",
-                      "id": "328c8bf9-63ed-48c3-80e6-b47e7f9f9312"
+                      "id": "7cde5aae-61a4-4009-b1d4-e7fcaab3f0c4"
                     }
                   ],
-                  "created_at": "2025-03-22T17:20:22.987209",
+                  "created_at": "2025-03-23T00:20:25.212242",
                   "name": "string",
                   "cover_url": "string",
-                  "id": "9c424f07-1c7a-423d-b2b7-f050da35a389",
+                  "id": "1fe2c6d7-c3b6-4013-8ef1-532b20381f25",
                   "dubbing_cast": [
                     {
                       "watchable": {
                         "categories": [
                           {
-                            "created_at": "2025-03-22T17:20:22.988216",
+                            "created_at": "2025-03-23T00:20:25.212561",
                             "category": "string",
-                            "id": "82bae964-9740-405a-8d4c-0d977ce31f77"
+                            "id": "3766e7ad-5f4c-4f54-993f-df671369144b"
                           }
                         ],
-                        "created_at": "2025-03-22T17:20:23.007786",
+                        "created_at": "2025-03-23T00:20:25.214250",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "156e8016-f6aa-4534-8fc1-8216dc562961"
+                        "id": "3bc42043-c6b5-46f9-b078-226ee649e966"
                       },
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-03-22T17:20:23.026883",
+                            "created_at": "2025-03-23T00:20:25.217931",
                             "category": "string",
-                            "id": "a28aefea-4ce2-4a41-84d8-f447f987e1ff"
+                            "id": "99c6d7cd-c927-4d91-b804-01b3f97cded5"
                           }
                         ],
-                        "created_at": "2025-03-22T17:20:23.041213",
+                        "created_at": "2025-03-23T00:20:25.219574",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "df1a7aab-57d2-4b9f-9074-9731615ec345"
+                        "id": "33586e91-dbdf-4571-b54a-22c13a3ddf9e"
                       },
-                      "created_at": "2025-03-22T17:20:23.070638",
+                      "created_at": "2025-03-23T00:20:25.222676",
                       "label": "string",
-                      "id": "d6bff8ed-aa1c-4f5e-91fe-01dd92d53789"
+                      "id": "d0d33d01-1c52-4b6f-9b23-6113beea74b6"
                     }
                   ]
                 }
@@ -261,15 +355,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-22T17:20:23.212869",
+                        "created_at": "2025-03-23T00:20:25.245108",
                         "category": "string",
-                        "id": "840ef1ab-3dfb-494a-b59d-7183ff74c59e"
+                        "id": "b99387ee-ab4c-45c7-a0fe-a71fdef6ecac"
                       }
                     ],
-                    "created_at": "2025-03-22T17:20:23.214900",
+                    "created_at": "2025-03-23T00:20:25.246901",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "6c7deb78-54f7-4fc1-85c5-d02af80e60ed"
+                    "id": "8e8282de-22de-42f9-a6df-fb37c90c32a5"
                   }
                 ]
               }
@@ -282,7 +376,7 @@
         "tags": [
           "Midias"
         ],
-        "operationId": "getWatchable"
+        "operationId": "getWatchables"
       }
     },
     "/api/watchables/{id}": {
@@ -312,46 +406,46 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-22T17:20:23.219131",
+                      "created_at": "2025-03-23T00:20:25.250822",
                       "category": "string",
-                      "id": "ed3bf12c-feed-4bc3-8826-fc93ebe1aee0"
+                      "id": "6b91d4eb-ccd7-4c07-95c3-4312d3bae17a"
                     }
                   ],
-                  "created_at": "2025-03-22T17:20:23.235121",
+                  "created_at": "2025-03-23T00:20:25.252297",
                   "name": "string",
                   "cover_url": "string",
-                  "id": "019d6f25-ae2f-456f-96da-5354fe420333",
+                  "id": "362442b1-70d9-4c5a-9c72-7e2b5e124594",
                   "dubbing_cast": [
                     {
                       "voice_actor": {
                         "categories": [
                           {
-                            "created_at": "2025-03-22T17:20:23.235918",
+                            "created_at": "2025-03-23T00:20:25.252648",
                             "category": "string",
-                            "id": "17e7d016-7c57-4f75-9c40-92e6b3409c0f"
+                            "id": "5d45a79d-e5e2-436e-ba7f-b28fea15390e"
                           }
                         ],
-                        "created_at": "2025-03-22T17:20:23.249366",
+                        "created_at": "2025-03-23T00:20:25.253924",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "660fcbbd-920a-40cb-86fb-3d063809d98c"
+                        "id": "86158956-5f17-49c2-b65d-e36e5b08649a"
                       },
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-03-22T17:20:23.272034",
+                            "created_at": "2025-03-23T00:20:25.256266",
                             "category": "string",
-                            "id": "f762d61e-ba3a-48d4-99e6-d27c9ef41b19"
+                            "id": "940a63ee-cd4e-41b8-8fed-5ef4291936bc"
                           }
                         ],
-                        "created_at": "2025-03-22T17:20:23.274057",
+                        "created_at": "2025-03-23T00:20:25.257419",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "dd6f2c0a-91d3-4d3d-9ea3-076e553180f6"
+                        "id": "968a4fe7-b723-4fd8-8003-c148506b318b"
                       },
-                      "created_at": "2025-03-22T17:20:23.306600",
+                      "created_at": "2025-03-23T00:20:25.259970",
                       "label": "string",
-                      "id": "a5b515ee-b84e-4d90-9059-9372cf0bf48f"
+                      "id": "7a7bfc07-20ef-4fbb-befb-668e2cb81d79"
                     }
                   ]
                 }
@@ -510,22 +604,7 @@
           "namespace"
         ]
       },
-      "LoginRequestSchema": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "password"
-        ]
-      },
-      "MediaEntitySchema1": {
+      "CharacterSchema": {
         "type": "object",
         "properties": {
           "categories": {
@@ -548,10 +627,103 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "dubbing_cast": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "watchable": {
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "voice_actor": {
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "label": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
           }
         },
         "required": [
           "name"
+        ]
+      },
+      "LoginRequestSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
         ]
       },
       "VoiceActorSchema": {
@@ -584,10 +756,62 @@
               "type": "object",
               "properties": {
                 "watchable": {
-                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
                 },
                 "character": {
-                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
                 },
                 "created_at": {
                   "type": "string",
@@ -639,10 +863,62 @@
               "type": "object",
               "properties": {
                 "voice_actor": {
-                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
                 },
                 "character": {
-                  "$ref": "#/components/schemas/MediaEntitySchema1"
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MediaCategoriesSchema"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "cover_url": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
                 },
                 "created_at": {
                   "type": "string",

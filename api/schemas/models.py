@@ -45,3 +45,9 @@ class VoiceActorSchema(MediaEntitySchema):
 
     dubbing_cast = fields.List(inline_schema(DubbingCastSchema, exclude=['voice_actor']))
 
+
+class CharacterSchema(MediaEntitySchema):
+    class Meta(MediaEntitySchema.Meta):
+        exclude = ['namespace']
+
+    dubbing_cast = fields.List(inline_schema(DubbingCastSchema, exclude=['character']))

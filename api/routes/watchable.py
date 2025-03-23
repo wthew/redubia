@@ -14,7 +14,7 @@ api = create_api_blueprint(NAMESPACE)
 @api.route("/watchables")
 class WatchableController(MethodView):
     @example_response(api, MediaEntitySchema(many=True))
-    @api.doc(operationId="getWatchable")
+    @api.doc(operationId="getWatchables")
     def get(self):
         return g.with_transaction(lambda s: WatchableRepository(s).get_all())
 

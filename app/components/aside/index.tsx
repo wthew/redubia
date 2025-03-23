@@ -1,13 +1,12 @@
 "use client";
 
-import { useGetPopularPages } from "@/lib/services/gen";
+import Image from "next/image";
 import { useAppBar } from "../app-bar/context";
-import Image from "../image";
 import Link from "next/link";
 
 export default function Aside() {
   const { appBarHeight: height } = useAppBar();
-  const popular = useGetPopularPages();
+  const popular = { isLoading: false, data: [] }; // FIXME
 
   return (
     <aside
@@ -25,13 +24,13 @@ export default function Aside() {
             className="hover:text-blue-400 text-gray-200 transition-colors"
           >
             <li className="flex items-center gap-2">
-              <Image
+              {/* <Image
                 className="rounded-full"
-                image={thumbnail}
+                image={thumbnail.url}
                 alt=""
                 width={48}
                 height={48}
-              />
+              /> */}
               <h4>{title}</h4>
             </li>
           </Link>

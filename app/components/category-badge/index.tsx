@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { hashColor } from "../../utils";
 import Color from "color";
-import { WikiEntity } from "@/lib/services/gen";
+import { MediaCategoriesSchema } from "@/lib/services/gen";
 
-type Props = { category: WikiEntity };
+type Props = { category: MediaCategoriesSchema };
 export function Category({ category }: Props) {
-  const bg = Color({ hex: hashColor(category.title) }).desaturate(0.16);
+  const bg = Color({ hex: hashColor(category.category) }).desaturate(0.16);
   const fg = bg.lighten(0.25).isDark()
     ? bg.negate().lighten(0.5)
     : bg.negate().darken(0.75);
@@ -18,17 +18,17 @@ export function Category({ category }: Props) {
         className="w-max p-2 rounded-full m-1 text-xs hover:scale-110 transition-all"
         style={style}
       >
-        <span>{category.title}</span>
+        <span>{category.category}</span>
       </div>
     </Link>
   );
 }
 
-export default async function Categories(props: { categories: WikiEntity[] }) {
+export default async function Categories(props: { categories: MediaCategoriesSchema[] }) {
   return (
     <div className="flex flex-wrap">
       {props.categories.map((category) => (
-        <Category key={category.title} category={category} />
+        <Category key={category.category} category={category} />
       ))}
     </div>
   );

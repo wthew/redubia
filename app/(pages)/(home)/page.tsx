@@ -29,9 +29,8 @@ const icons = [
 ];
 
 export default async function Home() {
-  console.log({ icons });
   return (
-    <div className="text-gray-400 bg-black font-sans flex flex-col md:flex-row-reverse">
+    <div className="text-gray-400 bg-black font-sans flex flex-col">
       <div className="w-full h-full text-center p-4">
         <p className="px-8 text-lg mt-4 text-left">
           Uma plataforma moderna criada para entusiastas e profissionais da
@@ -44,7 +43,7 @@ export default async function Home() {
           <Section
             title="Wiki da Dublagem"
             description="Explore o maior acervo sobre dublagem. Descubra quem deu voz a personagens inesquecíveis, quantos dubladores interpretaram seu ator favorito no Brasil e mergulhe nos elencos de filmes e séries que marcaram gerações. Tudo organizado e ao seu alcance!"
-            action={{ label: "Explorar", link: "/wiki", disabled: true }}
+            action={{ label: "Explorar", link: "/wiki" }}
           />
           <Section
             title="IA que Reconhece Vozes"
@@ -56,7 +55,7 @@ export default async function Home() {
             </Section.Background>
           </Section>
           <Section
-            title="API para Criadores"
+            title="API para Desenvolvedores"
             description="Integre dados de dubladores, personagens e animações em seus projetos usando nossa API robusta, intuitiva e fácil de implementar. Perfeito para desenvolvedores que buscam acesso a informações detalhadas e organizadas sobre o mundo da dublagem"
             action={{ label: "Ver preços", link: "/pricing", disabled: true }}
           >
@@ -74,25 +73,24 @@ export default async function Home() {
             </Section.Background>
           </Section>
         </div>
-
-        <footer className="footer py-6 text-gray-500 text-sm">
-          <p>
-            Feito com muito ☕ por{" "}
-            <a
-              className="underline"
-              target="_blank"
-              href="https://wthew.vercel.app"
-            >
-              thw
-            </a>
-          </p>
-        </footer>
       </div>
       <div className={clsx(style["wrap"])}>
         {icons.map((Svg, idx) => {
           return <Svg key={idx} className={clsx(style["svg"])} />;
         })}
       </div>
+      <footer className="w-full text-center py-6 text-gray-500 text-sm">
+        <p>
+          Feito com muito ☕ por{" "}
+          <a
+            className="underline"
+            target="_blank"
+            href="https://wthew.vercel.app"
+          >
+            thw
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }

@@ -13,3 +13,7 @@ export function hashColor(input: string) {
   const hex = hash.substring(idx, idx + 6)
   return `#${hex}`
 }
+
+
+export const PLACEHOLDER_IMAGE =
+  "https://fomldwntujceqbgkuack.supabase.co/storage/v1/object/public/dev//No_Image.jpg"

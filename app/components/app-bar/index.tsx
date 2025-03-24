@@ -19,7 +19,6 @@ import { useAppBar } from "@/components/app-bar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/hooks/useDebounced";
 import Link from "next/link";
-import { useSearch } from "@/lib/services/gen";
 
 export default function AppBar() {
   const { visible, appBarRef } = useAppBar();
@@ -50,7 +49,7 @@ export function Search() {
 
   const [search, setSearch] = useState("");
   const debounced = useDebounced(search);
-  const { data = [], isLoading } = useSearch({ params: { q: debounced } });
+  const { data = [], isLoading } = { data: [], isLoading: false }; // FIXME
 
   const onOpen = useCallback(() => {
     setOpen(true);

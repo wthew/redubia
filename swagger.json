@@ -18,15 +18,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-23T00:20:25.132461",
+                        "created_at": "2025-03-23T21:48:23.082933",
                         "category": "string",
-                        "id": "bf774d5c-15b1-4d5a-996f-caae68f86483"
+                        "id": "f7fd02a3-95c8-4d0f-a815-c53b45aa605f"
                       }
                     ],
-                    "created_at": "2025-03-23T00:20:25.135364",
+                    "created_at": "2025-03-23T21:48:23.084801",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "7eafe4a8-2868-4bef-8ca5-c43be8d82479"
+                    "id": "0fac6f9f-9cb1-47f3-b37a-015af36ba6ed"
                   }
                 ]
               }
@@ -57,7 +57,7 @@
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
@@ -69,46 +69,46 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-23T00:20:25.145762",
+                      "created_at": "2025-03-23T21:48:23.088467",
                       "category": "string",
-                      "id": "2c71c3cd-b1c0-4c8c-b04f-e3697e5f2621"
+                      "id": "083a93c3-2a67-4454-80ed-418f122b7f68"
                     }
                   ],
-                  "created_at": "2025-03-23T00:20:25.149045",
+                  "created_at": "2025-03-23T21:48:23.089801",
                   "name": "string",
                   "cover_url": "string",
-                  "id": "ba2d399d-6e6f-4a1a-ade4-31861954d200",
+                  "id": "869e5708-08e1-4187-be68-95e081c356a9",
                   "dubbing_cast": [
                     {
                       "watchable": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.150316",
+                            "created_at": "2025-03-23T21:48:23.091791",
                             "category": "string",
-                            "id": "322f1407-16fa-47b9-8fc5-fbde5eeeb3a0"
+                            "id": "d4d3fcb0-a251-456a-971f-81a20a7cec09"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.153986",
+                        "created_at": "2025-03-23T21:48:23.093434",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "37df5815-8c55-4828-9f93-b2282142a911"
+                        "id": "d0199d8c-47e6-4b77-a8fd-308d2abc7c43"
                       },
                       "voice_actor": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.163633",
+                            "created_at": "2025-03-23T21:48:23.097225",
                             "category": "string",
-                            "id": "5c4902d4-e76d-4013-a897-cf6c13e0872d"
+                            "id": "edf7a4f4-fb37-4279-b156-b36cdd3a4f74"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.165467",
+                        "created_at": "2025-03-23T21:48:23.098977",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "a8c80e2d-0dbf-4588-a898-966934042b9a"
+                        "id": "717b973a-4a67-4ccc-889e-e8abff5a7475"
                       },
-                      "created_at": "2025-03-23T00:20:25.169339",
+                      "created_at": "2025-03-23T21:48:23.102937",
                       "label": "string",
-                      "id": "cbb0fa2f-fc25-46a2-a108-873e6746e2e5"
+                      "id": "d73e4fe5-da63-464f-897a-a252a7940264"
                     }
                   ]
                 }
@@ -136,71 +136,6 @@
         }
       ]
     },
-    "/api/me": {
-      "get": {
-        "responses": {
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "Usuarios"
-        ],
-        "operationId": "getCurrentUserData"
-      }
-    },
-    "/api/sign-up": {
-      "post": {
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestSchema"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Usuarios"
-        ],
-        "operationId": "createAccount"
-      }
-    },
-    "/api/login": {
-      "post": {
-        "responses": {
-          "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequestSchema"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Usuarios"
-        ],
-        "operationId": "login"
-      }
-    },
     "/api/voice-actors": {
       "get": {
         "responses": {
@@ -219,15 +154,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-23T00:20:25.206136",
+                        "created_at": "2025-03-23T21:48:23.126829",
                         "category": "string",
-                        "id": "4f7c71e3-1038-497d-bafa-55c160cf3732"
+                        "id": "2ffa926c-3530-4e23-85a5-ef135839d835"
                       }
                     ],
-                    "created_at": "2025-03-23T00:20:25.207562",
+                    "created_at": "2025-03-23T21:48:23.128263",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "5d1313c2-5fdd-4ba4-b301-0f2dff83e902"
+                    "id": "ddd2fac1-679e-4e96-b48d-e467826f022a"
                   }
                 ]
               }
@@ -258,7 +193,7 @@
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
@@ -270,46 +205,46 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-23T00:20:25.210920",
+                      "created_at": "2025-03-23T21:48:23.131667",
                       "category": "string",
-                      "id": "7cde5aae-61a4-4009-b1d4-e7fcaab3f0c4"
+                      "id": "ca32b96a-4f4b-4d0f-9882-563543e4772a"
                     }
                   ],
-                  "created_at": "2025-03-23T00:20:25.212242",
+                  "created_at": "2025-03-23T21:48:23.133256",
                   "name": "string",
                   "cover_url": "string",
-                  "id": "1fe2c6d7-c3b6-4013-8ef1-532b20381f25",
+                  "id": "1fd0635c-8a2d-40d2-92a5-49d2b2917384",
                   "dubbing_cast": [
                     {
                       "watchable": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.212561",
+                            "created_at": "2025-03-23T21:48:23.133627",
                             "category": "string",
-                            "id": "3766e7ad-5f4c-4f54-993f-df671369144b"
+                            "id": "75d856d8-b35a-409b-aa72-701140a9d7a3"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.214250",
+                        "created_at": "2025-03-23T21:48:23.135046",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "3bc42043-c6b5-46f9-b078-226ee649e966"
+                        "id": "f1b5865a-9884-4dcb-9e65-935514cd6653"
                       },
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.217931",
+                            "created_at": "2025-03-23T21:48:23.139002",
                             "category": "string",
-                            "id": "99c6d7cd-c927-4d91-b804-01b3f97cded5"
+                            "id": "7b7a6112-e86e-4a5a-854c-118fcf4cd477"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.219574",
+                        "created_at": "2025-03-23T21:48:23.140595",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "33586e91-dbdf-4571-b54a-22c13a3ddf9e"
+                        "id": "9059debf-129c-4dd6-b918-772359fba069"
                       },
-                      "created_at": "2025-03-23T00:20:25.222676",
+                      "created_at": "2025-03-23T21:48:23.143637",
                       "label": "string",
-                      "id": "d0d33d01-1c52-4b6f-9b23-6113beea74b6"
+                      "id": "e0ad67c7-3eb8-4977-81ad-d64d955fcf80"
                     }
                   ]
                 }
@@ -355,15 +290,15 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-23T00:20:25.245108",
+                        "created_at": "2025-03-23T21:48:23.165399",
                         "category": "string",
-                        "id": "b99387ee-ab4c-45c7-a0fe-a71fdef6ecac"
+                        "id": "c7c9881a-cb13-4b7e-b1d5-5a9f461f1d7d"
                       }
                     ],
-                    "created_at": "2025-03-23T00:20:25.246901",
+                    "created_at": "2025-03-23T21:48:23.167163",
                     "name": "string",
                     "cover_url": "string",
-                    "id": "8e8282de-22de-42f9-a6df-fb37c90c32a5"
+                    "id": "dc3db211-3c41-4d8f-b1a9-67c78704c71d"
                   }
                 ]
               }
@@ -394,7 +329,7 @@
         ],
         "responses": {
           "422": {
-            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
             "description": "OK",
@@ -406,46 +341,46 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-23T00:20:25.250822",
+                      "created_at": "2025-03-23T21:48:23.170971",
                       "category": "string",
-                      "id": "6b91d4eb-ccd7-4c07-95c3-4312d3bae17a"
+                      "id": "01ffa4a5-1dc8-46f6-aec4-9ebbc798e0d4"
                     }
                   ],
-                  "created_at": "2025-03-23T00:20:25.252297",
+                  "created_at": "2025-03-23T21:48:23.172675",
                   "name": "string",
                   "cover_url": "string",
-                  "id": "362442b1-70d9-4c5a-9c72-7e2b5e124594",
+                  "id": "9062e2bc-87c3-48a3-8ca9-a3ecf9a22170",
                   "dubbing_cast": [
                     {
                       "voice_actor": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.252648",
+                            "created_at": "2025-03-23T21:48:23.173228",
                             "category": "string",
-                            "id": "5d45a79d-e5e2-436e-ba7f-b28fea15390e"
+                            "id": "0db357c0-ce65-4066-b9a3-f9637659c2c5"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.253924",
+                        "created_at": "2025-03-23T21:48:23.174926",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "86158956-5f17-49c2-b65d-e36e5b08649a"
+                        "id": "45ae877a-38fb-4be9-86bd-c22d1abb163b"
                       },
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-03-23T00:20:25.256266",
+                            "created_at": "2025-03-23T21:48:23.177997",
                             "category": "string",
-                            "id": "940a63ee-cd4e-41b8-8fed-5ef4291936bc"
+                            "id": "fedb6942-2d9b-4a0c-ac2d-9450692e25a2"
                           }
                         ],
-                        "created_at": "2025-03-23T00:20:25.257419",
+                        "created_at": "2025-03-23T21:48:23.179469",
                         "name": "string",
                         "cover_url": "string",
-                        "id": "968a4fe7-b723-4fd8-8003-c148506b318b"
+                        "id": "53b776d7-761e-4ebf-b9a4-2dbc8b6b3992"
                       },
-                      "created_at": "2025-03-23T00:20:25.259970",
+                      "created_at": "2025-03-23T21:48:23.182152",
                       "label": "string",
-                      "id": "7a7bfc07-20ef-4fbb-befb-668e2cb81d79"
+                      "id": "8e1be1ca-d4c4-476b-97bd-d2a22cebc8f0"
                     }
                   ]
                 }
@@ -711,21 +646,6 @@
           "name"
         ]
       },
-      "LoginRequestSchema": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "password"
-        ]
-      },
       "VoiceActorSchema": {
         "type": "object",
         "properties": {
@@ -952,8 +872,8 @@
           }
         }
       },
-      "UNPROCESSABLE_CONTENT": {
-        "description": "Unprocessable Content",
+      "UNPROCESSABLE_ENTITY": {
+        "description": "Unprocessable Entity",
         "content": {
           "application/json": {
             "schema": {

@@ -3,14 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:api": "python -m api",
-    "dev:app": "next dev",
-    "dev": "concurrently --kill-others --names back,front -c blue,green \"yarn:dev:api\" \"yarn:dev:app\"",
+    "dev": "next dev",
     "prebuild": "kubb generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pregen": "wget http://localhost:5328/api/swagger.json -O api/swagger.json",
+    "pregen": "wget http://localhost:5000/api/swagger.json -O swagger.json",
     "gen": "kubb generate"
   },
   "dependencies": {

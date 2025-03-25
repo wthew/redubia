@@ -7,6 +7,8 @@ import { AppBarProvider } from "../components/app-bar/context";
 import { QueryProvider } from "../context/query";
 import React from "react";
 import PageWrapper from "@/components/page-wrapper";
+import Script from "next/script";
+import AdBanner from "@/components/ads/banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <AdBanner />
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <QueryProvider>

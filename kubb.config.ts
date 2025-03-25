@@ -48,7 +48,6 @@ export default defineConfig({
       paramsType: "object",
       pathParamsType: "object",
       dataReturnType: "data",
-      client: "axios",
     }),
     pluginReactQuery({
       output: { path: "./hooks", banner: '// @ts-nocheck' },

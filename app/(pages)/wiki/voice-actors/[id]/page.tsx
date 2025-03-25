@@ -53,7 +53,7 @@ export default async function PageById(props: { params: Params }) {
           </CardHeader>
         </div>
         <CardContent className="">
-          <Markdown className="mt-3">{"data.description"}</Markdown>
+          {/* <Markdown className="mt-3">{"data.description"}</Markdown> */}
           {data.dubbing_cast?.map(({ character, watchable }, idx) => {
             return (
               <div key={idx} className="flex flex-col gap-2">

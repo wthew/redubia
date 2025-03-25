@@ -53,13 +53,14 @@ export default async function PageById(props: { params: Params }) {
           </CardHeader>
         </div>
         <CardContent className="">
-          <Markdown className="mt-3">{"data.description"}</Markdown>
-          {data.dubbing_cast?.map(({ character, voice_actor }, idx) => {
+          <Markdown className="mt-3">{data.summary}</Markdown>
+          {data.dubbing_cast?.map(({ character, voice_actors }, idx) => {
             return (
               <div key={idx} className="flex flex-col gap-2">
                 <CardHeader className="flex flex-row gap-4 items-center">
                   <div className="w-16 h-16 relative">
                     <Image
+                      style={{ width: 64, height: 64, objectFit: 'cover' }}
                       alt={character?.name || ""}
                       src={{
                         src: character?.cover_url || PLACEHOLDER_IMAGE,
@@ -75,11 +76,19 @@ export default async function PageById(props: { params: Params }) {
                         {character?.name}
                       </span>
                     </Link>
-                    <Link href={`/wiki/voice_actors/${voice_actor?.id}`}>
-                      <span className="text-sm text-gray-500">
-                        {voice_actor?.name}
-                      </span>
-                    </Link>
+
+                    <div className="flex gap-2">
+
+                      {voice_actors?.map(({ id, name }, idx, { length }) =>
+
+                        <Link href={`/wiki/voice-actors/${id}`}>
+                          <span className="text-sm text-gray-500">
+                            {name}{(length - 1) > idx ? ', ' : ''}
+                          </span>
+                        </Link>
+                      )
+                      }
+                    </div>
                   </div>
                 </CardHeader>
               </div>

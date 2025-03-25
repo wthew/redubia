@@ -53,38 +53,44 @@ export default async function PageById(props: { params: Params }) {
           </CardHeader>
         </div>
         <CardContent className="">
-          <Markdown className="mt-3">{"data.description"}</Markdown>
-          {data.dubbing_cast?.map(({ watchable, voice_actor }, idx) => {
-            return (
-              <div key={idx} className="flex flex-col gap-2">
-                <CardHeader className="flex flex-row gap-4 items-center">
-                  <div className="w-16 h-16 relative">
-                    <Image
-                      alt={voice_actor?.name || ""}
-                      src={{
-                        src: voice_actor?.cover_url || PLACEHOLDER_IMAGE,
-                        width: 64,
-                        height: 64,
-                      }}
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <Link href={`/wiki/voice_actors/${voice_actor?.id}`}>
-                      <span className="text-lg font-semibold">
-                        {voice_actor?.name}
-                      </span>
-                    </Link>
-                    <Link href={`/wiki/watchables/${watchable?.id}`}>
-                      <span className="text-sm text-gray-500">
-                        {watchable?.name}
-                      </span>
-                    </Link>
-                  </div>
-                </CardHeader>
-              </div>
-            );
-          })}
+          <div className="mt-3">
+            {data.name} é um personagem que aparece nas obras: poppy playtime, lorem, ipsum, dollar, sit amet
+          </div>
+
+          <h5>Detalhe de suas aparições:</h5>
+          <div className="flex flex-row">
+            {data.dubbing_cast?.map(({ watchable, voice_actor }, idx) => {
+              return (
+                <div key={idx} className="flex flex-col gap-2">
+                  <CardHeader className="flex flex-row gap-4 items-center">
+                    <div className="w-16 h-16 relative">
+                      <Image
+                        alt={voice_actor?.name || ""}
+                        src={{
+                          src: voice_actor?.cover_url || PLACEHOLDER_IMAGE,
+                          width: 64,
+                          height: 64,
+                        }}
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <Link href={`/wiki/voice-actors/${voice_actor?.id}`}>
+                        <span className="text-lg font-semibold">
+                          {voice_actor?.name}
+                        </span>
+                      </Link>
+                      <Link href={`/wiki/watchables/${watchable?.id}`}>
+                        <span className="text-sm text-gray-500">
+                          {watchable?.name}
+                        </span>
+                      </Link>
+                    </div>
+                  </CardHeader>
+                </div>
+              );
+            })}
+          </div>
         </CardContent>
       </HandlerAppBarHides>
     </div>

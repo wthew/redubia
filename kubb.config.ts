@@ -17,7 +17,7 @@ export default defineConfig({
     path: "swagger.json",
   },
   output: {
-    path: "./app/lib/services/gen",
+    path: "./src/lib/services/gen",
     clean: true,
   },
   hooks: {

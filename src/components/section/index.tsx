@@ -1,58 +1,49 @@
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 
-interface Props extends PropsWithChildren {
+interface SectionProps {
   title: string;
+  titleIcon?: string;
   description: string;
-  action?: { label: string; link: string; disabled?: boolean };
-  reversed?: boolean;
+  action: {
+    label: string;
+    link: string;
+    disabled?: boolean;
+  };
+  className?: string;
+  children?: React.ReactNode;
 }
 
-function Section(props: Props) {
-  const { title, description, action, reversed, children } = props;
-  const row = reversed ? "md:flex-row-reverse" : "md:flex-row";
-
+function Section({ title, titleIcon, description, action, className, children }: SectionProps) {
   return (
-    <div className={"z-10 flex items-center mt-16 mb-8 flex-col " + row}>
-      <div
-        style={{ boxShadow: "black 0px 0px 64px 64px" }}
-        className={
-          "bg-black relative flex flex-col pt-8 px-6 m-2 rounded-xl w-full md:w-1/2"
-        }
-      >
-        <h2 className="z-10 text-2xl mb-8 font-semibold text-gray-100">
-          {title}
-        </h2>
-        {children}
-      </div>
-      <div
-        style={{ boxShadow: "black 0px 0px 64px 64px" }}
-        className="bg-black z-10 flex flex-col"
-      >
-        <p className="w-full px-2 md:px-8 mt-2 max-w-2xl mx-auto text-gray-400 text-left">
+    <div className={`relative overflow-hidden ${className}`}>
+      {children}
+
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-4">
+          {titleIcon && <span className="text-2xl">{titleIcon}</span>}
+          <h2 className="text-xl font-semibold text-gray-100">{title}</h2>
+        </div>
+
+        <p className="text-gray-400 mb-6 leading-relaxed">
           {description}
         </p>
-        {action && (
-          <Link
-            style={action.disabled ? { pointerEvents: "none" } : {}}
-            className={
-              "flex px-5 mt-4 py-2.5 justify-center w-full border-gray-100 rounded-lg transition-colors text-gray-100 " +
-              (action.disabled ? "opacity-50 cursor-not-allowed" : "")
-            }
-            href={action.link}
-          >
-            <span className={action.disabled ? "line-through" : ""}>
-              {action.label}
-            </span>
-            {action.disabled && <span className="mx-4">Em breve!</span>}
-          </Link>
-        )}
+
+        <button
+          className={`px-4 py-2 rounded-lg ${action.disabled
+            ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+            : 'bg-blue-500 hover:bg-blue-400 text-white'
+            } transition-colors`}
+          disabled={action.disabled}
+        >
+          {action.label}
+        </button>
       </div>
     </div>
   );
 }
 
-interface BackgroundProps extends PropsWithChildren {}
+interface BackgroundProps extends PropsWithChildren { }
 Section.Background = function SectionBackground(props: BackgroundProps) {
   const { children } = props;
 
@@ -61,9 +52,6 @@ Section.Background = function SectionBackground(props: BackgroundProps) {
       {children}
       <div
         className="absolute w-full h-full top-0 left-0"
-        style={{
-          boxShadow: "black 0px 0px 16px 24px inset,black 0px 0px 64px 64px",
-        }}
       />
     </div>
   );

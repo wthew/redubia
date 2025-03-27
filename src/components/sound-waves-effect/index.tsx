@@ -14,11 +14,11 @@ export default function SounWavesEffect() {
 
   const handleBarRef = useCallback((el: HTMLDivElement | null) => {
     if (!el) return;
-    el.style.animationDuration = `${Math.random() * (0.7 - 0.2) + 0.4}s`;
+    el.style.animationDuration = `${Math.random() * (0.7 - 0.2) + 0.8}s`;
   }, []);
 
   return (
-    <div ref={handleContainerRef} className={clsx(style["sound-wave"])}>
+    <div ref={handleContainerRef} className={clsx('h-80', style["sound-wave"])}>
       {Array.from({ length: bars }).map((_, idx) => (
         <div ref={handleBarRef} key={idx} className={clsx(style["bar"])} />
       ))}

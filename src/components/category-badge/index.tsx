@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { hashColor } from "../../utils";
 import Color from "color";
-import { MediaCategoriesSchema } from "@/lib/services/gen";
+import { WikiCategoriesSchema } from "@/lib/services/gen";
 
-type Props = { category: MediaCategoriesSchema };
+type Props = { category: WikiCategoriesSchema };
 export function Category({ category }: Props) {
   const bg = Color({ hex: hashColor(category.category) }).desaturate(0.16);
   const fg = bg.lighten(0.25).isDark()
@@ -24,7 +24,7 @@ export function Category({ category }: Props) {
   );
 }
 
-export default async function Categories(props: { categories: MediaCategoriesSchema[] }) {
+export default async function Categories(props: { categories: WikiCategoriesSchema[] }) {
   return (
     <div className="flex flex-wrap">
       {props.categories.map((category) => (

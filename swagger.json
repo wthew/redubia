@@ -10,7 +10,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaEntitySchema"
+                    "$ref": "#/components/schemas/WikiEntitySchema"
                   }
                 },
                 "example": [
@@ -18,16 +18,16 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-25T13:34:40.344839",
+                        "created_at": "2025-03-30T13:46:15.083101",
                         "category": "string",
-                        "id": "78a38c81-d01e-42f1-a87b-742cd51b514a"
+                        "id": "60f5bda1-4a3d-40c4-b8b7-20997cb81d81"
                       }
                     ],
-                    "created_at": "2025-03-25T13:34:40.346382",
+                    "created_at": "2025-03-30T13:46:15.085446",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "607724fb-020a-4fe3-bb0a-d26c2cb70a4d"
+                    "id": "9e99a332-116a-46d8-a78f-c73062c0a3b4"
                   }
                 ]
               }
@@ -70,35 +70,35 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-25T13:34:40.351157",
+                      "created_at": "2025-03-30T13:46:15.099582",
                       "category": "string",
-                      "id": "ff108538-03b4-411a-a2ed-98cbc34a3745"
+                      "id": "42efd522-0b2a-450e-8368-35950d97d4db"
                     }
                   ],
-                  "created_at": "2025-03-25T13:34:40.352626",
+                  "created_at": "2025-03-30T13:46:15.102565",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "13f507ae-a1fe-40ee-8fb3-5c9f5d8e3fd5",
+                  "id": "e03f4ef3-75b2-4dee-98b3-c565c8256ddf",
                   "dubbing_cast": [
                     {
                       "watchable": {
-                        "created_at": "2025-03-25T13:34:40.353305",
+                        "created_at": "2025-03-30T13:46:15.104176",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "4a23c1ff-60cd-4f94-a5fe-281a7d12b667"
+                        "id": "93e5f962-f3b7-4671-85c2-aa9263271435"
                       },
                       "voice_actor": {
-                        "created_at": "2025-03-25T13:34:40.354715",
+                        "created_at": "2025-03-30T13:46:15.108081",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "3283c172-c247-48ce-813f-dbc04840bbb9"
+                        "id": "f3589c74-2c48-4a9f-803f-1f062cf35c23"
                       },
-                      "created_at": "2025-03-25T13:34:40.356019",
+                      "created_at": "2025-03-30T13:46:15.111757",
                       "label": "string",
-                      "id": "148ec579-7bbe-4ada-8480-f2217277c9b2"
+                      "id": "192665ec-0032-4288-ab59-afe974d3c0c7"
                     }
                   ]
                 }
@@ -136,7 +136,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaEntitySchema"
+                    "$ref": "#/components/schemas/WikiEntitySchema"
                   }
                 },
                 "example": [
@@ -144,16 +144,16 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-25T13:34:40.370707",
+                        "created_at": "2025-03-30T13:46:15.142834",
                         "category": "string",
-                        "id": "73a71240-04ce-4d71-890a-07b44d0eb602"
+                        "id": "902a5831-3393-4a21-9f59-dfd3f795799a"
                       }
                     ],
-                    "created_at": "2025-03-25T13:34:40.372063",
+                    "created_at": "2025-03-30T13:46:15.145068",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "9c8c0c51-7dce-4dfd-b33e-9084db35aeeb"
+                    "id": "0d6dde04-2740-4f02-b81f-8516e528242d"
                   }
                 ]
               }
@@ -196,35 +196,35 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-25T13:34:40.375344",
+                      "created_at": "2025-03-30T13:46:15.148688",
                       "category": "string",
-                      "id": "981d6694-4be7-439f-8d2a-29710e94ab7c"
+                      "id": "4c520114-c946-4880-a297-fbc7be18a4ab"
                     }
                   ],
-                  "created_at": "2025-03-25T13:34:40.376688",
+                  "created_at": "2025-03-30T13:46:15.149941",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "514f460e-56d6-4360-b021-6b395f86bcd3",
-                  "dubbing_cast": [
+                  "id": "000f4b54-ef23-4e7d-ad46-8ec43d0fa5f4",
+                  "works": [
                     {
                       "watchable": {
-                        "created_at": "2025-03-25T13:34:40.376997",
+                        "created_at": "2025-03-30T13:46:15.150299",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "d736bb4c-3e1d-4945-b98d-00a5ae4b4654"
+                        "id": "57fc4c52-8a49-4dc9-9de5-e36342446847"
                       },
                       "character": {
-                        "created_at": "2025-03-25T13:34:40.378317",
+                        "created_at": "2025-03-30T13:46:15.151895",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "b6815aed-3d8a-4993-9314-fbbb29b6cd2c"
+                        "id": "2d52d1a0-39bf-4fc2-88de-49ee490ad4dc"
                       },
-                      "created_at": "2025-03-25T13:34:40.379632",
+                      "created_at": "2025-03-30T13:46:15.153267",
                       "label": "string",
-                      "id": "c2c21772-09f0-4b35-9e36-55d02ccbb2b5"
+                      "id": "fac426e3-2dca-4c10-8459-96737f6842b3"
                     }
                   ]
                 }
@@ -262,7 +262,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaEntitySchema"
+                    "$ref": "#/components/schemas/WikiEntitySchema"
                   }
                 },
                 "example": [
@@ -270,16 +270,16 @@
                     "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-25T13:34:40.395899",
+                        "created_at": "2025-03-30T13:46:15.176802",
                         "category": "string",
-                        "id": "0f141cc0-89ae-448c-bc65-bc35d07a3ed9"
+                        "id": "e5cf320a-b179-4d4d-ad57-ef7c99092844"
                       }
                     ],
-                    "created_at": "2025-03-25T13:34:40.397218",
+                    "created_at": "2025-03-30T13:46:15.179492",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "dd1d5c48-99bf-40fb-a018-fbf8ffe09a17"
+                    "id": "4b9aea79-f540-415d-947f-3e626111de2b"
                   }
                 ]
               }
@@ -322,35 +322,35 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-25T13:34:40.400576",
+                      "created_at": "2025-03-30T13:46:15.184545",
                       "category": "string",
-                      "id": "eaeeb544-6610-4b44-8edb-246f724abfc4"
+                      "id": "ae3fe527-d6db-49b5-8fc4-02de037feeb7"
                     }
                   ],
-                  "created_at": "2025-03-25T13:34:40.401896",
+                  "created_at": "2025-03-30T13:46:15.186464",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "e6d1a86b-2f9e-4472-a673-67e229e9a4c9",
+                  "id": "f360dc91-cd58-437b-8116-9d6ec0b8afc0",
                   "dubbing_cast": [
                     {
                       "character": {
-                        "created_at": "2025-03-25T13:34:40.402239",
+                        "created_at": "2025-03-30T13:46:15.186944",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "d4d588e2-9874-4e72-b39e-d4fb22e6f306"
+                        "id": "d9350942-52ce-4fe3-b1b7-e50203599c98"
                       },
-                      "created_at": "2025-03-25T13:34:40.403583",
+                      "created_at": "2025-03-30T13:46:15.188795",
                       "label": "string",
-                      "id": "8079ce8b-71b2-4bb8-abb0-78bf8194b050",
+                      "id": "d7c21fa7-8a53-44e8-ac41-3d65ffb3e2a7",
                       "voice_actors": [
                         {
-                          "created_at": "2025-03-25T13:34:40.403616",
+                          "created_at": "2025-03-30T13:46:15.188840",
                           "name": "string",
                           "summary": "string",
                           "cover_url": "string",
-                          "id": "dcdceded-57f2-47e3-b8bf-3cc9079f57be"
+                          "id": "41b134d5-1403-4912-b0e6-fa0e6c076a8b"
                         }
                       ]
                     }
@@ -379,6 +379,112 @@
           }
         }
       ]
+    },
+    "/api/wiki/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WikiEntitySchema"
+                },
+                "example": {
+                  "namespace": "watchable",
+                  "categories": [
+                    {
+                      "created_at": "2025-03-30T13:46:15.213781",
+                      "category": "string",
+                      "id": "d685d390-6793-40b4-b966-638a8972fa9f"
+                    }
+                  ],
+                  "created_at": "2025-03-30T13:46:15.215390",
+                  "name": "string",
+                  "summary": "string",
+                  "cover_url": "string",
+                  "id": "3f56bc1d-148c-4915-a364-e1b6a35f08aa"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Wiki"
+        ],
+        "operationId": "getWikiEntityById"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "/api/wiki/featured": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WikiEntitySchema"
+                  }
+                },
+                "example": [
+                  {
+                    "namespace": "watchable",
+                    "categories": [
+                      {
+                        "created_at": "2025-03-30T13:46:15.228222",
+                        "category": "string",
+                        "id": "99ef5873-eefd-4f65-bf0b-9dbbc743e92b"
+                      }
+                    ],
+                    "created_at": "2025-03-30T13:46:15.230795",
+                    "name": "string",
+                    "summary": "string",
+                    "cover_url": "string",
+                    "id": "a6db007f-1216-430c-abaa-a14e58747a5d"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Wiki"
+        ],
+        "operationId": "getFeaturedWikiEntities"
+      }
     }
   },
   "info": {
@@ -400,6 +506,10 @@
     },
     {
       "name": "Midias",
+      "description": ""
+    },
+    {
+      "name": "Wiki",
       "description": ""
     }
   ],
@@ -454,7 +564,7 @@
           }
         }
       },
-      "MediaCategoriesSchema": {
+      "WikiCategoriesSchema": {
         "type": "object",
         "properties": {
           "created_at": {
@@ -473,7 +583,7 @@
           "category"
         ]
       },
-      "MediaEntitySchema": {
+      "WikiEntitySchema": {
         "type": "object",
         "properties": {
           "namespace": {
@@ -487,7 +597,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MediaCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategoriesSchema"
             }
           },
           "created_at": {
@@ -521,7 +631,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MediaCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategoriesSchema"
             }
           },
           "created_at": {
@@ -628,7 +738,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MediaCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategoriesSchema"
             }
           },
           "created_at": {
@@ -649,7 +759,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "dubbing_cast": {
+          "works": {
             "type": "array",
             "items": {
               "type": "object",
@@ -735,7 +845,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MediaCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategoriesSchema"
             }
           },
           "created_at": {

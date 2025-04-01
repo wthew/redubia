@@ -16,6 +16,7 @@ import settings from "@/assets/svg/settings.svg";
 import style from "./style.module.scss";
 import clsx from "clsx";
 import MagicGradientBackground from "@/components/magic-gradient-bg";
+import Link from "next/link";
 
 const icons = [
   videoCamera,
@@ -52,7 +53,7 @@ export default function Home() {
       <div className="max-w-5xl mx-auto pt-12 px-4 space-y-32 pb-32">
         {/* Seção Wiki */}
         <section className="relative">
-          <div className="absolute -left-20 top-1/2 w-48 h-48 bg-purple-500/10 blur-3xl rounded-full" />
+          <div className="absolute pointer-events-none -left-20 top-1/2 w-48 h-48 bg-purple-500/10 blur-3xl rounded-full" />
 
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="flex-1 space-y-6">
@@ -62,6 +63,9 @@ export default function Home() {
               <p className="text-lg text-gray-400 leading-relaxed">
                 Explore o maior acervo sobre dublagem. Descubra quem deu voz a personagens inesquecíveis, e explore elencos de filmes e séries que marcaram gerações. Tudo organizado e ao seu alcance!
               </p>
+              {/* <Link href="/wiki" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
+                Explorar
+              </Link> */}
               <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
                 Explorar - Em breve
               </button>
@@ -175,7 +179,7 @@ export default function Home() {
                 <h2 className="text-3xl font-semibold">API para desenvolvedores</h2>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Integre dados de dubladores, personagens e animações em seus projetos usando nossa API robusta, intuitiva e fácil de implementa
+                Integre dados de dubladores, personagens e animações em seus projetos usando nossa API robusta, intuitiva e fácil de implementar
               </p>
               <button className="px-6 py-3 border border-gray-800 hover:border-cyan-400/30 rounded-lg font-medium bg-black/50 hover:bg-cyan-500/10 transition-colors">
                 Ver preços - Em breve

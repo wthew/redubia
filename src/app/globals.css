@@ -106,3 +106,14 @@
 .animate-wave {
   animation: wave 1.2s ease-in-out infinite;
 }
+
+
+@keyframes subtle-glow {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.4; }
+}
+
+.group:focus-within .subtle-glow {
+  animation: subtle-glow 3s ease-in-out infinite;
+}

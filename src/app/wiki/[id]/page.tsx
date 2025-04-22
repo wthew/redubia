@@ -10,12 +10,14 @@ import Markdown from "react-markdown";
 import Image from "next/image";
 import { PLACEHOLDER_IMAGE } from "@/utils";
 import { getWikiEntityById } from "@/lib/services/gen";
+import Link from "next/link";
 
 type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {
   const { id } = await props.params;
   const data = await getWikiEntityById({ id });
-  const { name, summary, categories, cover_url } = data;
+  const { name, summary, categories, cover_url, dubbing_cast, namespace } =
+    data;
 
   return (
     <div className="flex justify-center items-center md:p-8">
@@ -54,7 +56,7 @@ export default async function PageById(props: { params: Params }) {
         </div>
         <CardContent className="">
           <Markdown className="mt-3">{summary}</Markdown>
-          {/* {dubbing_cast?.map(({ character, voice_actors }, idx) => {
+          {dubbing_cast?.map(({ character, voice_actor, watchable }, idx) => {
             return (
               <div key={idx} className="flex flex-col gap-2">
                 <CardHeader className="flex flex-row gap-4 items-center">
@@ -71,27 +73,26 @@ export default async function PageById(props: { params: Params }) {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <Link href={`/wiki/characters/${character?.id}`}>
+                    <Link href={`/wiki/${character?.id}`}>
                       <span className="text-lg font-semibold">
                         {character?.name}
                       </span>
                     </Link>
 
                     <div className="flex gap-2">
-                      {voice_actors?.map(({ id, name }, idx, { length }) => (
-                        <Link href={`/wiki/voice-actors/${id}`}>
+                      {voice_actor && (
+                        <Link href={`/wiki/${voice_actor.id}`}>
                           <span className="text-sm text-gray-500">
-                            {name}
-                            {length - 1 > idx ? ", " : ""}
+                            {voice_actor.name}
                           </span>
                         </Link>
-                      ))}
+                      )}
                     </div>
                   </div>
                 </CardHeader>
               </div>
             );
-          })} */}
+          })}
         </CardContent>
       </HandlerAppBarHides>
     </div>

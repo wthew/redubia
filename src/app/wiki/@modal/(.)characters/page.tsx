@@ -1,10 +1,10 @@
 import Modal from "@/components/modal";
-import WikiEntityList, { getData } from "@/components/pages/wiki/namespaces";
+import WikiEntityList from "@/components/pages/wiki/entity-list";
 
 export default async function Page() {
-    const data = await getData('characters')
-    
-    return <Modal title="Personagens" route="/wiki">
-        <WikiEntityList data={data} />
+  return (
+    <Modal title="Personagens" route="/wiki">
+      <WikiEntityList namespace="characters" />
     </Modal>
+  );
 }

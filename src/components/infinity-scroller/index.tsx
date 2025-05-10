@@ -4,7 +4,7 @@ import { UseInfiniteQueryResult } from "@tanstack/react-query";
 import React from "react";
 
 type Props<TData = unknown> = React.HTMLAttributes<HTMLDivElement> & {
-  infinite: Omit<UseInfiniteQueryResult<TData>, "data">;
+  infinite: Pick<UseInfiniteQueryResult<TData>, "hasNextPage" | 'fetchNextPage'>;
 };
 
 const InfiniteScroller = React.forwardRef<HTMLDivElement, Props>(
@@ -14,13 +14,7 @@ const InfiniteScroller = React.forwardRef<HTMLDivElement, Props>(
     React.useEffect(() => {
       const observer = new IntersectionObserver(
         (entries) => {
-          console.log(
-            "indo chamar",
-            entries[0]?.isIntersecting,
-            infinite.hasNextPage
-          );
           if (entries[0]?.isIntersecting && infinite.hasNextPage) {
-            console.log("indo chamar");
             infinite.fetchNextPage();
           }
         },

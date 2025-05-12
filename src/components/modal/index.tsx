@@ -10,7 +10,7 @@ interface ModalProps extends PropsWithChildren {
 
 export default async function Modal(props: ModalProps) {
   return <ModalWrapper route={props.route} replace={props.replace}>
-  <DialogContent className="max-w-4xl">
+  <DialogContent className="max-w-4xl scrol">
     <DialogTitle className="mb-4">{props.title}</DialogTitle>
     {props.children}
   </DialogContent>

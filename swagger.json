@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/api/characters": {
+    "/wiki/characters": {
       "get": {
         "responses": {
           "200": {
@@ -8,26 +8,183 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/Paginated"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.531265",
+                          "category": "string",
+                          "id": "77147383-f2f9-46ff-963b-073be2ace309"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.532261",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "dubbing_cast": [
+                        {
+                          "watchable": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.532905",
+                                "category": "string",
+                                "id": "486eeec0-859b-4bb8-b018-6ea477da407f"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.533653",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "12ea6a72-dac5-4406-89fb-f89ed7b62e2c"
+                          },
+                          "voice_actor": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.535489",
+                                "category": "string",
+                                "id": "457d7a5b-59ed-43ff-bd65-54170f23e67c"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.536186",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "7084d337-3bb1-42c2-9c49-8693f7f22b72"
+                          },
+                          "sort_order": 0,
+                          "created_at": "2025-05-11T18:16:17.537567",
+                          "label": "string",
+                          "id": "17948e73-58bf-40da-b906-85547df68b19"
+                        }
+                      ],
+                      "id": "8ee6f49f-1b5e-4c8f-a616-0d92b05f2b45"
+                    }
+                  ],
+                  "page": 0,
+                  "next_page": 0
+                }
+              }
+            },
+            "headers": {
+              "X-Pagination": {
+                "$ref": "#/components/headers/PAGINATION"
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          },
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "Personagens"
+        ],
+        "operationId": "getCharacters"
+      }
+    },
+    "/wiki/characters/{id}/dubbing-cast": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WikiEntitySchema"
+                    "$ref": "#/components/schemas/DubbingCastSchema1"
                   }
                 },
                 "example": [
                   {
-                    "namespace": "watchable",
-                    "categories": [
-                      {
-                        "created_at": "2025-03-30T13:46:15.083101",
-                        "category": "string",
-                        "id": "60f5bda1-4a3d-40c4-b8b7-20997cb81d81"
-                      }
-                    ],
-                    "created_at": "2025-03-30T13:46:15.085446",
-                    "name": "string",
-                    "summary": "string",
-                    "cover_url": "string",
-                    "id": "9e99a332-116a-46d8-a78f-c73062c0a3b4"
+                    "watchable": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.554024",
+                          "category": "string",
+                          "id": "0654f171-179a-4614-a889-13f65771758b"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.554915",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "0c62846c-ae9a-45db-ac89-9573e5686a88"
+                    },
+                    "voice_actor": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.556319",
+                          "category": "string",
+                          "id": "0ab382b1-1083-4e63-9bfd-855667bf3f9c"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.557324",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "2ae1d241-1ee7-4a05-ae59-ea7a3cb6c546"
+                    },
+                    "character": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.559126",
+                          "category": "string",
+                          "id": "0f1c3f1b-83fe-4579-ba40-84229e938648"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.560013",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "617f9a22-26dc-47c6-bcf0-145551f2de39"
+                    },
+                    "sort_order": 0,
+                    "created_at": "2025-05-11T18:16:17.561368",
+                    "label": "string",
+                    "id": "a686c7e8-583e-4644-8750-fcad51d18474"
                   }
                 ]
               }
@@ -40,10 +197,21 @@
         "tags": [
           "Personagens"
         ],
-        "operationId": "getCharacters"
-      }
+        "operationId": "getDubbingCastByCharacterId"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
     },
-    "/api/characters/{id}": {
+    "/wiki/characters/{id}": {
       "get": {
         "parameters": [
           {
@@ -70,37 +238,52 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-30T13:46:15.099582",
+                      "created_at": "2025-05-11T18:16:17.568572",
                       "category": "string",
-                      "id": "42efd522-0b2a-450e-8368-35950d97d4db"
+                      "id": "7e670c40-3170-4c05-ab0a-e25fbd1f8144"
                     }
                   ],
-                  "created_at": "2025-03-30T13:46:15.102565",
+                  "created_at": "2025-05-11T18:16:17.569296",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "e03f4ef3-75b2-4dee-98b3-c565c8256ddf",
                   "dubbing_cast": [
                     {
                       "watchable": {
-                        "created_at": "2025-03-30T13:46:15.104176",
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.569322",
+                            "category": "string",
+                            "id": "5143ae0d-a7dc-4ac5-b5a0-2ba5017c0f21"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.570147",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "93e5f962-f3b7-4671-85c2-aa9263271435"
+                        "id": "208bec69-6174-47e4-abb5-358b289a1d4d"
                       },
                       "voice_actor": {
-                        "created_at": "2025-03-30T13:46:15.108081",
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.571656",
+                            "category": "string",
+                            "id": "27f6d1e7-1c56-4cc2-8369-4362f5edd209"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.572319",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "f3589c74-2c48-4a9f-803f-1f062cf35c23"
+                        "id": "403d73b5-c960-40b0-9e81-bb4a2cb534c6"
                       },
-                      "created_at": "2025-03-30T13:46:15.111757",
+                      "sort_order": 0,
+                      "created_at": "2025-05-11T18:16:17.573799",
                       "label": "string",
-                      "id": "192665ec-0032-4288-ab59-afe974d3c0c7"
+                      "id": "78b2fa6e-2bca-48ef-85e9-2717574315bb"
                     }
-                  ]
+                  ],
+                  "id": "1156200d-353c-4e4d-97e8-1d3d9aa24cb9"
                 }
               }
             }
@@ -126,50 +309,7 @@
         }
       ]
     },
-    "/api/voice-actors": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WikiEntitySchema"
-                  }
-                },
-                "example": [
-                  {
-                    "namespace": "watchable",
-                    "categories": [
-                      {
-                        "created_at": "2025-03-30T13:46:15.142834",
-                        "category": "string",
-                        "id": "902a5831-3393-4a21-9f59-dfd3f795799a"
-                      }
-                    ],
-                    "created_at": "2025-03-30T13:46:15.145068",
-                    "name": "string",
-                    "summary": "string",
-                    "cover_url": "string",
-                    "id": "0d6dde04-2740-4f02-b81f-8516e528242d"
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/DEFAULT_ERROR"
-          }
-        },
-        "tags": [
-          "Dubladores"
-        ],
-        "operationId": "getVoiceActors"
-      }
-    },
-    "/api/voice-actors/{id}": {
+    "/wiki/{id}": {
       "get": {
         "parameters": [
           {
@@ -191,42 +331,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceActorSchema"
+                  "$ref": "#/components/schemas/WikiEntitySchema"
                 },
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-30T13:46:15.148688",
+                      "created_at": "2025-05-11T18:16:17.584333",
                       "category": "string",
-                      "id": "4c520114-c946-4880-a297-fbc7be18a4ab"
+                      "id": "1816f0b7-f909-4d11-83e9-c1530f2efea1"
                     }
                   ],
-                  "created_at": "2025-03-30T13:46:15.149941",
+                  "created_at": "2025-05-11T18:16:17.585132",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "000f4b54-ef23-4e7d-ad46-8ec43d0fa5f4",
-                  "works": [
-                    {
-                      "watchable": {
-                        "created_at": "2025-03-30T13:46:15.150299",
-                        "name": "string",
-                        "summary": "string",
-                        "cover_url": "string",
-                        "id": "57fc4c52-8a49-4dc9-9de5-e36342446847"
-                      },
-                      "character": {
-                        "created_at": "2025-03-30T13:46:15.151895",
-                        "name": "string",
-                        "summary": "string",
-                        "cover_url": "string",
-                        "id": "2d52d1a0-39bf-4fc2-88de-49ee490ad4dc"
-                      },
-                      "created_at": "2025-03-30T13:46:15.153267",
-                      "label": "string",
-                      "id": "fac426e3-2dca-4c10-8459-96737f6842b3"
-                    }
-                  ]
+                  "id": "1d58db70-218f-4c4d-9320-4cc064d8b76c"
                 }
               }
             }
@@ -236,9 +355,9 @@
           }
         },
         "tags": [
-          "Dubladores"
+          "Wiki"
         ],
-        "operationId": "getVoiceActorById"
+        "operationId": "getWikiEntityById"
       },
       "parameters": [
         {
@@ -252,7 +371,62 @@
         }
       ]
     },
-    "/api/watchables": {
+    "/wiki": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WikiEntitySchema"
+                  }
+                },
+                "example": [
+                  {
+                    "categories": [
+                      {
+                        "created_at": "2025-05-11T18:16:17.587473",
+                        "category": "string",
+                        "id": "7e109368-9516-4e18-92ff-3ceba352dfa2"
+                      }
+                    ],
+                    "created_at": "2025-05-11T18:16:17.588170",
+                    "name": "string",
+                    "summary": "string",
+                    "cover_url": "string",
+                    "id": "625c8b91-910e-472f-973b-203881ac45eb"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Wiki"
+        ],
+        "operationId": "searchWikiEntity"
+      }
+    },
+    "/wiki/featured": {
       "get": {
         "responses": {
           "200": {
@@ -267,19 +441,218 @@
                 },
                 "example": [
                   {
-                    "namespace": "watchable",
                     "categories": [
                       {
-                        "created_at": "2025-03-30T13:46:15.176802",
+                        "created_at": "2025-05-11T18:16:17.590592",
                         "category": "string",
-                        "id": "e5cf320a-b179-4d4d-ad57-ef7c99092844"
+                        "id": "ac3c5c08-6535-49ef-b55b-b1e6be7fbc44"
                       }
                     ],
-                    "created_at": "2025-03-30T13:46:15.179492",
+                    "created_at": "2025-05-11T18:16:17.591579",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "4b9aea79-f540-415d-947f-3e626111de2b"
+                    "id": "5b1cfe60-316a-4d78-9bdc-6a8663e124c6"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Wiki"
+        ],
+        "operationId": "getFeaturedWikiEntities"
+      }
+    },
+    "/wiki/watchables": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Paginated1"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.596289",
+                          "category": "string",
+                          "id": "6494b217-1fc4-44b8-927d-bdf196a34a63"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.597177",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "dubbing_cast": [
+                        {
+                          "voice_actor": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.597411",
+                                "category": "string",
+                                "id": "049ebec1-a604-4fa7-8eed-340385151075"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.598121",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "c9edb414-f8ce-4324-a66a-2cf17344433f"
+                          },
+                          "character": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.599689",
+                                "category": "string",
+                                "id": "ae50409d-e7d6-48b2-8649-9044910a034b"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.600436",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "7ca731fc-53a0-4911-9945-8690fe802ec4"
+                          },
+                          "sort_order": 0,
+                          "created_at": "2025-05-11T18:16:17.601761",
+                          "label": "string",
+                          "id": "122ee201-7e7a-416c-bfa9-45f77ffb8526"
+                        }
+                      ],
+                      "id": "ac68321a-9c29-46b3-9780-5f2834394a02"
+                    }
+                  ],
+                  "page": 0,
+                  "next_page": 0
+                }
+              }
+            },
+            "headers": {
+              "X-Pagination": {
+                "$ref": "#/components/headers/PAGINATION"
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          },
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "Midias"
+        ],
+        "operationId": "getWatchables"
+      }
+    },
+    "/wiki/watchables/{id}/dubbing-cast": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DubbingCastSchema1"
+                  }
+                },
+                "example": [
+                  {
+                    "watchable": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.617489",
+                          "category": "string",
+                          "id": "b2ed2604-ff8d-47d4-9c8f-383dfb8edfd4"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.618243",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "1a91327a-f5fe-471f-9eba-3bfd45f72dbd"
+                    },
+                    "voice_actor": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.619916",
+                          "category": "string",
+                          "id": "25a9a82b-c541-4c26-aade-e8716162895f"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.620654",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "fd42d082-2001-4d3a-abb4-e7831e9ed465"
+                    },
+                    "character": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.621998",
+                          "category": "string",
+                          "id": "2c179adf-7437-498e-bf08-1c9f1ad13e88"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.622874",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "fec2e463-948f-484a-9016-4c73b401936e"
+                    },
+                    "sort_order": 0,
+                    "created_at": "2025-05-11T18:16:17.624732",
+                    "label": "string",
+                    "id": "0b0c29d2-f5bc-469b-a4ea-360d0da38e83"
                   }
                 ]
               }
@@ -292,10 +665,21 @@
         "tags": [
           "Midias"
         ],
-        "operationId": "getWatchables"
-      }
+        "operationId": "getDubbingCastByWatchableId"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
     },
-    "/api/watchables/{id}": {
+    "/wiki/watchables/{id}": {
       "get": {
         "parameters": [
           {
@@ -322,39 +706,52 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-03-30T13:46:15.184545",
+                      "created_at": "2025-05-11T18:16:17.630519",
                       "category": "string",
-                      "id": "ae3fe527-d6db-49b5-8fc4-02de037feeb7"
+                      "id": "30972130-6df1-40f4-8cfd-913e501d015e"
                     }
                   ],
-                  "created_at": "2025-03-30T13:46:15.186464",
+                  "created_at": "2025-05-11T18:16:17.631247",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "f360dc91-cd58-437b-8116-9d6ec0b8afc0",
                   "dubbing_cast": [
                     {
-                      "character": {
-                        "created_at": "2025-03-30T13:46:15.186944",
+                      "voice_actor": {
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.631272",
+                            "category": "string",
+                            "id": "ba0eaed1-1adf-40dc-81a6-e4f4093e698d"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.632024",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "d9350942-52ce-4fe3-b1b7-e50203599c98"
+                        "id": "86e2d445-e2f1-406b-967a-5b8ff37681fb"
                       },
-                      "created_at": "2025-03-30T13:46:15.188795",
+                      "character": {
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.633336",
+                            "category": "string",
+                            "id": "00318f27-ca95-4c69-9bdf-7a954ff28726"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.634044",
+                        "name": "string",
+                        "summary": "string",
+                        "cover_url": "string",
+                        "id": "c78f2820-95bb-4bfc-833f-aa0b892ab4a0"
+                      },
+                      "sort_order": 0,
+                      "created_at": "2025-05-11T18:16:17.635482",
                       "label": "string",
-                      "id": "d7c21fa7-8a53-44e8-ac41-3d65ffb3e2a7",
-                      "voice_actors": [
-                        {
-                          "created_at": "2025-03-30T13:46:15.188840",
-                          "name": "string",
-                          "summary": "string",
-                          "cover_url": "string",
-                          "id": "41b134d5-1403-4912-b0e6-fa0e6c076a8b"
-                        }
-                      ]
+                      "id": "d158efa5-a4b5-46e7-8213-8b7446e23d54"
                     }
-                  ]
+                  ],
+                  "id": "6b8a4aa8-435c-489a-93f4-7921656b7db6"
                 }
               }
             }
@@ -380,7 +777,117 @@
         }
       ]
     },
-    "/api/wiki/{id}": {
+    "/wiki/voice-actors": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Paginated2"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.647522",
+                          "category": "string",
+                          "id": "8499fe24-3c6d-447c-b2a7-654afdeaa1a0"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.648264",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "dubbing_cast": [
+                        {
+                          "watchable": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.648486",
+                                "category": "string",
+                                "id": "688c1d4a-54f0-48f1-9689-be5c5ef52584"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.649184",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "1ee8bb2a-5595-47b0-88f5-7389b7c2d848"
+                          },
+                          "character": {
+                            "categories": [
+                              {
+                                "created_at": "2025-05-11T18:16:17.650810",
+                                "category": "string",
+                                "id": "3cc0c0fb-6816-472d-9583-e84fddac0d82"
+                              }
+                            ],
+                            "created_at": "2025-05-11T18:16:17.651594",
+                            "name": "string",
+                            "summary": "string",
+                            "cover_url": "string",
+                            "id": "cc2caaed-0e35-45d9-9225-2fe05bd68200"
+                          },
+                          "sort_order": 0,
+                          "created_at": "2025-05-11T18:16:17.652999",
+                          "label": "string",
+                          "id": "000e1342-d5a7-440c-a0a9-2b73a20555d1"
+                        }
+                      ],
+                      "id": "fe728520-a4f3-4d86-a41d-17efed1396d2"
+                    }
+                  ],
+                  "page": 0,
+                  "next_page": 0
+                }
+              }
+            },
+            "headers": {
+              "X-Pagination": {
+                "$ref": "#/components/headers/PAGINATION"
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          },
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "required": false
+          }
+        ],
+        "tags": [
+          "Dubladores"
+        ],
+        "operationId": "getVoiceActors"
+      }
+    },
+    "/wiki/voice-actors/{id}/dubbing-cast": {
       "get": {
         "parameters": [
           {
@@ -402,23 +909,61 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WikiEntitySchema"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DubbingCastSchema1"
+                  }
                 },
-                "example": {
-                  "namespace": "watchable",
-                  "categories": [
-                    {
-                      "created_at": "2025-03-30T13:46:15.213781",
-                      "category": "string",
-                      "id": "d685d390-6793-40b4-b966-638a8972fa9f"
-                    }
-                  ],
-                  "created_at": "2025-03-30T13:46:15.215390",
-                  "name": "string",
-                  "summary": "string",
-                  "cover_url": "string",
-                  "id": "3f56bc1d-148c-4915-a364-e1b6a35f08aa"
-                }
+                "example": [
+                  {
+                    "watchable": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.668824",
+                          "category": "string",
+                          "id": "c80ce126-84cf-4405-b05b-ceee9dc13e06"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.669623",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "f6bd5d45-a6f2-4b43-8931-a36fd1bc6c4a"
+                    },
+                    "voice_actor": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.671296",
+                          "category": "string",
+                          "id": "7e24195b-0c02-4115-93d0-90a983abdd6f"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.672213",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "e592c02c-e413-4c05-8b82-3e4a881d6f0f"
+                    },
+                    "character": {
+                      "categories": [
+                        {
+                          "created_at": "2025-05-11T18:16:17.674327",
+                          "category": "string",
+                          "id": "9fa76c39-2111-40b1-a490-86190214388e"
+                        }
+                      ],
+                      "created_at": "2025-05-11T18:16:17.675348",
+                      "name": "string",
+                      "summary": "string",
+                      "cover_url": "string",
+                      "id": "3039a8b4-4e58-42c5-b362-f3b59d8044a5"
+                    },
+                    "sort_order": 0,
+                    "created_at": "2025-05-11T18:16:17.677061",
+                    "label": "string",
+                    "id": "e449abc5-2bd5-4de4-b54e-2faf90cb5e33"
+                  }
+                ]
               }
             }
           },
@@ -427,9 +972,9 @@
           }
         },
         "tags": [
-          "Wiki"
+          "Dubladores"
         ],
-        "operationId": "getWikiEntityById"
+        "operationId": "getDubbingCastByVoiceActorId"
       },
       "parameters": [
         {
@@ -443,36 +988,80 @@
         }
       ]
     },
-    "/api/wiki/featured": {
+    "/wiki/voice-actors/{id}": {
       "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
         "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WikiEntitySchema"
-                  }
+                  "$ref": "#/components/schemas/VoiceActorSchema"
                 },
-                "example": [
-                  {
-                    "namespace": "watchable",
-                    "categories": [
-                      {
-                        "created_at": "2025-03-30T13:46:15.228222",
-                        "category": "string",
-                        "id": "99ef5873-eefd-4f65-bf0b-9dbbc743e92b"
-                      }
-                    ],
-                    "created_at": "2025-03-30T13:46:15.230795",
-                    "name": "string",
-                    "summary": "string",
-                    "cover_url": "string",
-                    "id": "a6db007f-1216-430c-abaa-a14e58747a5d"
-                  }
-                ]
+                "example": {
+                  "categories": [
+                    {
+                      "created_at": "2025-05-11T18:16:17.683421",
+                      "category": "string",
+                      "id": "59e2ed1e-e347-4311-bc0d-4844ac7afddd"
+                    }
+                  ],
+                  "created_at": "2025-05-11T18:16:17.684240",
+                  "name": "string",
+                  "summary": "string",
+                  "cover_url": "string",
+                  "dubbing_cast": [
+                    {
+                      "watchable": {
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.684282",
+                            "category": "string",
+                            "id": "7294f4ba-cbd7-4091-828e-e2de423cc613"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.684990",
+                        "name": "string",
+                        "summary": "string",
+                        "cover_url": "string",
+                        "id": "821d420b-5ad8-4dde-939c-4449fe0a1a33"
+                      },
+                      "character": {
+                        "categories": [
+                          {
+                            "created_at": "2025-05-11T18:16:17.686504",
+                            "category": "string",
+                            "id": "6b5af604-d158-49f0-b76e-d0c9c48000c9"
+                          }
+                        ],
+                        "created_at": "2025-05-11T18:16:17.687329",
+                        "name": "string",
+                        "summary": "string",
+                        "cover_url": "string",
+                        "id": "650a89ff-29ed-49b6-bbb4-1a51c04d2b9c"
+                      },
+                      "sort_order": 0,
+                      "created_at": "2025-05-11T18:16:17.688757",
+                      "label": "string",
+                      "id": "fc1bc204-998b-4646-a0f0-a0e94bb149d3"
+                    }
+                  ],
+                  "id": "c1e73be0-a558-41e1-8a6c-770f224bba5b"
+                }
               }
             }
           },
@@ -481,14 +1070,25 @@
           }
         },
         "tags": [
-          "Wiki"
+          "Dubladores"
         ],
-        "operationId": "getFeaturedWikiEntities"
-      }
+        "operationId": "getVoiceActorById"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
     }
   },
   "info": {
-    "title": "Redub.ia API",
+    "title": "Redubia API",
     "version": "v1"
   },
   "tags": [
@@ -497,11 +1097,7 @@
       "description": ""
     },
     {
-      "name": "Usuarios",
-      "description": ""
-    },
-    {
-      "name": "Dubladores",
+      "name": "Wiki",
       "description": ""
     },
     {
@@ -509,7 +1105,11 @@
       "description": ""
     },
     {
-      "name": "Wiki",
+      "name": "Usuarios",
+      "description": ""
+    },
+    {
+      "name": "Dubladores",
       "description": ""
     }
   ],
@@ -564,7 +1164,7 @@
           }
         }
       },
-      "WikiCategoriesSchema": {
+      "WikiCategorySchema": {
         "type": "object",
         "properties": {
           "created_at": {
@@ -583,34 +1183,83 @@
           "category"
         ]
       },
-      "WikiEntitySchema": {
+      "DubbingCastSchema": {
         "type": "object",
         "properties": {
-          "namespace": {
-            "type": "string",
-            "enum": [
-              "watchable",
-              "voice_actor",
-              "character"
+          "watchable": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
             ]
           },
-          "categories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WikiCategoriesSchema"
-            }
+          "voice_actor": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
-          "name": {
-            "type": "string"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "cover_url": {
+          "label": {
             "type": "string",
             "nullable": true
           },
@@ -618,12 +1267,7 @@
             "type": "string",
             "format": "uuid"
           }
-        },
-        "required": [
-          "name",
-          "namespace",
-          "summary"
-        ]
+        }
       },
       "CharacterSchema": {
         "type": "object",
@@ -631,7 +1275,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WikiCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategorySchema"
             }
           },
           "created_at": {
@@ -648,97 +1292,165 @@
             "type": "string",
             "nullable": true
           },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "dubbing_cast": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "watchable": {
-                  "type": "object",
-                  "properties": {
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "cover_url": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "summary"
-                  ]
-                },
-                "voice_actor": {
-                  "type": "object",
-                  "properties": {
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "cover_url": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "summary"
-                  ]
-                },
-                "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "label": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "id": {
-                  "type": "string",
-                  "format": "uuid"
-                }
-              }
+              "$ref": "#/components/schemas/DubbingCastSchema"
             }
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "required": [
-          "name",
-          "summary"
+          "id",
+          "name"
         ]
       },
-      "VoiceActorSchema": {
+      "Paginated": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacterSchema"
+            }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        }
+      },
+      "DubbingCastSchema1": {
+        "type": "object",
+        "properties": {
+          "watchable": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "voice_actor": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "character": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "sort_order": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "WikiEntitySchema": {
         "type": "object",
         "properties": {
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WikiCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategorySchema"
             }
           },
           "created_at": {
@@ -758,86 +1470,97 @@
           "id": {
             "type": "string",
             "format": "uuid"
-          },
-          "works": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "watchable": {
-                  "type": "object",
-                  "properties": {
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "cover_url": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "summary"
-                  ]
-                },
-                "character": {
-                  "type": "object",
-                  "properties": {
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "cover_url": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "summary"
-                  ]
-                },
-                "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "label": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "id": {
-                  "type": "string",
-                  "format": "uuid"
-                }
-              }
-            }
           }
         },
         "required": [
-          "name",
-          "summary"
+          "name"
         ]
+      },
+      "DubbingCastSchema2": {
+        "type": "object",
+        "properties": {
+          "voice_actor": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "character": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "sort_order": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
       },
       "WatchableSchema": {
         "type": "object",
@@ -845,7 +1568,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WikiCategoriesSchema"
+              "$ref": "#/components/schemas/WikiCategorySchema"
             }
           },
           "created_at": {
@@ -862,92 +1585,180 @@
             "type": "string",
             "nullable": true
           },
+          "dubbing_cast": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DubbingCastSchema2"
+            }
+          },
           "id": {
             "type": "string",
             "format": "uuid"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "Paginated1": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchableSchema"
+            }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        }
+      },
+      "DubbingCastSchema3": {
+        "type": "object",
+        "properties": {
+          "watchable": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "character": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/WikiCategorySchema"
+                }
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "name": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "cover_url": {
+                "type": "string",
+                "nullable": true
+              },
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "sort_order": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "VoiceActorSchema": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WikiCategorySchema"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "cover_url": {
+            "type": "string",
+            "nullable": true
           },
           "dubbing_cast": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "character": {
-                  "type": "object",
-                  "properties": {
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "cover_url": {
-                      "type": "string",
-                      "nullable": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "summary"
-                  ]
-                },
-                "created_at": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "label": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "id": {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                "voice_actors": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "created_at": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "summary": {
-                        "type": "string"
-                      },
-                      "cover_url": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "id": {
-                        "type": "string",
-                        "format": "uuid"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "summary"
-                    ]
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/DubbingCastSchema3"
             }
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "required": [
-          "name",
-          "summary"
+          "id",
+          "name"
         ]
+      },
+      "Paginated2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceActorSchema"
+            }
+          },
+          "page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        }
       }
     },
     "responses": {
@@ -969,6 +1780,14 @@
               "$ref": "#/components/schemas/ErrorSchema"
             }
           }
+        }
+      }
+    },
+    "headers": {
+      "PAGINATION": {
+        "description": "Pagination metadata",
+        "schema": {
+          "$ref": "#/components/schemas/PaginationMetadataSchema"
         }
       }
     }

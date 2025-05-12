@@ -1,10 +1,8 @@
 import Modal from "@/components/modal";
-import WikiEntityList, { getData } from "@/components/pages/wiki/namespaces";
+import WikiEntityList from "@/components/pages/wiki/prefetch-items";
 
-export default async function Page() {
-    const data = await getData('characters')
-    
+export default async function Page() {    
     return <Modal title="Personagens" route="/wiki">
-        <WikiEntityList data={data} />
+        <WikiEntityList query="characters" />
     </Modal>
 }

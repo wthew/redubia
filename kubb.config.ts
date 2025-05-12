@@ -36,6 +36,7 @@ export default defineConfig({
     }),
     pluginClient({
       baseURL: process.env.API_URL,
+      client: "axios",
       output: {
         path: "./client",
         barrelType: "named",
@@ -55,8 +56,8 @@ export default defineConfig({
       paramsType: "object",
       pathParamsType: "object",
       infinite: {
-        cursorParam: 'next_cursor',
-        queryParam: 'cursor',
+        cursorParam: 'next_page',
+        queryParam: 'page',
         initialPageParam: null
       },
       query: {

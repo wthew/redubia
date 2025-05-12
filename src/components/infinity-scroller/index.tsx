@@ -14,13 +14,7 @@ const InfiniteScroller = React.forwardRef<HTMLDivElement, Props>(
     React.useEffect(() => {
       const observer = new IntersectionObserver(
         (entries) => {
-          console.log(
-            "indo chamar",
-            entries[0]?.isIntersecting,
-            infinite.hasNextPage
-          );
           if (entries[0]?.isIntersecting && infinite.hasNextPage) {
-            console.log("indo chamar");
             infinite.fetchNextPage();
           }
         },

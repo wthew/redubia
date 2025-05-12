@@ -1,6 +1,10 @@
 @config "../../tailwind.config.js";
 @import "tailwindcss";
 
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -74,6 +78,7 @@
 @layer base {
   * {
     @apply border-border;
+    @apply no-scrollbar
   }
   body {
     @apply bg-background text-foreground;

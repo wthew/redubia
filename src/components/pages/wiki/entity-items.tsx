@@ -8,7 +8,7 @@ import { mapper, Schemas } from "./utils";
 
 type Props<T extends keyof Schemas> = { query: T };
 export default function WikiEntityItems<T extends keyof Schemas>(p: Props<T>) {
-  const options = mapper[p.query]({});
+  const options = mapper[p.query]({ params: {} });
   const infinite = useInfiniteQuery(options);
 
   return (

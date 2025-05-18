@@ -29,4 +29,4 @@ export const mapper = {
   characters: getCharactersInfiniteQueryOptions as unknown,
   "voice-actors": getVoiceActorsInfiniteQueryOptions as unknown,
   watchables: getWatchablesInfiniteQueryOptions as unknown,
-} as { [K in keyof Schemas]: (_?: unknown) => Response<InfiniteData<Schemas[K]>> };
+} as { [K in keyof Schemas]: (_: {params: unknown}) => Response<InfiniteData<Schemas[K]>> };

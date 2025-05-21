@@ -25,7 +25,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <QueryProvider>
             <AppBarProvider>
-              {/* <AppBar /> */}
+              <AppBar />
               <PageWrapper>{children}</PageWrapper>
             </AppBarProvider>
           </QueryProvider>

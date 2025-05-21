@@ -4,6 +4,7 @@ import { pluginOas } from "@kubb/plugin-oas";
 import { pluginTs } from "@kubb/plugin-ts";
 import { pluginReactQuery } from "@kubb/plugin-react-query";
 import { pluginClient } from "@kubb/plugin-client";
+import { pluginZod } from "@kubb/plugin-zod";
 
 console.log("env: ", process.env.NODE_ENV);
 
@@ -66,5 +67,15 @@ export default defineConfig({
       },
       suspense: {},
     }),
+    pluginZod({
+      output: {
+        path: './zod',
+      },
+      group: { type: 'tag', name: ({ group }) => `${group}Schemas` },
+      typed: true,
+      dateType: 'date',
+      unknownType: 'unknown',
+      importPath: 'zod',
+    })
   ],
 });

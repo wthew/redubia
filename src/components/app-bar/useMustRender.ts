@@ -10,6 +10,7 @@ export default function useMustRender() {
   useEffect(() => {
     switch (path) {
       case "/sign-in":
+      case "/sign-up":
         setMustRender(false);
         break;
 

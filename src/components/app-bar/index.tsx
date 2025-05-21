@@ -13,15 +13,18 @@ import {
 
 // components/AppBar.js
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { cn } from "@/utils"; // Função utilitária para lidar com classes no ShadCN
 import { useAppBar } from "@/components/app-bar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/hooks/useDebounced";
 import Link from "next/link";
+import useMustRender from "./useMustRender";
 
 export default function AppBar() {
   const { visible, appBarRef } = useAppBar();
+
+  if (!useMustRender()) return <></>;
 
   return (
     <>
@@ -37,7 +40,10 @@ export default function AppBar() {
           <Link href="/">
             <h1 className="text-xl font-semibold">redubia</h1>
           </Link>
-          {/* <Search /> */}
+          <div className="flex items-center space-x-4">
+            {/* <Search /> */}
+            <ProfileIcon />
+          </div>
         </div>
       </header>
     </>
@@ -101,5 +107,16 @@ export function Search() {
         </CommandList>
       </CommandDialog>
     </>
+  );
+}
+
+export function ProfileIcon() {
+  
+  return (
+    <Link href="/sign-in">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Login
+      </button>
+    </Link>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import signInAction from "./action";
+import signUpAction from "./action";
 import { useForm } from "react-hook-form";
 import { loginRequestSchema } from "@/lib/services/gen";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,11 +14,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-export default function SignIn() {
+export default function SignUp() {
   const form = useForm({ resolver: zodResolver(loginRequestSchema) });
-  const onSubmit = form.handleSubmit(signInAction);
+  const onSubmit = form.handleSubmit(signUpAction);
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -34,10 +33,10 @@ export default function SignIn() {
               </Link>
             </h3>
             <p>
-              Conecte-se e continue sua jornada pelo universo da dublagem.
-              Reencontre vozes conhecidas, descubra novos talentos e mergulhe
-              ainda mais fundo no mundo que dá vida aos personagens que você
-              ama.
+              Junte-se à comunidade que dá voz aos seus personagens favoritos.
+              Descubra bastidores, conheça dubladores incríveis e comece agora
+              sua jornada pelo universo da dublagem. Sua voz também pode fazer
+              parte dessa história.
             </p>
           </div>
         </div>
@@ -70,12 +69,12 @@ export default function SignIn() {
               />
 
               <Button type="submit" className="w-full">
-                Login
+                Cadastre-se
               </Button>
 
-              <Link href="/sign-up">
+              <Link href="/sign-in">
                 <Button variant="link" className="w-full p-0">
-                  Cadastre-se
+                  Possui conta?
                 </Button>
               </Link>
 

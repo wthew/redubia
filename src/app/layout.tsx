@@ -3,32 +3,34 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "../context/theme";
 import AppBar from "../components/app-bar";
-import { AppBarProvider } from "../components/app-bar/context";
+import { mustRenderAppBar } from "../components/app-bar/utils";
 import { QueryProvider } from "../context/query";
 import React from "react";
-import PageWrapper from "@/components/page-wrapper";
+import { AuthProvider } from "@/context/auth";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "redubia",
   description: "",
-  other: {
-    'google-adsense-account': 'ca-pub-9123981005716024'
-  }
+  other: { "google-adsense-account": "ca-pub-9123981005716024" },
 };
 
-export default function RootLayout({ children }: React.PropsWithChildren) {
+type Props = React.PropsWithChildren;
+export default async function RootLayout({ children }: Props) {
+  const pathname = (await headers()).get("x-pathname") || "";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <QueryProvider>
-            <AppBarProvider>
-              <AppBar />
-              <PageWrapper>{children}</PageWrapper>
-            </AppBarProvider>
-          </QueryProvider>
+          <AuthProvider>
+            <QueryProvider>
+              <AppBar mustRender={mustRenderAppBar(pathname)} />
+              {children}
+            </QueryProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

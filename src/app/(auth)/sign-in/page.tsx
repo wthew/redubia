@@ -1,8 +1,7 @@
 "use client";
 
-import signInAction from "./action";
 import { useForm } from "react-hook-form";
-import { loginRequestSchema } from "@/lib/services/gen";
+import { login, loginRequestSchema } from "@/lib/services/gen";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -14,11 +13,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { redirect } from "next/navigation";
+import { setAccessToken, setRefreshToken } from "@/lib/auth";
+import { useAuth } from "@/context/auth";
 
 export default function SignIn() {
+  const { update } = useAuth()
   const form = useForm({ resolver: zodResolver(loginRequestSchema) });
-  const onSubmit = form.handleSubmit(signInAction);
+
+  const onSubmit = form.handleSubmit(async (data) => {
+    const session = await login({ data });
+
+    setAccessToken(session.access_token);
+    setRefreshToken(session.refresh_token);
+    update(session);
+
+    redirect("/wiki");
+  });
 
   return (
     <div className="flex items-center justify-center h-screen">

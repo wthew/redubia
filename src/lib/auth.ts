@@ -12,8 +12,17 @@ export async function setAccessToken(token: string) {
   store.set("access_token", token);
 }
 
+export async function retriveRefreshToken() {
+  const store = await cookies();
+  return store.get("refresh_token")?.value
+}
+
+export async function setRefreshToken(token: string) {
+  const store = await cookies();
+  store.set("refresh_token", token);
+}
+
 export async function authHeaders() {
   const token = await retriveAccessToken();
-  console.log('lido:', token)
   return { Authorization: "Bearer " + token };
 }

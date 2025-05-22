@@ -14,8 +14,6 @@ export default async function WikiEntityList<T extends keyof Schemas>(p: Props<T
   const queryOptions = mapper[p.query]({ params: {} });
   client.prefetchInfiniteQuery(queryOptions);
 
-  console.log("prefecth efetuado");
-
   return (
     <HydrationBoundary state={dehydrate(client)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-8">

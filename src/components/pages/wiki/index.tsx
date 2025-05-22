@@ -1,11 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { WikiEntitySchema } from "@/lib/services/gen";
 import { PLACEHOLDER_IMAGE } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  featured?: WikiEntitySchema[];
+  featured?: any[];
 }
 export default async function WikiPage(props: Props) {
   return (

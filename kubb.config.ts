@@ -38,6 +38,7 @@ export default defineConfig({
     pluginClient({
       baseURL: process.env.API_URL,
       client: "axios",
+      importPath: "@/lib/services/client",
       output: {
         path: "./client",
         barrelType: "named",

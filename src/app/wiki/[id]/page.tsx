@@ -1,10 +1,10 @@
 import {
+  Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "../../../components/ui/card";
-import { HandlerAppBarHides } from "../../../components/app-bar/context";
 import Categories from "../../../components/category-badge";
 import Markdown from "react-markdown";
 import Image from "next/image";
@@ -31,33 +31,37 @@ export default async function PageById(props: { params: Params }) {
           }}
         />
       </div>
-      <HandlerAppBarHides>
-        <div className="p-6 pb-0 flex flex-row justify-between">
-          <div className="rounded-md w-fit m-3 overflow-hidden">
-            <Image
-              alt=""
-              src={{
-                src: cover_url || PLACEHOLDER_IMAGE,
-                width: 128,
-                height: 128,
-              }}
-            />
+      <div className="flex flex-col w-screen z-10 justify-center items-center min-h-dvh h-auto">
+        <Card
+          className={`border-0 md:border-1 rounded-none h-full md:rounded-lg w-full max-w-5xl`}
+        >
+          <div className="p-6 pb-0 flex flex-row justify-between">
+            <div className="rounded-md w-fit m-3 overflow-hidden">
+              <Image
+                alt=""
+                src={{
+                  src: cover_url || PLACEHOLDER_IMAGE,
+                  width: 128,
+                  height: 128,
+                }}
+              />
+            </div>
+            <CardHeader className="h-full w-4/5 p-2">
+              <CardTitle className="flex justify-start gap-2 items-center">
+                <h1 className="text-2xl self-baseline">{name}</h1>
+              </CardTitle>
+              <CardDescription>
+                <Categories categories={categories || []} />
+              </CardDescription>
+              {/* <Gallery page_id={id} /> */}
+            </CardHeader>
           </div>
-          <CardHeader className="h-full w-4/5 p-2">
-            <CardTitle className="flex justify-start gap-2 items-center">
-              <h1 className="text-2xl self-baseline">{name}</h1>
-            </CardTitle>
-            <CardDescription>
-              <Categories categories={categories || []} />
-            </CardDescription>
-            {/* <Gallery page_id={id} /> */}
-          </CardHeader>
-        </div>
-        <CardContent className="">
-          <Markdown className="mt-3">{summary}</Markdown>
-          <DubbingCast id={id} namespace={namespace!} />
-        </CardContent>
-      </HandlerAppBarHides>
+          <CardContent className="">
+            <Markdown className="mt-3">{summary}</Markdown>
+            <DubbingCast id={id} namespace={namespace!} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -15,25 +15,19 @@ import {
 
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { cn } from "@/utils"; // Função utilitária para lidar com classes no ShadCN
-import { useAppBar } from "@/components/app-bar/context";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/hooks/useDebounced";
 import Link from "next/link";
-import useMustRender from "./useMustRender";
+import { useAuth } from "@/context/auth";
 
-export default function AppBar() {
-  const { visible, appBarRef } = useAppBar();
-
-  if (!useMustRender()) return <></>;
+export default function AppBar(props: { mustRender: boolean }) {
+  if (!props.mustRender) return <></>;
 
   return (
     <>
       <header
-        ref={appBarRef}
         className={cn(
-          "bg-card text-card-foreground sticky top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
-          visible ? "translate-y-0" : "-translate-y-full",
-          "md:translate-y-0" // Sempre visível no desktop
+          "text-card-foreground absolute top-0 left-0 w-full shadow-md z-50 transition-transform duration-300 bg-[#0005] backdrop-blur-md"
         )}
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -111,8 +105,15 @@ export function Search() {
 }
 
 export function ProfileIcon() {
-  
-  return (
+  const { session } = useAuth();
+
+  return session?.profile?.id ? (
+    <Link href="/me">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Minha conta
+      </button>
+    </Link>
+  ) : (
     <Link href="/sign-in">
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Login

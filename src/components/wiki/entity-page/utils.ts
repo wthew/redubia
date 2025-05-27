@@ -5,7 +5,7 @@ import {
   GetDubbingCastByVoiceActorIdQueryResponse,
   getDubbingCastByWatchableIdInfiniteQueryOptions,
   GetDubbingCastByWatchableIdQueryResponse,
-  WikiEntitySchemaNamespaceEnum,
+  WikiEntityNamespaceEnum,
 } from "@/lib/services/gen";
 import {
   InfiniteData,
@@ -23,7 +23,7 @@ export const mapper = {
   voice_actor: getDubbingCastByVoiceActorIdInfiniteQueryOptions,
   watchable: getDubbingCastByWatchableIdInfiniteQueryOptions,
 } as {
-  [K in WikiEntitySchemaNamespaceEnum]: (_: {
+  [K in WikiEntityNamespaceEnum]: (_: {
     params?: any;
     id: string;
   }) => InfiniteQueryObserverOptions<InfiniteData<Responses[K]>>;

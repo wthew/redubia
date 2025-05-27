@@ -3,11 +3,11 @@
 import InfiniteScroller from "@/components/infinity-scroller";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  DubbingCastFromCharacterSchema,
-  DubbingCastFromVoiceActorSchema,
-  DubbingCastFromWatchableSchema,
-  WikiEntitySchema,
-  WikiEntitySchemaNamespaceEnum,
+  DubbingCastFromCharacter,
+  DubbingCastFromVoiceActor,
+  DubbingCastFromWatchable,
+  WikiEntity,
+  WikiEntityNamespaceEnum,
 } from "@/lib/services/gen";
 import Link from "next/link";
 import { mapper } from "./utils";
@@ -28,7 +28,7 @@ import { compact } from "lodash";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type PopoverProps = {
-  relations?: Pick<WikiEntitySchema, "name" | "id">[];
+  relations?: Pick<WikiEntity, "name" | "id">[];
 };
 export function PopoverRelations(props: PropsWithChildren<PopoverProps>) {
   return (
@@ -57,7 +57,7 @@ export function PopoverRelations(props: PropsWithChildren<PopoverProps>) {
   );
 }
 
-function DubbingCastFromWatchableItem(p: DubbingCastFromWatchableSchema) {
+function DubbingCastFromWatchableItem(p: DubbingCastFromWatchable) {
   const { dubbing_cast, character } = p;
   const relations = compact(dubbing_cast?.map((item) => item.voice_actor));
 
@@ -78,7 +78,7 @@ function DubbingCastFromWatchableItem(p: DubbingCastFromWatchableSchema) {
   );
 }
 
-function DubbinCastFromCharacterItem(p: DubbingCastFromCharacterSchema) {
+function DubbinCastFromCharacterItem(p: DubbingCastFromCharacter) {
   const { dubbing_cast, watchable } = p;
   const relations = compact(dubbing_cast?.map((item) => item.voice_actor));
 
@@ -99,7 +99,7 @@ function DubbinCastFromCharacterItem(p: DubbingCastFromCharacterSchema) {
   );
 }
 
-function DubbingCastFromVoiceActorItem(p: DubbingCastFromVoiceActorSchema) {
+function DubbingCastFromVoiceActorItem(p: DubbingCastFromVoiceActor) {
   const { dubbing_cast, character } = p;
   const relations = compact(dubbing_cast?.map((item) => item.watchable));
 
@@ -120,12 +120,12 @@ function DubbingCastFromVoiceActorItem(p: DubbingCastFromVoiceActorSchema) {
   );
 }
 
-type Props<T extends WikiEntitySchemaNamespaceEnum> = {
+type Props<T extends WikiEntityNamespaceEnum> = {
   id: string;
   namespace: T;
 };
 export default function DubbingCastItems<
-  T extends WikiEntitySchemaNamespaceEnum,
+  T extends WikiEntityNamespaceEnum,
 >({ id, namespace }: Props<T>) {
   const options = mapper[namespace]({ id, params: {} });
   type Options =
@@ -154,17 +154,17 @@ export default function DubbingCastItems<
             data?.map((pageData) => {
               switch (namespace) {
                 case "watchable": {
-                  const data = pageData as DubbingCastFromWatchableSchema;
+                  const data = pageData as DubbingCastFromWatchable;
                   const key = data.character?.id;
                   return <DubbingCastFromWatchableItem key={key} {...data} />;
                 }
                 case "character": {
-                  const data = pageData as DubbingCastFromCharacterSchema;
+                  const data = pageData as DubbingCastFromCharacter;
                   const key = data.watchable?.id;
                   return <DubbinCastFromCharacterItem key={key} {...data} />;
                 }
                 case "voice_actor":
-                  const data = pageData as DubbingCastFromVoiceActorSchema;
+                  const data = pageData as DubbingCastFromVoiceActor;
                   const key = data.character?.id;
                   return <DubbingCastFromVoiceActorItem key={key} {...data} />;
               }

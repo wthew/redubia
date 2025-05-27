@@ -17,6 +17,7 @@ import style from "./style.module.scss";
 import clsx from "clsx";
 import MagicGradientBackground from "@/components/magic-gradient-bg";
 import Link from "next/link";
+import RedubiaLogo from "@/components/redubia-logo";
 
 const icons = [
   videoCamera,
@@ -35,14 +36,12 @@ export default function Home() {
     <div className="min-h-screen bg-black font-sans overflow-hidden">
       {/* Hero Section - Preto puro com detalhes luminosos */}
       <div className="relative overflow-hidden border-b border-gray-900">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 animate-pulse-slow" />
+        <div className="absolute pointer-events-none inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 animate-pulse-slow" />
 
         <div className="max-w-6xl mx-auto px-4 pt-24 pb-8 text-center">
           <div className="mb-12 animate-fade-in">
-            <h1 className="text-6xl font-bold bg-gradient-to-r from-cyan-300 via-blue-500 to-purple-950 bg-clip-text text-transparent mb-6">
-              redubia
-            </h1>
-            <p className="text-lg text-left text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <RedubiaLogo className="text-6xl" />
+            <p className="text-lg text-left mt-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
               Uma plataforma moderna criada para entusiastas e profissionais da dublagem. Embarque no universo da dublagem e descubra as vozes que dão vida aos seus personagens favoritos. Conheça dubladores e curiosidades do mundo das animações e filmes.
             </p>
           </div>

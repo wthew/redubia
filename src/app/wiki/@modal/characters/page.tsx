@@ -1,5 +1,5 @@
 import Modal from "@/components/modal";
-import WikiEntityList  from "@/components/pages/wiki/prefetch-items";
+import WikiEntityList  from "@/components/wiki/prefetch-items";
 
 export default async function Page() {
 

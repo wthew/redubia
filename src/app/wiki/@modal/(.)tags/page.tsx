@@ -1,5 +1,5 @@
 import Modal from "@/components/modal";
-import TagsSelector from "@/components/pages/wiki/tags-selector";
+import TagsSelector from "@/components/wiki/tags-selector";
 
 export default async function Page() {
   return (

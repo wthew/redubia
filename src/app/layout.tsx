@@ -3,11 +3,11 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "../context/theme";
 import AppBar from "../components/app-bar";
-import { mustRenderAppBar } from "../components/app-bar/utils";
 import { QueryProvider } from "../context/query";
 import React from "react";
 import { AuthProvider } from "@/context/auth";
 import { headers } from "next/headers";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,6 @@ export const metadata = {
 
 type Props = React.PropsWithChildren;
 export default async function RootLayout({ children }: Props) {
-  const pathname = (await headers()).get("x-pathname") || "";
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -27,8 +26,9 @@ export default async function RootLayout({ children }: Props) {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <AuthProvider>
             <QueryProvider>
-              <AppBar mustRender={mustRenderAppBar(pathname)} />
+              <AppBar />
               {children}
+              <Toaster />
             </QueryProvider>
           </AuthProvider>
         </ThemeProvider>

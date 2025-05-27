@@ -16,7 +16,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   const update = useCallback((session: Session) => {
     setSession(session);
-    localStorage.setItem("session", JSON.stringify(session));
   }, []);
 
   React.useEffect(() => {
@@ -33,4 +32,4 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   );
 }
 
-export const useAuth = () => React.useContext(AuthContext)
+export const useAuth = () => React.useContext(AuthContext);

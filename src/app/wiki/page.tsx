@@ -1,4 +1,4 @@
-import WikiPage from "@/components/pages/wiki";
+import WikiPage from "@/components/wiki";
 import { getFeaturedWikiEntities } from "@/lib/services/gen";
 
 export default async function () {

@@ -10,7 +10,7 @@ import Markdown from "react-markdown";
 import Image from "next/image";
 import { PLACEHOLDER_IMAGE } from "@/utils";
 import { getWikiEntityById } from "@/lib/services/gen";
-import DubbingCast from "@/components/pages/wiki/entity-page/dubbing-cast-prefetch";
+import DubbingCast from "@/components/wiki/entity-page/dubbing-cast-prefetch";
 
 type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {

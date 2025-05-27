@@ -37,7 +37,6 @@ export default defineConfig({
     }),
     pluginClient({
       baseURL: process.env.API_URL,
-      client: "axios",
       importPath: "@/lib/services/client",
       output: {
         path: "./client",
@@ -51,6 +50,7 @@ export default defineConfig({
       paramsType: "object",
       pathParamsType: "object",
       dataReturnType: "data",
+      urlType: "export",
     }),
     pluginReactQuery({
       output: { path: "./hooks", banner: '// @ts-nocheck' },

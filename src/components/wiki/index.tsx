@@ -9,7 +9,7 @@ interface Props {
 export default async function WikiPage(props: Props) {
   return (
     <div className="bg-black text-gray-100 min-h-screen font-sans">
-      <div className="relative overflow-hidden border-b border-gray-900">
+      <div className="relative overflow-hidden border-b border-gray-900 pt-16 pb-4">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 animate-pulse-slow" />
 
         <div className="max-w-6xl mx-auto px-4 pt-24 pb-8 text-center">
@@ -121,9 +121,9 @@ export default async function WikiPage(props: Props) {
           <div className="flex gap-6 pb-4 overflow-x-auto scroll-smooth hide-scrollbar">
             <Link
               href="/wiki/voice-actors"
-              className=" transition-transform hover:scale-95"
+              className="h-auto transition-transform hover:scale-95"
             >
-              <div className="flex-shrink-0 w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
+              <div className="h-full w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
                 <h3 className="text-lg font-semibold text-gray-200 mb-2">
                   Dubladores
                 </h3>
@@ -135,9 +135,9 @@ export default async function WikiPage(props: Props) {
 
             <Link
               href="/wiki/characters"
-              className=" transition-transform hover:scale-95"
+              className="h-auto transition-transform hover:scale-95"
             >
-              <div className="flex-shrink-0 w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
+              <div className="h-full w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
                 <h3 className="text-lg font-semibold text-gray-200 mb-2">
                   Personagens
                 </h3>
@@ -149,23 +149,23 @@ export default async function WikiPage(props: Props) {
 
             <Link
               href="/wiki/watchables"
-              className=" transition-transform hover:scale-95"
+              className="h-auto transition-transform hover:scale-95"
             >
-              <div className="flex-shrink-0 w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
+              <div className="h-full w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
                 <h3 className="text-lg font-semibold text-gray-200 mb-2">
                   Produções
                 </h3>
                 <p className="text-gray-400 text-sm line-clamp-2">
-                  Filmes, séries, jogos e animações
+                  Busque por filmes, séries, jogos e animações
                 </p>
               </div>
             </Link>
 
             <Link
               href="/wiki/tags"
-              className=" transition-transform hover:scale-95"
+              className="h-auto transition-transform hover:scale-95"
             >
-              <div className="flex-shrink-0 w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
+              <div className="h-full w-64 p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800/50 hover:border-cyan-400/30 transition-all group">
                 <h3 className="text-lg font-semibold text-gray-200 mb-2">
                   Tags
                 </h3>

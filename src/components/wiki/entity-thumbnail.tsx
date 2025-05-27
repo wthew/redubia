@@ -1,11 +1,11 @@
-import { WikiEntitySchema } from "@/lib/services/gen";
+import { WikiEntity } from "@/lib/services/gen";
 import { PLACEHOLDER_IMAGE } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties } from "react";
 
 type Props = {
-  item: Pick<WikiEntitySchema, "id" | "name" | "cover_url">;
+  item: Pick<WikiEntity, "id" | "name" | "cover_url">;
   size?: number;
   className?: string;
 };

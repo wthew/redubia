@@ -8,7 +8,9 @@ import WikiEntityItems from "./entity-items";
 import { mapper, Schemas } from "./utils";
 
 type Props<T extends keyof Schemas> = { query: T };
-export default async function WikiEntityList<T extends keyof Schemas>(p: Props<T>) {
+export default async function WikiEntityList<T extends keyof Schemas>(
+  p: Props<T>
+) {
   const client = new QueryClient();
 
   const queryOptions = mapper[p.query]({ params: {} });
@@ -16,9 +18,7 @@ export default async function WikiEntityList<T extends keyof Schemas>(p: Props<T
 
   return (
     <HydrationBoundary state={dehydrate(client)}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-8">
-        <WikiEntityItems query={p.query} />
-      </div>
+      <WikiEntityItems query={p.query} />
     </HydrationBoundary>
   );
 }

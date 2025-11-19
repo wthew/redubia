@@ -4,7 +4,7 @@ import { UseInfiniteQueryResult } from "@tanstack/react-query";
 import React from "react";
 
 type Props<TData = unknown> = React.HTMLAttributes<HTMLDivElement> & {
-  infinite: Omit<UseInfiniteQueryResult<TData>, "data">;
+  infinite: Pick<UseInfiniteQueryResult<TData>, "hasNextPage" | 'fetchNextPage'>;
 };
 
 const InfiniteScroller = React.forwardRef<HTMLDivElement, Props>(

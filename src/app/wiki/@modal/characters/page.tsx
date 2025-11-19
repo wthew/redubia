@@ -1,11 +1,11 @@
 import Modal from "@/components/modal";
-import WikiEntityList from "@/components/pages/wiki/entity-list";
+import WikiEntityList  from "@/components/wiki/prefetch-items";
 
 export default async function Page() {
 
   return (
     <Modal title="Personagens" route="/wiki" replace>
-      <WikiEntityList namespace="characters" />
+      <WikiEntityList query="characters" />
     </Modal>
   );
 }

@@ -11,36 +11,31 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-// components/AppBar.js
-
-import React, { useCallback, useEffect, useState } from "react";
-import { cn } from "@/utils"; // Função utilitária para lidar com classes no ShadCN
-import { useAppBar } from "@/components/app-bar/context";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { DialogTitle } from "../ui/dialog";
 import useDebounced from "@/hooks/useDebounced";
 import Link from "next/link";
+import { useAuth } from "@/context/auth";
+import RedubiaLogo from "../redubia-logo";
+import { usePathname } from "next/navigation";
+import { mustRenderAppBar } from "./utils";
 
 export default function AppBar() {
-  const { visible, appBarRef } = useAppBar();
+  const path = usePathname();
+
+  const avoidRender = useMemo(() => mustRenderAppBar(path), [path]);
+  if (!avoidRender) return <></>;
 
   return (
-    <>
-      <header
-        ref={appBarRef}
-        className={cn(
-          "bg-card text-card-foreground sticky top-0 left-0 w-full shadow-md z-50 transition-transform duration-300",
-          visible ? "translate-y-0" : "-translate-y-full",
-          "md:translate-y-0" // Sempre visível no desktop
-        )}
-      >
-        <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/">
-            <h1 className="text-xl font-semibold">redubia</h1>
-          </Link>
+    <header className="absolute top-0 left-0 w-full shadow-md z-50 transition-transform duration-300 bg-[#0005] backdrop-blur-md">
+      <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+        <RedubiaLogo className="text-xl" />
+        <div className="flex items-center space-x-4">
           {/* <Search /> */}
+          <ProfileIcon />
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
 
@@ -101,5 +96,28 @@ export function Search() {
         </CommandList>
       </CommandDialog>
     </>
+  );
+}
+
+export function ProfileIcon() {
+  const { session } = useAuth();
+  const path = usePathname();
+
+  return session?.profile?.id ? (
+    path === "/me" ? (
+      <> </>
+    ) : (
+      <Link href="/me">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Minha conta
+        </button>
+      </Link>
+    )
+  ) : (
+    <Link href="/sign-in">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Login
+      </button>
+    </Link>
   );
 }

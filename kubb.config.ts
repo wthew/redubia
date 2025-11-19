@@ -4,6 +4,7 @@ import { pluginOas } from "@kubb/plugin-oas";
 import { pluginTs } from "@kubb/plugin-ts";
 import { pluginReactQuery } from "@kubb/plugin-react-query";
 import { pluginClient } from "@kubb/plugin-client";
+import { pluginZod } from "@kubb/plugin-zod";
 
 console.log("env: ", process.env.NODE_ENV);
 
@@ -36,6 +37,7 @@ export default defineConfig({
     }),
     pluginClient({
       baseURL: process.env.API_URL,
+      importPath: "@/lib/services/client",
       output: {
         path: "./client",
         barrelType: "named",
@@ -48,6 +50,7 @@ export default defineConfig({
       paramsType: "object",
       pathParamsType: "object",
       dataReturnType: "data",
+      urlType: "export",
     }),
     pluginReactQuery({
       output: { path: "./hooks", banner: '// @ts-nocheck' },
@@ -55,8 +58,8 @@ export default defineConfig({
       paramsType: "object",
       pathParamsType: "object",
       infinite: {
-        cursorParam: 'next_cursor',
-        queryParam: 'cursor',
+        cursorParam: 'next_page',
+        queryParam: 'page',
         initialPageParam: null
       },
       query: {
@@ -65,5 +68,15 @@ export default defineConfig({
       },
       suspense: {},
     }),
+    pluginZod({
+      output: {
+        path: './zod',
+      },
+      group: { type: 'tag', name: ({ group }) => `${group}Schemas` },
+      typed: true,
+      dateType: 'date',
+      unknownType: 'unknown',
+      importPath: 'zod',
+    })
   ],
 });

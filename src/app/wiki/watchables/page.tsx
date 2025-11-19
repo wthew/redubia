@@ -1,4 +1,4 @@
-import WikiPage from "@/components/pages/wiki";
+import WikiPage from "@/components/wiki";
 
 export default function () {
   return <WikiPage />

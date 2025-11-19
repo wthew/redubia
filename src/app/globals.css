@@ -1,6 +1,10 @@
 @config "../../tailwind.config.js";
 @import "tailwindcss";
 
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -74,9 +78,39 @@
 @layer base {
   * {
     @apply border-border;
+    @apply no-scrollbar
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  
+  .animate-gradient-loop {
+    background-image: linear-gradient(
+      270deg,
+      #06b6d4,
+      #3b82f6,
+      #59168b,
+      #3b82f6,
+      #06b6d4
+    );
+    background-size: 600% 600%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradientScroll 3s ease-out infinite;
+  }
+
+  @keyframes gradientScroll {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
   }
 }
 

@@ -1,21 +1,20 @@
 "use client";
 
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog } from "../ui/dialog";
 import { usePathname, useRouter } from "next/navigation";
 
-interface Props extends PropsWithChildren {
+interface Props extends React.PropsWithChildren {
   route: string;
-  replace?: boolean;
 }
 
-export default function ModalWrapper({ route, children, replace }: Props) {
+interface ModalContext {
+  close: () => void;
+}
+const ModalContext = React.createContext<ModalContext | null>(null);
+export const useModalContext = () => React.useContext(ModalContext)!;
+
+export default function ModalWrapper({ route, children }: Props) {
   const [open, setOpen] = useState(true);
   const path = usePathname();
   const initial = useRef(path);
@@ -23,12 +22,10 @@ export default function ModalWrapper({ route, children, replace }: Props) {
 
   const onOpenChange = useCallback(
     (open: boolean) => {
-      if (initial.current === path) {
-        (replace ? () => router.replace(route) : router.back)();
-      }
+      if (initial.current === path) router.replace(route);
       setOpen(open);
     },
-    [replace, route, path]
+    [route, path]
   );
 
   useEffect(() => {
@@ -37,7 +34,9 @@ export default function ModalWrapper({ route, children, replace }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {children}
+      <ModalContext.Provider value={{ close: () => onOpenChange(false) }}>
+        {children}
+      </ModalContext.Provider>
     </Dialog>
   );
 }

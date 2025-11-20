@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 
 export async function retriveAccessToken() {
   const store = await cookies();
+  console.log("retriveAccessToken called", store.get("access_token"));
   return store.get("access_token")?.value
 }
 

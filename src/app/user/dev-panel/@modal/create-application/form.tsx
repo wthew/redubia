@@ -1,5 +1,6 @@
 "use client";
 
+import { useModalContext } from "@/components/modal/wrapper";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import {
@@ -10,20 +11,18 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  createApplicationRequestSchema,
+  useCreateAuthApplication,
+} from "@/lib/services/gen";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { z } from "zod";
-
-export const createApplicationRequestSchema = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  redirect_uris: z.array(z.object({ id: z.string(), uri: z.string().url() })),
-  website: z.string().optional(),
-  scopes: z.array(z.string()),
-});
+import { toast } from "sonner";
 
 export default function FormCreateApplication() {
+  const { close } = useModalContext();
+
   const form = useForm({
     resolver: zodResolver(createApplicationRequestSchema),
     defaultValues: {
@@ -37,16 +36,18 @@ export default function FormCreateApplication() {
 
   const redirects = useFieldArray({
     control: form.control,
+    // @ts-ignore
     name: "redirect_uris",
   });
 
-  const mutate = ({
-    data,
-  }: {
-    data: (typeof createApplicationRequestSchema)["_type"];
-  }) => {
-    // Mutation logic goes here
-  };
+  const { mutate } = useCreateAuthApplication({
+    mutation: {
+      onSuccess: () => {
+        toast("Aplicação criada com sucesso!", { position: "bottom-center" });
+        close();
+      },
+    },
+  });
 
   return (
     <Form {...form}>
@@ -96,7 +97,7 @@ export default function FormCreateApplication() {
                 <FormControl>
                   <Input
                     placeholder="https://teste/callback"
-                    {...form.register(`redirect_uris.${index}.uri`)}
+                    {...form.register(`redirect_uris.${index}.redirect_uri`)}
                   />
                 </FormControl>
                 <Button variant="ghost" onClick={() => redirects.remove(index)}>
@@ -105,13 +106,12 @@ export default function FormCreateApplication() {
               </div>
             ))}
             <Button
+              type="button"
               variant="link"
-              onClick={() =>
-                redirects.append({
-                  id: redirects.fields.length.toString(),
-                  uri: "",
-                })
-              }
+              onClick={() => {
+                const id = redirects.fields.length.toString();
+                redirects.append({ id, uri: "" });
+              }}
             >
               add
             </Button>
@@ -119,7 +119,7 @@ export default function FormCreateApplication() {
         </div>
 
         <DialogFooter>
-          <Button>Salvar</Button>
+          <Button type="submit">Salvar</Button>
         </DialogFooter>
       </form>
     </Form>

@@ -1,40 +1,11 @@
-import MatrixEffect from "@/components/matrix-effect/index.ts";
-import RetroEffect from "@/components/retro-effect";
-import Section from "@/components/section";
-import SounWavesEffect from "@/components/sound-waves-effect";
-
-import videoCamera from "@/assets/svg/video-camera.svg";
-import headphones from "@/assets/svg/headphones.svg";
-import videoPlayer from "@/assets/svg/video-player.svg";
-import microphone from "@/assets/svg/microphone.svg";
-import speaker from "@/assets/svg/speaker.svg";
-import videoEditorPlayer from "@/assets/svg/video-editor-player.svg";
-import plug from "@/assets/svg/plug.svg";
-import microphoneB from "@/assets/svg/microphone-b.svg";
-import settings from "@/assets/svg/settings.svg";
-
-import style from "./style.module.scss";
-import clsx from "clsx";
 import MagicGradientBackground from "@/components/magic-gradient-bg";
 import Link from "next/link";
 import RedubiaLogo from "@/components/redubia-logo";
 
-const icons = [
-  videoCamera,
-  headphones,
-  videoPlayer,
-  microphone,
-  speaker,
-  videoEditorPlayer,
-  plug,
-  microphoneB,
-  settings,
-];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black font-sans overflow-hidden">
-      {/* Hero Section - Preto puro com detalhes luminosos */}
       <div className="relative overflow-hidden border-b border-gray-900">
         <div className="absolute pointer-events-none inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 animate-pulse-slow" />
 
@@ -48,9 +19,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Seções - Contraste máximo */}
       <div className="max-w-5xl mx-auto pt-12 px-4 space-y-32 pb-32">
-        {/* Seção Wiki */}
         <section className="relative">
           <div className="absolute pointer-events-none -left-20 top-1/2 w-48 h-48 bg-purple-500/10 blur-3xl rounded-full" />
 
@@ -62,17 +31,13 @@ export default function Home() {
               <p className="text-lg text-gray-400 leading-relaxed">
                 Explore o maior acervo sobre dublagem. Descubra quem deu voz a personagens inesquecíveis, e explore elencos de filmes e séries que marcaram gerações. Tudo organizado e ao seu alcance!
               </p>
-              {/* <Link href="/wiki" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
+              <Link href="/wiki" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
                 Explorar
-              </Link> */}
-              <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
-                Explorar - Em breve
-              </button>
+              </Link>
             </div>
             <div className="flex-1 w-full ">
               <MagicGradientBackground className="hover:border-cyan-500/20">
                 <div className="h-80 flex flex-col items-center justify-center p-8 space-y-8">
-                  {/* Animação de cards flutuantes */}
                   <div className="relative h-32 w-full max-w-xs">
                     <div className="absolute left-0 top-0 w-24 h-32 bg-gray-900/50 rounded-xl border border-cyan-400/20 transform -rotate-6 animate-float">
                       <div className="p-3">
@@ -96,7 +61,6 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* CTA Forte */}
                   <div className="text-center space-y-4">
                     <h3 className="text-xl text-gray-200 font-medium">
                       Descubra o Universo da Dublagem
@@ -112,7 +76,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Seção IA */}
         <section className="relative">
           <div className="absolute -right-20 top-1/2 w-48 h-48 bg-cyan-500/10 blur-3xl rounded-full" />
 
@@ -132,12 +95,10 @@ export default function Home() {
               <MagicGradientBackground className="hover:border-purple-500/20" colors={["rgba(128, 0, 128, 0.3) 0%", "rgba(128, 0, 128, 0.15) 30%"]} >
                 <div className="h-80 flex flex-col items-center justify-center p-8 space-y-8">
 
-                  {/* Demonstração da IA */}
                   <div className="relative w-full max-w-md">
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-xl animate-pulse-slow" />
 
                     <div className="relative bg-black/50 rounded-xl p-6 border border-gray-800/50">
-                      {/* Ondas sonoras animadas */}
                       <div className="flex items-center justify-center gap-1 h-24 mb-6">
                         {[1, 2, 3, 4, 5].map((i) => (
                           <div
@@ -152,7 +113,6 @@ export default function Home() {
                         ))}
                       </div>
 
-                      {/* Resultado da Análise */}
                       <div className="text-center space-y-2">
                         <p className="text-sm text-gray-400">Voz detectada:</p>
                         <div className="flex items-center justify-center gap-2">
@@ -187,7 +147,6 @@ export default function Home() {
             <div className="flex-1 w-full">
               <MagicGradientBackground className="hover:border-cyan-950">
                 <div className="h-auto py-16 px-4 flex flex-col items-center space-y-12">
-                  {/* Cabeçalho Sublime */}
                   <div className="text-center space-y-4">
                     <div className="text-cyan-400 text-4xl mb-2">⎇</div>
                     <h3 className="text-2xl text-gray-200 font-medium">
@@ -197,11 +156,9 @@ export default function Home() {
                   </div>
 
 
-                  {/* CTA Quase Invisível */}
                   <div className="opacity-70 hover:opacity-100 transition-opacity">
                     <button className="text-cyan-400 text-sm flex items-center gap-2">
                       <span>Documentação Técnica - Em breve</span>
-                      {/*<span className="text-lg">↗</span>*/}
                     </button>
                   </div>
                 </div>
@@ -211,7 +168,6 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Footer - Minimalista */}
       <footer className="border-t border-gray-900 py-12">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-gray-600">

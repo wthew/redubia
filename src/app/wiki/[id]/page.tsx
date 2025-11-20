@@ -16,8 +16,10 @@ type Params = Promise<{ id: string }>;
 export default async function PageById(props: { params: Params }) {
   const { id } = await props.params;
   const data = await getWikiEntityById({ id });
-  const { name, summary, categories, cover_url, dubbing_cast } =
+  const { name, summary, categories, cover_url } =
     data;
+
+  const dubbing_cast: any[] = [];
 
   return (
     <div className="flex justify-center items-center md:p-8">
@@ -66,7 +68,7 @@ export default async function PageById(props: { params: Params }) {
             </CardDescription>
             {/* <Gallery page_id={id} /> */}
           </CardHeader>
-        </div>
+        </Card>
         <CardContent className="">
           <Markdown className="mt-3">{summary}</Markdown>
           {dubbing_cast?.map(({ character, voice_actor, watchable }, idx) => {
@@ -107,6 +109,7 @@ export default async function PageById(props: { params: Params }) {
             );
           })}
         </CardContent>
+    </div>
     </div>
   );
 }

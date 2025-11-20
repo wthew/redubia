@@ -1,10 +1,3 @@
-import Modal from "@/components/modal";
-import WikiEntityList from "@/components/wiki/prefetch-items";
+import { default as Page } from "../voice-actors/page";
 
-export default async function Page() {
-  return (
-    <Modal title="Dubladores" route="/wiki">
-      <WikiEntityList query="voice-actors" />
-    </Modal>
-  );
-}
+export default Page;

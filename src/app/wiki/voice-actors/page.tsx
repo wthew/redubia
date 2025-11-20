@@ -1,5 +1,3 @@
-import WikiPage from "@/components/wiki";
+import { default as Page } from "../page";
 
-export default function () {
-  return <WikiPage />
-}
+export default Page;

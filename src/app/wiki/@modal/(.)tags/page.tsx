@@ -1,10 +1,3 @@
-import Modal from "@/components/modal";
-import TagsSelector from "@/components/wiki/tags-selector";
+import { default as Page } from "../tags/page";
 
-export default async function Page() {
-  return (
-    <Modal title="Tags" route="/wiki">
-      <TagsSelector />
-    </Modal>
-  );
-}
+export default Page;

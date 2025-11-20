@@ -27,8 +27,8 @@ export default function AppBar() {
   if (!avoidRender) return <></>;
 
   return (
-    <header className="absolute top-0 left-0 w-full shadow-md z-50 transition-transform duration-300 bg-[#0005] backdrop-blur-md">
-      <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full z-50 transition-transform duration-300 bg-[#0000]">
+      <div className="mx-4 px-4 py-3 flex items-center justify-between">
         <RedubiaLogo className="text-xl" />
         <div className="flex items-center space-x-4">
           {/* <Search /> */}
@@ -104,10 +104,10 @@ export function ProfileIcon() {
   const path = usePathname();
 
   return session?.profile?.id ? (
-    path === "/me" ? (
+    path === "/user" ? (
       <> </>
     ) : (
-      <Link href="/me">
+      <Link href="/user">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Minha conta
         </button>

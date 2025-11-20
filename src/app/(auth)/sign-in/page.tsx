@@ -26,7 +26,7 @@ export default function SignIn() {
 
     localStorage.setItem("session", JSON.stringify(session));
     await setAuthTokens(session);
-    router.push("/me");
+    router.push("/user");
   });
 
   return (

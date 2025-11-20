@@ -92,6 +92,7 @@ class ApiWrapper {
 
   request = async <T, V>(c: RequestConfig<V>): Promise<ResponseConfig<T>> => {
     const config: RequestConfig = { ...c, headers: { ...c.headers } };
+    console.log("fazendo requisição");
 
     if (ApiWrapper.refreshing) {
       console.log("indo esperar");
@@ -102,6 +103,8 @@ class ApiWrapper {
     return this.api.request(config).catch(async (error: AxiosError<Error>) => {
       const original = error.config as typeof config;
       const response = error.response;
+
+      console.log("erro na requisição", { error, ...original });
 
       if (!original) throw error;
       if (!response) throw error;
@@ -121,6 +124,8 @@ class ApiWrapper {
         //   }
         // }
       }
+
+      console.log("sem handler para esse erro", error);
 
       throw error;
     });

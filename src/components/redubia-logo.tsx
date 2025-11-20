@@ -12,8 +12,10 @@ export default function RedubiaLogo({ className, as: wrapper }: Props) {
   const path = usePathname();
 
   return (
+    <div className="rounded-full bg-black px-4 py-2">
     <Tag className={`text-4xl font-bold animate-gradient-loop ${className}`}>
       {path === "/" ? <>redubia</> : <Link href="/">redubia</Link>}
     </Tag>
+    </div>
   );
 }

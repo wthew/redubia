@@ -1,10 +1,3 @@
-import Modal from "@/components/modal";
-import WikiEntityList from "@/components/wiki/prefetch-items";
+import { default as Page } from "../watchables/page";
 
-export default async function Page() {
-  return (
-    <Modal title="Produções" route="/wiki">
-      <WikiEntityList query="watchables" />
-    </Modal>
-  );
-}
+export default Page;

@@ -52,16 +52,16 @@
                     {
                       "categories": [
                         {
-                          "created_at": "2025-11-20T01:57:04.505440",
+                          "created_at": "2025-11-20T21:02:34.778888",
                           "category": "string",
-                          "id": "4ada4b8a-e75f-4409-a306-e524132f1c82"
+                          "id": "d6d09464-39c0-4b14-bd19-050e7207642a"
                         }
                       ],
-                      "created_at": "2025-11-20T01:57:04.506655",
+                      "created_at": "2025-11-20T21:02:34.780081",
                       "name": "string",
                       "summary": "string",
                       "cover_url": "string",
-                      "id": "8b0aeb69-363e-4230-8856-fc91f08622be"
+                      "id": "6be9d413-86c1-4ecc-b931-dbc0c808d397"
                     }
                   ]
                 }
@@ -136,16 +136,16 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-11-20T01:57:04.512860",
+                      "created_at": "2025-11-20T21:02:34.785465",
                       "category": "string",
-                      "id": "76906dd9-b0f9-4651-997f-ecbb77483aa8"
+                      "id": "144218bb-43b1-48ac-8275-1b9c7bfef6eb"
                     }
                   ],
-                  "created_at": "2025-11-20T01:57:04.513809",
+                  "created_at": "2025-11-20T21:02:34.786503",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "4d692347-c60f-4ef0-9983-5ca84b974c20"
+                  "id": "fb1b8efc-76ca-482e-a40c-ac50f51311e7"
                 }
               }
             }
@@ -259,41 +259,41 @@
                       "watchable": {
                         "categories": [
                           {
-                            "created_at": "2025-11-20T01:57:04.518692",
+                            "created_at": "2025-11-20T21:02:34.791282",
                             "category": "string",
-                            "id": "57017bdc-4f81-4f95-933b-63d2623c0cd7"
+                            "id": "e5a328d4-6462-4795-8b07-c73d24d1c168"
                           }
                         ],
-                        "created_at": "2025-11-20T01:57:04.519734",
+                        "created_at": "2025-11-20T21:02:34.792256",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "75968453-1fea-4740-b824-24b7125b3daf"
+                        "id": "3c34a010-4322-46b8-862b-b01704043a43"
                       },
                       "sort_order": 0,
-                      "created_at": "2025-11-20T01:57:04.521637",
+                      "created_at": "2025-11-20T21:02:34.794322",
                       "label": "string",
-                      "id": "9d7fa6f0-6a7d-4cf2-b0ed-c8c483001894",
+                      "id": "5e701e74-d0f4-4a45-b1aa-80635f199311",
                       "dubbing_cast": [
                         {
                           "voice_actor": {
                             "categories": [
                               {
-                                "created_at": "2025-11-20T01:57:04.522289",
+                                "created_at": "2025-11-20T21:02:34.795033",
                                 "category": "string",
-                                "id": "70a360b2-7f17-4212-9ee1-512c5b0f1c01"
+                                "id": "5c17c273-afe2-41ca-b927-dac97aae89e1"
                               }
                             ],
-                            "created_at": "2025-11-20T01:57:04.523290",
+                            "created_at": "2025-11-20T21:02:34.796050",
                             "name": "string",
                             "summary": "string",
                             "cover_url": "string",
-                            "id": "f2d23572-b4e0-48d1-81eb-452558aa7350"
+                            "id": "82e24ab3-5926-42df-a5ba-474b616bc043"
                           },
                           "sort_order": 0,
-                          "created_at": "2025-11-20T01:57:04.525235",
+                          "created_at": "2025-11-20T21:02:34.797890",
                           "label": "string",
-                          "id": "24ea4a52-3b60-455b-8c43-5ba79ca2348e"
+                          "id": "79f4287f-4579-4e26-a867-98d18f3e14bf"
                         }
                       ]
                     }
@@ -342,7 +342,7 @@
                   "avatar_url": "http://example.com",
                   "username": "string",
                   "full_name": "string",
-                  "id": "ca90c277-a14b-4a98-8595-a18722cf66da"
+                  "id": "02795bfa-82ec-40c1-9b21-381cbe1fd3f7"
                 }
               }
             }
@@ -372,7 +372,7 @@
                   "avatar_url": "http://example.com",
                   "username": "string",
                   "full_name": "string",
-                  "id": "73659378-c8b8-439c-b1bc-1c8964928b57"
+                  "id": "3cec8370-f146-47b1-a431-c2b9ddedd9cd"
                 }
               }
             }
@@ -443,7 +443,7 @@
                     "avatar_url": "http://example.com",
                     "username": "string",
                     "full_name": "string",
-                    "id": "5f8311b1-3071-4c62-b993-6dae9113bf64"
+                    "id": "b178e9c7-6d9d-41fa-8b9a-a52125ec4dbd"
                   }
                 }
               }
@@ -489,7 +489,7 @@
                     "avatar_url": "http://example.com",
                     "username": "string",
                     "full_name": "string",
-                    "id": "f4c15cec-849f-41a7-afc3-64b6f254d26f"
+                    "id": "4a867c62-d078-4b2a-b4e5-c05beca3b15e"
                   }
                 }
               }
@@ -567,16 +567,16 @@
                     {
                       "categories": [
                         {
-                          "created_at": "2025-11-20T01:57:05.012339",
+                          "created_at": "2025-11-20T21:02:35.261634",
                           "category": "string",
-                          "id": "944d6e2e-e47c-4274-9607-6e234a4f8de1"
+                          "id": "1ab421d2-62c6-4fb2-ae60-78a176d04005"
                         }
                       ],
-                      "created_at": "2025-11-20T01:57:05.013152",
+                      "created_at": "2025-11-20T21:02:35.262457",
                       "name": "string",
                       "summary": "string",
                       "cover_url": "string",
-                      "id": "cee4f5da-2da2-4ffb-9b8c-f73864171105"
+                      "id": "2a26b6a3-f84c-4b5c-8615-c1521cb42287"
                     }
                   ]
                 }
@@ -651,16 +651,16 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-11-20T01:57:05.017058",
+                      "created_at": "2025-11-20T21:02:35.266850",
                       "category": "string",
-                      "id": "16da5b42-337f-4ef4-b577-fe92e38fecf1"
+                      "id": "11fad02c-5a0d-4d78-8fb8-07a9b8058caf"
                     }
                   ],
-                  "created_at": "2025-11-20T01:57:05.018107",
+                  "created_at": "2025-11-20T21:02:35.267907",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "afe9149d-7e1a-4e99-9d84-780a524ac6f1"
+                  "id": "a5748fc8-1d4c-49b6-b74a-a84a3ba3f8fc"
                 }
               }
             }
@@ -774,41 +774,41 @@
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-11-20T01:57:05.022859",
+                            "created_at": "2025-11-20T21:02:35.271956",
                             "category": "string",
-                            "id": "d5b9b57f-76b4-43ea-8060-69572e6d6a1d"
+                            "id": "aa995030-ecf7-4bfa-98ad-90207fdfc5ba"
                           }
                         ],
-                        "created_at": "2025-11-20T01:57:05.023968",
+                        "created_at": "2025-11-20T21:02:35.272783",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "2589f834-453d-4fd0-a275-4ce8da49c8ba"
+                        "id": "df45f129-0aa7-4512-8047-9f1f83bfdaec"
                       },
                       "sort_order": 0,
-                      "created_at": "2025-11-20T01:57:05.026493",
+                      "created_at": "2025-11-20T21:02:35.274441",
                       "label": "string",
-                      "id": "50f9551a-78a3-4165-bee5-3f72b4b10f15",
+                      "id": "138dec70-fd09-4148-a7a7-a0329833aba5",
                       "dubbing_cast": [
                         {
                           "voice_actor": {
                             "categories": [
                               {
-                                "created_at": "2025-11-20T01:57:05.026983",
+                                "created_at": "2025-11-20T21:02:35.274762",
                                 "category": "string",
-                                "id": "8e7152da-58a0-4ce1-a288-3a57c3d2c893"
+                                "id": "c3d0fac1-808b-4151-876a-b1d1c8e77e36"
                               }
                             ],
-                            "created_at": "2025-11-20T01:57:05.028017",
+                            "created_at": "2025-11-20T21:02:35.275969",
                             "name": "string",
                             "summary": "string",
                             "cover_url": "string",
-                            "id": "cb7df236-d0a0-4361-9e9d-487372dda957"
+                            "id": "7ddbd5d4-f0dc-4544-91bb-4241cd5fbcc6"
                           },
                           "sort_order": 0,
-                          "created_at": "2025-11-20T01:57:05.029867",
+                          "created_at": "2025-11-20T21:02:35.277992",
                           "label": "string",
-                          "id": "41fcc480-f45d-4776-a377-e95b095f68a2"
+                          "id": "013939b9-5fd3-4d05-94c5-cc2d78b41c15"
                         }
                       ]
                     }
@@ -870,17 +870,17 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-11-20T01:57:05.045920",
+                      "created_at": "2025-11-20T21:02:35.292098",
                       "category": "string",
-                      "id": "a7ff6e5c-3bdb-4da7-8ebb-04f0539f8aef"
+                      "id": "a78983d9-bb5d-4bbc-8029-a1c90717096b"
                     }
                   ],
                   "namespace": "watchable",
-                  "created_at": "2025-11-20T01:57:05.047131",
+                  "created_at": "2025-11-20T21:02:35.292953",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "a4bff6e5-1521-44ac-99cf-3c1c7b7f9f6d"
+                  "id": "b97cdc72-b78f-403a-b3b0-f1c296d40c88"
                 }
               }
             }
@@ -936,17 +936,17 @@
                   {
                     "categories": [
                       {
-                        "created_at": "2025-11-20T01:57:05.050564",
+                        "created_at": "2025-11-20T21:02:35.295091",
                         "category": "string",
-                        "id": "4fa36d5b-cb19-4469-bdaa-2b384add9240"
+                        "id": "484a089b-317d-476f-9308-5a33d679d426"
                       }
                     ],
                     "namespace": "watchable",
-                    "created_at": "2025-11-20T01:57:05.051485",
+                    "created_at": "2025-11-20T21:02:35.295881",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "e0d9847f-3cac-4470-8843-51cf79024ce2"
+                    "id": "a578d6f3-714a-419a-bc0f-ff5732eb7be5"
                   }
                 ]
               }
@@ -979,17 +979,17 @@
                   {
                     "categories": [
                       {
-                        "created_at": "2025-11-20T01:57:05.054420",
+                        "created_at": "2025-11-20T21:02:35.298009",
                         "category": "string",
-                        "id": "93795629-778c-4d90-a035-018ce7d4b236"
+                        "id": "53bafe80-07a5-4d58-831e-f7753ac27c9d"
                       }
                     ],
                     "namespace": "watchable",
-                    "created_at": "2025-11-20T01:57:05.055787",
+                    "created_at": "2025-11-20T21:02:35.299065",
                     "name": "string",
                     "summary": "string",
                     "cover_url": "string",
-                    "id": "df78bf84-c1c1-4ff2-9077-761d46090ec9"
+                    "id": "487d12cd-ae17-45b5-a738-d286f0fc2223"
                   }
                 ]
               }
@@ -1057,16 +1057,16 @@
                     {
                       "categories": [
                         {
-                          "created_at": "2025-11-20T01:57:05.059745",
+                          "created_at": "2025-11-20T21:02:35.303073",
                           "category": "string",
-                          "id": "76531bde-f032-4cf7-8269-7b8d47cd7105"
+                          "id": "4b8bbfe4-7031-4e8a-90b5-6d8acb3e6a51"
                         }
                       ],
-                      "created_at": "2025-11-20T01:57:05.060611",
+                      "created_at": "2025-11-20T21:02:35.304007",
                       "name": "string",
                       "summary": "string",
                       "cover_url": "string",
-                      "id": "fc1aefb3-a822-4d8b-9728-5718cd4c13e9"
+                      "id": "186c3075-4976-47c8-b7c2-195e6bc36c16"
                     }
                   ]
                 }
@@ -1141,16 +1141,16 @@
                 "example": {
                   "categories": [
                     {
-                      "created_at": "2025-11-20T01:57:05.066011",
+                      "created_at": "2025-11-20T21:02:35.307730",
                       "category": "string",
-                      "id": "224f80e2-2093-4ffd-9f17-737d4a3220c4"
+                      "id": "141ebc27-c972-4692-b350-ce857c89f1bc"
                     }
                   ],
-                  "created_at": "2025-11-20T01:57:05.066967",
+                  "created_at": "2025-11-20T21:02:35.308508",
                   "name": "string",
                   "summary": "string",
                   "cover_url": "string",
-                  "id": "d98d22e2-4539-4d33-8d7f-97110409f370"
+                  "id": "61f9d972-3534-41ab-88dc-0202ec0e6f50"
                 }
               }
             }
@@ -1264,41 +1264,41 @@
                       "character": {
                         "categories": [
                           {
-                            "created_at": "2025-11-20T01:57:05.071611",
+                            "created_at": "2025-11-20T21:02:35.312411",
                             "category": "string",
-                            "id": "17a27615-7ffe-43df-8714-d304a9a80176"
+                            "id": "1a595664-5d5d-4a7b-a219-49b4bd8985d3"
                           }
                         ],
-                        "created_at": "2025-11-20T01:57:05.072480",
+                        "created_at": "2025-11-20T21:02:35.313209",
                         "name": "string",
                         "summary": "string",
                         "cover_url": "string",
-                        "id": "b1af6390-978a-4175-85aa-aba1e956fbb5"
+                        "id": "b64baaf8-e0bd-407e-bc6f-9e620fd0eb59"
                       },
                       "sort_order": 0,
-                      "created_at": "2025-11-20T01:57:05.074193",
+                      "created_at": "2025-11-20T21:02:35.314702",
                       "label": "string",
-                      "id": "c17889f7-0c64-429f-ae6c-1b1cedb050d9",
+                      "id": "158a99ba-52d2-416e-8d4e-ec27e1c9fbf2",
                       "dubbing_cast": [
                         {
                           "watchable": {
                             "categories": [
                               {
-                                "created_at": "2025-11-20T01:57:05.074967",
+                                "created_at": "2025-11-20T21:02:35.315125",
                                 "category": "string",
-                                "id": "3724b106-b539-4878-8b4b-698771198332"
+                                "id": "3ce445d5-52d1-407c-b8d7-a1eca2e95490"
                               }
                             ],
-                            "created_at": "2025-11-20T01:57:05.076221",
+                            "created_at": "2025-11-20T21:02:35.315924",
                             "name": "string",
                             "summary": "string",
                             "cover_url": "string",
-                            "id": "9e48a792-865b-42d1-bb41-e4a280007b27"
+                            "id": "e57c36e6-964b-4625-8b87-af03b41d3089"
                           },
                           "sort_order": 0,
-                          "created_at": "2025-11-20T01:57:05.077818",
+                          "created_at": "2025-11-20T21:02:35.317811",
                           "label": "string",
-                          "id": "d61e883e-a8ab-491f-8610-7dae7a68601e"
+                          "id": "9edd710e-7c29-4bf1-90bc-28a27273387d"
                         }
                       ]
                     }
@@ -1333,6 +1333,41 @@
         }
       ]
     },
+    "/applications": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "string",
+                    "description": "string",
+                    "client_id": "string",
+                    "created_at": "2025-11-20T21:02:35.333998",
+                    "id": "4f767f7b-b03e-454a-8e51-a37da18563b2"
+                  }
+                ]
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "Desenvolvedores"
+        ],
+        "operationId": "getAuthApplications"
+      }
+    },
     "/create-application": {
       "post": {
         "responses": {
@@ -1350,8 +1385,8 @@
                   "name": "string",
                   "description": "string",
                   "client_id": "string",
-                  "created_at": "2025-11-20T01:57:05.097518",
-                  "id": "a6841add-f396-425d-9ae8-0931f4f689e0"
+                  "created_at": "2025-11-20T21:02:35.337296",
+                  "id": "6c93018c-1222-428a-a715-514b8e92f90f"
                 }
               }
             }
@@ -1957,6 +1992,35 @@
         },
         "additionalProperties": false
       },
+      "Application": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "client_id",
+          "description",
+          "name"
+        ],
+        "additionalProperties": false
+      },
       "ApllicationRedirectURI": {
         "type": "object",
         "properties": {
@@ -1993,35 +2057,6 @@
           "description",
           "name",
           "redirect_uris"
-        ],
-        "additionalProperties": false
-      },
-      "Application": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "client_id": {
-            "type": "string"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "required": [
-          "client_id",
-          "description",
-          "name"
         ],
         "additionalProperties": false
       }

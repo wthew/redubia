@@ -5,12 +5,11 @@ import ModalWrapper from "./wrapper";
 interface ModalProps extends PropsWithChildren {
   route: string;
   title: ReactNode;
-  replace?: boolean;
 }
 
 export default async function Modal(props: ModalProps) {
   return (
-    <ModalWrapper route={props.route} replace={props.replace}>
+    <ModalWrapper route={props.route}>
       <DialogContent className="max-w-4xl scrol">
         <DialogTitle className="mb-4">{props.title}</DialogTitle>
         {props.children}

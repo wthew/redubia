@@ -12,7 +12,14 @@ import Link from "next/link";
 type Props<T extends keyof Schemas> = { query: T };
 export default function WikiEntityItems<T extends keyof Schemas>(p: Props<T>) {
   const options = mapper[p.query]({ params: {} });
-  const infinite = useInfiniteQuery(options);
+
+  const infinite = useInfiniteQuery({
+    getNextPageParam: options.getNextPageParam,
+    initialData: options.initialData,
+    initialPageParam: options.initialPageParam,
+    queryKey: options.queryKey,
+    queryFn: options.queryFn as any,
+  });
 
   return (
     <InfiniteScroller
@@ -20,7 +27,7 @@ export default function WikiEntityItems<T extends keyof Schemas>(p: Props<T>) {
       className="grid grid-cols-2 md:grid-cols-3 gap-6"
     >
       {infinite.data?.pages.map(({ data = [] }) =>
-        data.map((item) => <WikiEntityItem key={item.id} {...item} />)
+        data.map((item) => <WikiEntityItem key={item.id} {...item} />),
       )}
       {infinite.isFetching &&
         Array.from({ length: 10 }).map((_, i) => (

@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode, Suspense } from "react";
 
 interface Props extends PropsWithChildren {
   modal: ReactNode;

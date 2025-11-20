@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Gallery(props: { page_id: number }) {
-  const res: any[] = []
+export default async function Gallery(props: { entity_id: string }) {
+  const res: any[] = [];
 
   return (
     <div className="flex flex-row gap-3 items-center">
@@ -17,7 +17,7 @@ export default async function Gallery(props: { page_id: number }) {
           />
         </Link>
       ))}
-      <Link href={`/${props.page_id}/gallery`}>Ver mais...</Link>
+      <Link href={`wiki/${props.entity_id}/gallery`}>Ver mais...</Link>
     </div>
   );
 }

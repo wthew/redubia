@@ -1,0 +1,1 @@
+export type NextPageProps<T> = { params: Promise<T> };

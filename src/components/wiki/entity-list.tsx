@@ -26,20 +26,23 @@ const mapper = {
     typeGuard: (data: unknown): data is WatchableSchema => true,
   },
 } as const;
-type Props<T extends keyof typeof mapper> = { 
+type Props<T extends keyof typeof mapper> = {
   namespace: T;
 };
 
 // Helper para extrair o tipo da query
-type InferDataFromQueryOptions<T> = T extends ReturnType<typeof getCharactersInfiniteQueryOptions> 
-  ? CharacterSchema
-  : T extends ReturnType<typeof getVoiceActorsInfiniteQueryOptions> 
-  ? VoiceActorSchema 
-  : T extends ReturnType<typeof getWatchablesInfiniteQueryOptions> 
-  ? WatchableSchema
-  : never;
+type InferDataFromQueryOptions<T> =
+  T extends ReturnType<typeof getCharactersInfiniteQueryOptions>
+    ? CharacterSchema
+    : T extends ReturnType<typeof getVoiceActorsInfiniteQueryOptions>
+      ? VoiceActorSchema
+      : T extends ReturnType<typeof getWatchablesInfiniteQueryOptions>
+        ? WatchableSchema
+        : never;
 
-export default async function WikiEntityList<T extends keyof typeof mapper>({ namespace }: Props<T>) {
+export default async function WikiEntityList<T extends keyof typeof mapper>({
+  namespace,
+}: Props<T>) {
   const queryClient = new QueryClient();
   const { options: getQueryOptions, typeGuard } = mapper[namespace];
   const queryOptions = getQueryOptions();

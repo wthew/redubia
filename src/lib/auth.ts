@@ -4,8 +4,7 @@ import { cookies } from "next/headers";
 
 export async function retriveAccessToken() {
   const store = await cookies();
-  console.log("retriveAccessToken called", store.get("access_token"));
-  return store.get("access_token")?.value
+  return store.get("access_token")?.value;
 }
 
 export async function setAccessToken(token: string) {
@@ -15,7 +14,7 @@ export async function setAccessToken(token: string) {
 
 export async function retriveRefreshToken() {
   const store = await cookies();
-  return store.get("refresh_token")?.value
+  return store.get("refresh_token")?.value;
 }
 
 export async function setRefreshToken(token: string) {
@@ -28,7 +27,10 @@ export async function authHeaders() {
   return { Authorization: "Bearer " + token };
 }
 
-export async function setAuthTokens(tokens: { access_token: string, refresh_token: string }) {
+export async function setAuthTokens(tokens: {
+  access_token: string;
+  refresh_token: string;
+}) {
   const store = await cookies();
   store.set("access_token", tokens.access_token);
   store.set("refresh_token", tokens.refresh_token);

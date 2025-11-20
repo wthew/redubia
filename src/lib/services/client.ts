@@ -3,9 +3,7 @@ import {
   clearAuthTokens,
   retriveAccessToken,
   retriveRefreshToken,
-  setAccessToken,
   setAuthTokens,
-  setRefreshToken,
 } from "../auth";
 import type { RequestConfig } from "@kubb/plugin-client/clients/axios";
 import type { ResponseConfig } from "@kubb/plugin-client/clients/axios";
@@ -22,7 +20,7 @@ export type { RequestConfig, ResponseConfig, ResponseErrorConfig };
 
 type ErrorHandler<T = unknown> = (
   r: AxiosResponse<Error>,
-  c: RequestConfig
+  c: RequestConfig,
 ) => Promise<ResponseConfig<T>>;
 
 export const api = axios.create({ baseURL: process.env.API_URL });
@@ -46,11 +44,7 @@ class ApiWrapper {
 
   private errors: Partial<Record<number, ErrorHandler>> = {
     401: async ({ data }, config) => {
-      console.log("lidando com erro 401");
-
       if (data.message === "Token expired") {
-        console.log("token expirado", ApiWrapper.refreshing);
-
         if (!ApiWrapper.refreshing) {
           ApiWrapper.refreshing = true;
 
@@ -62,23 +56,16 @@ class ApiWrapper {
             .then(async ({ data }) => setAuthTokens(data).then(() => data))
             .catch(() => clearAuthTokens().then(() => null));
 
-          console.log("session", session);
           if (!session) {
-            console.log("não foi possivel renovar o token");
             if (localStorage) localStorage.removeItem("session");
-            console.log("localStorage removido", localStorage);
-
-            console.log("redirecionando para login");
 
             redirect("/sign-in");
           }
 
           for (const cb of ApiWrapper.queue) {
-            console.log("indo avisar quem está esperando");
             cb();
           }
 
-          console.log("finalizando");
           ApiWrapper.refreshing = false;
           ApiWrapper.queue = [];
         }
@@ -92,19 +79,14 @@ class ApiWrapper {
 
   request = async <T, V>(c: RequestConfig<V>): Promise<ResponseConfig<T>> => {
     const config: RequestConfig = { ...c, headers: { ...c.headers } };
-    console.log("fazendo requisição");
 
     if (ApiWrapper.refreshing) {
-      console.log("indo esperar");
       await new Promise<void>((res) => ApiWrapper.queue.push(() => res()));
-      console.log("esperado");
     }
 
     return this.api.request(config).catch(async (error: AxiosError<Error>) => {
       const original = error.config as typeof config;
       const response = error.response;
-
-      console.log("erro na requisição", { error, ...original });
 
       if (!original) throw error;
       if (!response) throw error;
@@ -114,18 +96,7 @@ class ApiWrapper {
       if (handler) {
         ApiWrapper.retries = 0;
         return (await handler(response, original)) as ResponseConfig<T>;
-        // while (ApiWrapper.retries < 3) {
-        //   console.log("tentando novamente", ApiWrapper.retries);
-
-        //   try {
-
-        //   } catch {
-        //     ApiWrapper.retries++;
-        //   }
-        // }
       }
-
-      console.log("sem handler para esse erro", error);
 
       throw error;
     });

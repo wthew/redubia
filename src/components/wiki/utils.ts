@@ -26,7 +26,7 @@ export type Response<T> = InfiniteQueryObserverOptions<
   unknown
 >;
 export const mapper = {
-  characters: getCharactersInfiniteQueryOptions as unknown,
-  "voice-actors": getVoiceActorsInfiniteQueryOptions as unknown,
-  watchables: getWatchablesInfiniteQueryOptions as unknown,
-} as { [K in keyof Schemas]: (_: {params: unknown}) => Response<InfiniteData<Schemas[K]>> };
+  characters: getCharactersInfiniteQueryOptions,
+  "voice-actors": getVoiceActorsInfiniteQueryOptions,
+  watchables: getWatchablesInfiniteQueryOptions,
+};

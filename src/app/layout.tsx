@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "../context/theme";
 import AppBar from "../components/app-bar";
 import { QueryProvider } from "../context/query";
-import React from "react";
+import React, { Suspense } from "react";
 import { AuthProvider } from "@/context/auth";
 import { headers } from "next/headers";
 import { Toaster } from "@/components/ui/sonner";
@@ -19,7 +19,6 @@ export const metadata = {
 
 type Props = React.PropsWithChildren;
 export default async function RootLayout({ children }: Props) {
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -27,7 +26,7 @@ export default async function RootLayout({ children }: Props) {
           <AuthProvider>
             <QueryProvider>
               <AppBar />
-              {children}
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
               <Toaster />
             </QueryProvider>
           </AuthProvider>

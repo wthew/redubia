@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
+  Application,
   createApplicationRequestSchema,
   useCreateDeveloperApplication,
 } from "@/lib/services/gen";
@@ -20,19 +21,12 @@ import { Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export default function FormCreateApplication() {
-  const { close } = useModalContext();
+const resolver = zodResolver(createApplicationRequestSchema);
 
-  const form = useForm({
-    resolver: zodResolver(createApplicationRequestSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      redirect_uris: [],
-      website: "",
-      scopes: [],
-    },
-  });
+type Props = { application: Application };
+export default function FormUpdateApplication(props: Props) {
+  const form = useForm({ resolver, defaultValues: props.application });
+  const { close } = useModalContext();
 
   const redirects = useFieldArray({
     control: form.control,

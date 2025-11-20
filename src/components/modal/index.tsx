@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode, Suspense } from "react";
 import { DialogContent, DialogTitle } from "../ui/dialog";
 import ModalWrapper from "./wrapper";
 
@@ -12,7 +12,15 @@ export default async function Modal(props: ModalProps) {
     <ModalWrapper route={props.route}>
       <DialogContent className="max-w-4xl scrol">
         <DialogTitle className="mb-4">{props.title}</DialogTitle>
-        {props.children}
+        <Suspense
+          fallback={
+            <span className="text-4xl font-bold animate-gradient-loop">
+              ...
+            </span>
+          }
+        >
+          {props.children}
+        </Suspense>
       </DialogContent>
     </ModalWrapper>
   );

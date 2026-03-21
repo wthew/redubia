@@ -1,0 +1,22 @@
+name: Ritual do Hello World
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  saudacao:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixando o código
+        uses: actions/checkout@v4
+
+      - name: Quebrando a maldição
+        run: echo "Hello World! O operário Act Runner do Asus i7 está vivo e trabalhando!"
+
+      - name: Inspecionando a jaula de trabalho
+        run: |
+          echo "Este comando está rodando dentro de um container efêmero!"
+          cat /etc/os-release

@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "yarn" # ⚡ O operário vai guardar o cache das dependências!
 
-      - name: Instalando e Buildando
+      - name: Instalando e Buildando com Yarn
         run: |
-          npm install
-          npm run build
+          yarn install
+          yarn build
           # (Se o Redubia gerar a pasta com outro nome tipo 'out' ou 'build', mude o 'dist' abaixo)
 
       - name: Hospedando o Preview no Nginx

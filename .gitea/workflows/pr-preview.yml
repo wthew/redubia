@@ -1,0 +1,39 @@
+name: Deploy de Preview da PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixando o código
+        uses: actions/checkout@v4
+
+      - name: Setup do Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalando e Buildando
+        run: |
+          npm install
+          npm run build
+          # (Se o Redubia gerar a pasta com outro nome tipo 'out' ou 'build', mude o 'dist' abaixo)
+
+      - name: Hospedando o Preview no Nginx
+        run: |
+          PR_NUM=${{ github.event.pull_request.number }}
+
+          echo "Limpando versão antiga da PR caso exista..."
+          docker exec preview-server rm -rf /usr/share/nginx/html/redubia/pr-$PR_NUM
+
+          echo "Criando pasta da PR $PR_NUM..."
+          docker exec preview-server mkdir -p /usr/share/nginx/html/redubia/pr-$PR_NUM
+
+          echo "Copiando os arquivos do build (dist) pro servidor web..."
+          docker cp dist/. preview-server:/usr/share/nginx/html/redubia/pr-$PR_NUM/
+
+          echo "✅ Deploy concluído!"
+          echo "🚀 Acesse: http://preview.homelab.lan/redubia/pr-$PR_NUM"

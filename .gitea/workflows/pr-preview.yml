@@ -15,7 +15,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "yarn" # ⚡ O operário vai guardar o cache das dependências!
+
+      - name: Instalando o Yarn
+        run: npm install -g yarn
 
       - name: Instalando e Buildando com Yarn
         run: |

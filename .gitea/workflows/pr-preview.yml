@@ -19,6 +19,12 @@ jobs:
       - name: Instalando o Yarn
         run: npm install -g yarn
 
+      - name: Injetando o .env secreto
+        run: |
+          cat << 'EOF' > .env
+          ${{ secrets.ENV_FILE }}
+          EOF
+
       - name: Instalando e Buildando com Yarn
         run: |
           yarn install

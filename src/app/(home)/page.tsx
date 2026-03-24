@@ -12,10 +12,10 @@ export default function Home() {
           <div className="mb-12 animate-fade-in">
             <RedubiaLogo className="text-6xl" />
             <p className="text-lg text-left mt-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Uma plataforma moderna criada para entusiastas e profissionais da
-              dublagem. Embarque no universo da dublagem e descubra as vozes que
-              dão vida aos seus personagens favoritos. Conheça dubladores e
-              curiosidades do mundo das animações e filmes.
+              Uma plataforma modeeeeeerna criada para entusiastas e
+              profissionais da dublagem. Embarque no universo da dublagem e
+              descubra as vozes que dão vida aos seus personagens favoritos.
+              Conheça dubladores e curiosidades do mundo das animações e filmes.
             </p>
           </div>
         </div>

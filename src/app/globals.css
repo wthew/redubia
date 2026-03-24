@@ -1,4 +1,3 @@
-@config "../../tailwind.config.js";
 @import "tailwindcss";
 
 @utility no-scrollbar {
@@ -76,13 +75,13 @@
 }
 
 @layer base {
-  * {
+  /* * {
     @apply border-border;
     @apply no-scrollbar
   }
   body {
     @apply bg-background text-foreground;
-  }
+  } */
 
   button {
     cursor: pointer;

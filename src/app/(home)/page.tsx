@@ -2,7 +2,6 @@ import MagicGradientBackground from "@/components/magic-gradient-bg";
 import Link from "next/link";
 import RedubiaLogo from "@/components/redubia-logo";
 
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-black font-sans overflow-hidden">
@@ -13,7 +12,10 @@ export default function Home() {
           <div className="mb-12 animate-fade-in">
             <RedubiaLogo className="text-6xl" />
             <p className="text-lg text-left mt-12 text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Uma plataforma moderna criada para entusiastas e profissionais da dublagem. Embarque no universo da dublagem e descubra as vozes que dão vida aos seus personagens favoritos. Conheça dubladores e curiosidades do mundo das animações e filmes.
+              Uma plataforma moderna criada para entusiastas e profissionais da
+              dublagem. Embarque no universo da dublagem e descubra as vozes que
+              dão vida aos seus personagens favoritos. Conheça dubladores e
+              curiosidades do mundo das animações e filmes.
             </p>
           </div>
         </div>
@@ -29,9 +31,14 @@ export default function Home() {
                 <h2 className="text-3xl font-semibold">Wiki de dublagem</h2>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Explore o maior acervo sobre dublagem. Descubra quem deu voz a personagens inesquecíveis, e explore elencos de filmes e séries que marcaram gerações. Tudo organizado e ao seu alcance!
+                Explore o maior acervo sobre dublagem. Descubra quem deu voz a
+                personagens inesquecíveis, e explore elencos de filmes e séries
+                que marcaram gerações. Tudo organizado e ao seu alcance!
               </p>
-              <Link href="/wiki" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform">
+              <Link
+                href="/wiki"
+                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-medium hover:scale-[1.02] transition-transform"
+              >
                 Explorar
               </Link>
             </div>
@@ -42,7 +49,9 @@ export default function Home() {
                     <div className="absolute left-0 top-0 w-24 h-32 bg-gray-900/50 rounded-xl border border-cyan-400/20 transform -rotate-6 animate-float">
                       <div className="p-3">
                         <div className="text-cyan-400 text-lg">🎭</div>
-                        <p className="text-xs text-gray-300 mt-2">Personagens</p>
+                        <p className="text-xs text-gray-300 mt-2">
+                          Personagens
+                        </p>
                       </div>
                     </div>
 
@@ -66,11 +75,11 @@ export default function Home() {
                       Descubra o Universo da Dublagem
                     </h3>
                     <p className="text-sm text-gray-400 max-w-md mx-auto">
-                      Explore biografias e conexões entre todas as vozes cadastradas
+                      Explore biografias e conexões entre todas as vozes
+                      cadastradas
                     </p>
                   </div>
                 </div>
-
               </MagicGradientBackground>
             </div>
           </div>
@@ -82,19 +91,27 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
             <div className="flex-1 space-y-6">
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                <h2 className="text-3xl font-semibold">Quem é esse personagem?</h2>
+                <h2 className="text-3xl font-semibold">
+                  Quem é esse personagem?
+                </h2>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Grave e descubra qual dublador está por trás da voz com nossa tecnologia de Inteligência Artificial
+                Grave e descubra qual dublador está por trás da voz com nossa
+                tecnologia de Inteligência Artificial
               </p>
               <button className="px-6 py-3 border border-gray-800 hover:border-cyan-400/30 rounded-lg font-medium bg-black/50 hover:bg-cyan-500/10 transition-colors">
                 Analisar Voz - Em Breve
               </button>
             </div>
             <div className="flex-1 h-80 w-full">
-              <MagicGradientBackground className="hover:border-purple-500/20" colors={["rgba(128, 0, 128, 0.3) 0%", "rgba(128, 0, 128, 0.15) 30%"]} >
+              <MagicGradientBackground
+                className="hover:border-purple-500/20"
+                colors={[
+                  "rgba(128, 0, 128, 0.3) 0%",
+                  "rgba(128, 0, 128, 0.15) 30%",
+                ]}
+              >
                 <div className="h-80 flex flex-col items-center justify-center p-8 space-y-8">
-
                   <div className="relative w-full max-w-md">
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-xl animate-pulse-slow" />
 
@@ -106,8 +123,7 @@ export default function Home() {
                             className="w-2 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full animate-wave"
                             style={{
                               height: `${Math.random() * 40 + 20}px`,
-                              animationDuration: `${(Math.random() * 1) + 0.5}s`
-
+                              animationDuration: `${Math.random() * 1 + 0.5}s`,
                             }}
                           />
                         ))}
@@ -116,13 +132,16 @@ export default function Home() {
                       <div className="text-center space-y-2">
                         <p className="text-sm text-gray-400">Voz detectada:</p>
                         <div className="flex items-center justify-center gap-2">
-                          <span className="font-medium text-gray-200">Wendel Bezerra</span>
+                          <span className="font-medium text-gray-200">
+                            Wendel Bezerra
+                          </span>
                         </div>
-                        <p className="text-xs text-purple-400">92% de correspondência</p>
+                        <p className="text-xs text-purple-400">
+                          92% de correspondência
+                        </p>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </MagicGradientBackground>
             </div>
@@ -135,10 +154,14 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="flex-1 space-y-6">
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent  mb-4">
-                <h2 className="text-3xl font-semibold">API para desenvolvedores</h2>
+                <h2 className="text-3xl font-semibold">
+                  API para desenvolvedores
+                </h2>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                Integre dados de dubladores, personagens e animações em seus projetos usando nossa API robusta, intuitiva e fácil de implementar
+                Integre dados de dubladores, personagens e animações em seus
+                projetos usando nossa API robusta, intuitiva e fácil de
+                implementar
               </p>
               <button className="px-6 py-3 border border-gray-800 hover:border-cyan-400/30 rounded-lg font-medium bg-black/50 hover:bg-cyan-500/10 transition-colors">
                 Ver preços - Em breve
@@ -151,10 +174,11 @@ export default function Home() {
                     <div className="text-cyan-400 text-4xl mb-2">⎇</div>
                     <h3 className="text-2xl text-gray-200 font-medium">
                       Dados Estruturados
-                      <span className="block text-cyan-400 text-lg mt-2 font-normal">Para Integrações Criativas</span>
+                      <span className="block text-cyan-400 text-lg mt-2 font-normal">
+                        Para Integrações Criativas
+                      </span>
                     </h3>
                   </div>
-
 
                   <div className="opacity-70 hover:opacity-100 transition-opacity">
                     <button className="text-cyan-400 text-sm flex items-center gap-2">
@@ -171,7 +195,7 @@ export default function Home() {
       <footer className="border-t border-gray-900 py-12">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="text-gray-600">
-            Feito por{' '}
+            Feito por{" "}
             <a
               href="https://wthew.vercel.app"
               target="_blank"
@@ -186,18 +210,30 @@ export default function Home() {
   );
 }
 
-function QuizCard({ title, description, color = "blue" }: { title: string; description: string; color?: "blue" | "purple" | "cyan" }) {
+function QuizCard({
+  title,
+  description,
+  color = "blue",
+}: {
+  title: string;
+  description: string;
+  color?: "blue" | "purple" | "cyan";
+}) {
   const colors = {
-    blue: 'border-blue-500/20 hover:border-blue-400/40',
-    purple: 'border-purple-500/20 hover:border-purple-400/40',
-    cyan: 'border-cyan-500/20 hover:border-cyan-400/40'
+    blue: "border-blue-500/20 hover:border-blue-400/40",
+    purple: "border-purple-500/20 hover:border-purple-400/40",
+    cyan: "border-cyan-500/20 hover:border-cyan-400/40",
   };
 
   return (
-    <div className={`p-8 rounded-2xl border ${colors[color]} bg-black/30 hover:bg-black/50 transition-all`}>
+    <div
+      className={`p-8 rounded-2xl border ${colors[color]} bg-black/30 hover:bg-black/50 transition-all`}
+    >
       <h3 className="text-xl font-semibold mb-3 text-gray-200">{title}</h3>
       <p className="text-gray-400 mb-6">{description}</p>
-      <button className={`px-6 py-2 rounded-lg bg-gradient-to-r from-${color}-500 to-${color}-600 hover:to-${color}-500 transition-all`}>
+      <button
+        className={`px-6 py-2 rounded-lg bg-gradient-to-r from-${color}-500 to-${color}-600 hover:to-${color}-500 transition-all`}
+      >
         Jogar
       </button>
     </div>

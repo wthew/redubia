@@ -15,7 +15,7 @@ console.log("base url: ", process.env.API_URL);
 export default defineConfig({
   root: ".",
   input: {
-    path: "swagger.json",
+    path: "swagger/swagger.json",
   },
   output: {
     path: "./src/lib/services/gen",
